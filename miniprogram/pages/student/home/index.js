@@ -57,22 +57,6 @@ Page({
   goSign: function (e) {
     const type = e.currentTarget.dataset.type
     console.log(type)
-    switch (type) {
-      case 'student':
-        wx.reLaunch({
-          url: '/pages/student/home/index'
-        })
-        break;
-      case 'coach':
-        wx.reLaunch({
-          url: '/pages/student/home/index'
-        })
-        break;
-      case 'boss':
-        wx.reLaunch({
-          url: '/pages/student/home/index'
-        })
-    }
     // wx.reLaunch({
     //   url: '/pages/_index/index/index'
     // })
