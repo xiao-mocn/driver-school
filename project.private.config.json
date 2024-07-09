@@ -7,6 +7,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "training",
+          "pathName": "pages/student/training/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "list",
           "pathName": "pages/student/list/index",
           "query": "type=car",
