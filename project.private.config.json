@@ -7,6 +7,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "list",
+          "pathName": "pages/student/list/index",
+          "query": "type=car",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "student-home",
           "pathName": "pages/student/home/index",
           "query": "",

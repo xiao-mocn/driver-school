@@ -3,7 +3,8 @@
     "pages/loadding/index",
     "pages/student/home/index",
     "pages/student/training/index",
-    "pages/student/user/index"
+    "pages/student/user/index",
+    "pages/student/list/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
