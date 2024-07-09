@@ -12,7 +12,7 @@ Page({
       { "classWrapper": "bd-bottom bd-right", "image": "../../../images/student/time.png", "text": "课程表", "bindTap": "clickTimeTable" },
       { "classWrapper": "bd-bottom", "image": "../../../images/student/phone.png", "text": "联系教练", "bindTap": "clickContactInstructor" },
       { "classWrapper": "bd-right", "image": "../../../images/student/log.png", "text": "学车记录", "bindTap": "clickBill" },
-      { "classWrapper": "", "image": "../../../images/student/question-circle.svg", "text": "理论练习", "bindTap": "clickCaocao" }
+      { "classWrapper": "", "image": "../../../images/student/question-circle.svg", "text": "分销推广", "bindTap": "clickCaocao" }
     ]
   },
 
