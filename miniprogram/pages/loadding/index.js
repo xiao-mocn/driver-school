@@ -73,9 +73,6 @@ Page({
           url: '/pages/student/home/index'
         })
     }
-    // wx.reLaunch({
-    //   url: '/pages/_index/index/index'
-    // })
   }
 
 })

@@ -14,30 +14,5 @@
   },
   "sitemapLocation": "sitemap.json",
   "style": "v2",
-  "lazyCodeLoading": "requiredComponents",
-  "tabBar": {
-    "color": "#A2A9B0",
-    "selectedColor": "#07C160",
-    "backgroundColor": "#ffffff",
-    "list": [
-      {
-        "pagePath": "pages/student/home/index",
-        "text": "首页",
-        "iconPath": "images/icons/home.png",
-        "selectedIconPath": "images/icons/home-active.png"
-      },
-      {
-        "pagePath": "pages/student/training/index",
-        "text": "训练",
-        "iconPath": "images/icons/training.png",
-        "selectedIconPath": "images/icons/training-active.png"
-      },
-      {
-        "pagePath": "pages/student/user/index",
-        "text": "我的",
-        "iconPath": "images/icons/user.png",
-        "selectedIconPath": "images/icons/user-active.png"
-      }
-    ]
-  }
+  "lazyCodeLoading": "requiredComponents"
 }

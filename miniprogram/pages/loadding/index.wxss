@@ -13,7 +13,7 @@
   background: #1bd0ad;
   align-items: stretch;
   padding: 0;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
 }
 .content{
@@ -57,6 +57,10 @@
   margin-left: -300rpx;
   opacity: 0;
   animation: show 2.5s cubic-bezier(0.19, 1, 0.22, 1) .5s forwards;
+}
+.entry-btns {
+  position: relative;
+  top: 50rpx;
 }
 
 @keyframes show{

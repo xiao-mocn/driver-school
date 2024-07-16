@@ -17,46 +17,46 @@ Page({
       { id: 2, iconName: '教练风采', iconUrl: '../../../images/student/coach.png', pageAddress: '/pages/student/list/index?type=coach' },
       { id: 3, iconName: '约车流程', iconUrl: '../../../images/student/process.png', pageAddress: '/pages/sign/sign' }
     ],
-    tabs:[
-      {
-        id: 1,
-        type: 'car',
-        title: '车型',
-        isActive: true,
-      },
-      {
-        id: 2,
-        type: 'coach',
-        title: '教练',
-        isActive: false
-      },
-      {
-        id: 3,
-        type: 'place',
-        title: '场地',
-        isActive: false
-      }
-    ],
-    tabsType: 'car',
-    carTypes: [
-      { id: 1, name: 'A1', price: '100元/次', describe: '一对多模式训练', statusText: '立即报名' },
-      { id: 2, name: 'B1', price: '100元/次', describe: '一对多模式训练', statusText: '立即报名' },
-      { id: 3, name: 'C1', price: '100元/次', describe: '一对多模式训练', statusText: '立即报名' },
-      { id: 4, name: 'A2', price: '100元/次', describe: '一对多模式训练', statusText: '立即报名' },
-      { id: 5, name: 'B1', price: '100元/次', describe: '一对多模式训练', statusText: '立即报名' },
-    ],
-    coachList: [
-      { id: 1, name: '张教练', avatar: '../../images/icons/user-active.png', starscore: 5, studentCount: 100, driving_age: 4 },
-      { id: 2, name: '张教练', avatar: '../../images/icons/user-active.png', starscore: 5, studentCount: 100, driving_age: 4  },
-      { id: 3, name: '张教练', avatar: '../../images/icons/user-active.png', starscore: 5, studentCount: 100, driving_age: 4  }
-    ],
-    venueList: [
-      { id: 1, name: '北京校区', address: '北京市东城区东直门街道', distance: '10公里', addressUrl: '../../images/icons/user-active.png' },
-      { id: 2, name: '北京校区', address: '北京市东城区东直门街道', distance: '10公里', addressUrl: '../../images/icons/user-active.png'  },
-      { id: 3, name: '北京校区', address: '北京市东城区东直门街道', distance: '10公里', addressUrl: '../../images/icons/user-active.png'  },
-      { id: 4, name: '北京校区', address: '北京市东城区东直门街道', distance: '10公里', addressUrl: '../../images/icons/user-active.png'  },
-      { id: 5, name: '北京校区', address: '北京市东城区东直门街道', distance: '10公里', addressUrl: '../../images/icons/user-active.png'  },
-    ]
+    // tabs:[
+    //   {
+    //     id: 1,
+    //     type: 'car',
+    //     title: '车型',
+    //     isActive: true,
+    //   },
+    //   {
+    //     id: 2,
+    //     type: 'coach',
+    //     title: '教练',
+    //     isActive: false
+    //   },
+    //   {
+    //     id: 3,
+    //     type: 'place',
+    //     title: '场地',
+    //     isActive: false
+    //   }
+    // ],
+    // listType: 'caoch',
+    // carTypes: [
+    //   { id: 1, name: 'A1', price: '100元/次', describe: '一对多模式训练', statusText: '立即报名' },
+    //   { id: 2, name: 'B1', price: '100元/次', describe: '一对多模式训练', statusText: '立即报名' },
+    //   { id: 3, name: 'C1', price: '100元/次', describe: '一对多模式训练', statusText: '立即报名' },
+    //   { id: 4, name: 'A2', price: '100元/次', describe: '一对多模式训练', statusText: '立即报名' },
+    //   { id: 5, name: 'B1', price: '100元/次', describe: '一对多模式训练', statusText: '立即报名' },
+    // ],
+    // coachList: [
+    //   { id: 1, name: '张教练', avatar: '../../images/icons/user-active.png', starscore: 5, studentCount: 100, driving_age: 4 },
+    //   { id: 2, name: '张教练', avatar: '../../images/icons/user-active.png', starscore: 5, studentCount: 100, driving_age: 4  },
+    //   { id: 3, name: '张教练', avatar: '../../images/icons/user-active.png', starscore: 5, studentCount: 100, driving_age: 4  }
+    // ],
+    // venueList: [
+    //   { id: 1, name: '北京校区', address: '北京市东城区东直门街道', distance: '10公里', addressUrl: '../../images/icons/user-active.png' },
+    //   { id: 2, name: '北京校区', address: '北京市东城区东直门街道', distance: '10公里', addressUrl: '../../images/icons/user-active.png'  },
+    //   { id: 3, name: '北京校区', address: '北京市东城区东直门街道', distance: '10公里', addressUrl: '../../images/icons/user-active.png'  },
+    //   { id: 4, name: '北京校区', address: '北京市东城区东直门街道', distance: '10公里', addressUrl: '../../images/icons/user-active.png'  },
+    //   { id: 5, name: '北京校区', address: '北京市东城区东直门街道', distance: '10公里', addressUrl: '../../images/icons/user-active.png'  },
+    // ]
   },
 
   onLoad: function(options) {

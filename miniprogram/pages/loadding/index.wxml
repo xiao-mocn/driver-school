@@ -12,7 +12,7 @@
       </view>
       <view class="bd">
          <image class="smalltitle" src="/images/loadding/confirm-word.png"></image>
-        <view>
+        <view class="entry-btns">
           <view class="confirm-btn" bindtap='goSign' data-type="student">
             <text >学员入口</text>
           </view>
