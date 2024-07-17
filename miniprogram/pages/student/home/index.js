@@ -4,7 +4,7 @@ Page({
     carouselImages: [
       {
         id: 1,
-        url: 'https://img2.baidu.com/it/u=3666767137,2046366303&fm=253&fmt=auto&app=138&f=JPEG?w=499&h=339'
+        url: 'https://img0.baidu.com/it/u=1727517992,2544439649&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721322000&t=09a9d87680a4bbf9a796ca877270f6ff'
       },
       {
         id: 2,
@@ -13,9 +13,9 @@ Page({
     ],
     noticeArr: [{title: '欢迎来到通告信息', id: 1}, {title: '手动滑稽说的就是', id: 2}],
     iconArr:[
-      { id: 1, iconName: '公司信息', iconUrl: '../../../images/student/company.png', pageAddress: '/pages/sign/sign' },
-      { id: 2, iconName: '教练风采', iconUrl: '../../../images/student/coach.png', pageAddress: '/pages/student/list/index?type=coach' },
-      { id: 3, iconName: '约车流程', iconUrl: '../../../images/student/process.png', pageAddress: '/pages/sign/sign' }
+      { id: 1, iconName: '公司信息', iconUrl: '../../../images/student/company.png', pageAddress: '/pages/sign/sign', dec: '公司详情' },
+      { id: 2, iconName: '预约课时', iconUrl: '../../../images/student/appointment.png', pageAddress: '', dec: '课时详情' },
+      { id: 3, iconName: '返现活动', iconUrl: '../../../images/student/activity.png', pageAddress: '/pages/sign/sign', dec: '更多优惠' }
     ],
     // tabs:[
     //   {
@@ -45,11 +45,11 @@ Page({
     //   { id: 4, name: 'A2', price: '100元/次', describe: '一对多模式训练', statusText: '立即报名' },
     //   { id: 5, name: 'B1', price: '100元/次', describe: '一对多模式训练', statusText: '立即报名' },
     // ],
-    // coachList: [
-    //   { id: 1, name: '张教练', avatar: '../../images/icons/user-active.png', starscore: 5, studentCount: 100, driving_age: 4 },
-    //   { id: 2, name: '张教练', avatar: '../../images/icons/user-active.png', starscore: 5, studentCount: 100, driving_age: 4  },
-    //   { id: 3, name: '张教练', avatar: '../../images/icons/user-active.png', starscore: 5, studentCount: 100, driving_age: 4  }
-    // ],
+    coachList: [
+      { id: 1, name: '张教练', avatar: '../../../images/student/appointment.png', starscore: 5, studentCount: 100, driving_age: 4 },
+      { id: 2, name: '张教练', avatar: '../../../images/student/appointment.png', starscore: 5, studentCount: 100, driving_age: 4  },
+      { id: 3, name: '张教练', avatar: '../../../images/student/appointment.png', starscore: 5, studentCount: 100, driving_age: 4  }
+    ],
     // venueList: [
     //   { id: 1, name: '北京校区', address: '北京市东城区东直门街道', distance: '10公里', addressUrl: '../../images/icons/user-active.png' },
     //   { id: 2, name: '北京校区', address: '北京市东城区东直门街道', distance: '10公里', addressUrl: '../../images/icons/user-active.png'  },

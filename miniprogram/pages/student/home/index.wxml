@@ -3,7 +3,7 @@
   <view class="top swiper-container">
     <swiper autoplay indicator-dots circular>
       <swiper-item wx:for="{{ carouselImages }}" wx:key="id">
-        <image bindtap="handleCarousel" mode="widthFix" src="{{item.url}}"></image>
+        <image bindtap="handleCarousel" src="{{item.url}}"></image>
       </swiper-item>
     </swiper>
   </view>
@@ -19,13 +19,46 @@
       </swiper>
     </navigator>
   </view>
-  <view class="content">
-    
-    <view class="icons">
-      <navigator wx:for="{{iconArr}}" wx:key="id" url="{{item.pageAddress}}" open-type="navigate">
-        <image mode="widthFix" src="{{item.iconUrl}}"></image>
-        <view class="text">{{item.iconName}}</view>
+  <view class="icons">
+    <navigator wx:for="{{iconArr}}" wx:key="id" url="{{item.pageAddress}}" open-type="navigate">
+      <image mode="widthFix" src="{{item.iconUrl}}"></image>
+      <view class="text">{{item.iconName}}</view>
+      <view class="sub">{{item.dec}}</view>
+    </navigator>
+  </view>
+  <view class="coach-navigator">
+    <view class="coach-left">
+      <text>热门教练</text>
+    </view>
+    <view class="coach-right">
+      <navigator url="" open-type="navigate">
+        <text>查看更多</text>
+        <image src="../../../images/student/next.png"></image>
       </navigator>
+    </view>
+  </view>
+  <view class="coach-list">
+    <view class="coach-item" wx:for="{{coachList}}" wx:key="id">
+      <view class="coach-base">
+        <image src="{{item.avatar}}" class="avatar"></image>
+        <view class="coach-info">
+          <view class="coach-title">
+            <text>{{item.name}}</text>
+            <navigator url="" open-type="navigate">
+              <view class="appointment-container">
+                <image src="../../../images/student/appointment-icon.png"></image>
+                <text>预约</text>
+              </view>
+            </navigator>
+          </view>
+          <view class="coach-dec">
+            <text>简介：驾驶是一种乐趣，一起学习这门艺术</text>
+          </view>
+        </view>
+      </view>
+      <view class="coach-sub">
+        
+      </view>
     </view>
   </view>
 </view>

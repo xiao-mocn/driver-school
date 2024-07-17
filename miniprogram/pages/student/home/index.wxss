@@ -1,8 +1,7 @@
 page {
   width: 710rpx;
   margin: 0 20rpx;
-  /* background-color: #f4f5f7; */
-  background-color: #fff;
+  background-color: rgb(246, 246, 246);
 }
 
 .swiper-container swiper {
@@ -12,6 +11,7 @@ page {
 
 .swiper-container swiper image {
   width: 100%;
+  height: 300rpx;
 }
 
 .content {
@@ -68,6 +68,7 @@ page {
   position: absolute;
   font-size: 24rpx;
   line-height: 50rpx;
+  color: rgb(131, 122, 120);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -75,28 +76,145 @@ page {
 
 .icons {
   width: 100%;
-  height: 180rpx  !important;
+  height: 240rpx  !important;
   margin-top: 20rpx;
-  background-color: #fff;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .icons navigator {
-  width: 180rpx;
-  /* flex: 1; */
+  width: 220rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #fff;
+  border-radius: 10rpx;
   box-shadow: 0 3rpx 5rpx 1rpx #ccc;
 }
 
 .icons navigator image {
-  width: 70rpx;
+  width: 66rpx;
   margin: 20rpx;
 }
 
-.footer {
-  margin-top: 20rpx;
+.icons .text {
+  font-weight: bold;
+  color: rgb(33, 33, 33);
+  font-size: 34rpx;
+  line-height: 40rpx;
+}
+
+.icons .sub {
+ margin-top: 20rpx;
+  color: rgb(153, 153, 153);
+  font-size: 28rpx;
+  line-height: 30rpx;
+}
+
+.coach-navigator {
+  width: 100%;
+  height: 40rpx;
+  padding: 20rpx 0;
+  display: flex;
+  justify-content: space-between;
+}
+.coach-navigator .coach-left {
+  font-weight: bold;
+  color: rgb(33, 33, 33);
+  font-size: 34rpx;
+  line-height: 40rpx;
+}
+.coach-navigator .coach-right {
+  color: rgb(153, 153, 153);
+  font-size: 28rpx;
+  line-height: 30rpx;
+}
+.coach-navigator .coach-right navigator {
+  display: flex;
+  align-items: center;
+}
+.coach-navigator .coach-right image{
+  width: 36rpx;
+  height: 36rpx;
+}
+
+.coach-list {
+  width: 100%;
+  padding-bottom: 40rpx;
+}
+
+.coach-list .coach-item {
+  width: 100%;
+  background: #fff;
+  margin-bottom: 20rpx;
+  border-radius: 20rpx;
+}
+.coach-list .coach-item .coach-base {
+  padding: 20rpx 20rpx 0 20rpx;
+  width: 670rpx;
+  display: flex;
+}
+
+.coach-list .coach-item .coach-base .avatar{
+  width: 160rpx;
+  height: 160rpx;
+}
+.coach-list .coach-item .coach-base .coach-info{
+  flex: 1;
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.coach-info .coach-title {
+  font-weight: bold;
+  font-size: 34rpx;
+  color: rgb(33, 33, 33);
+  display: flex;
+  justify-content: space-between;
+}
+
+.coach-info .coach-title .appointment-container {
+  width: 120rpx;
+  height: 46rpx;
+  display: flex;
+  align-items: center;
+  border-radius: 20rpx;
+  margin-top: 10rpx;
+  background-color: rgba(150, 191, 191, 0.6);
+  font-size: 26rpx;
+  color: #557878;
+  line-height: 40rpx;
+}
+
+.coach-info .coach-title .appointment-container image{
+  width: 30rpx;
+  height: 30rpx;
+  margin-left: 10rpx;
+}
+
+.coach-info .coach-title .appointment-container text{
+  margin-left: 10rpx;
+}
+
+.coach-info .coach-dec{
+  width: 490rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 26rpx;
+  color: rgb(153, 153, 153);
+  margin-top: 36rpx;
+}
+
+.coach-sub {
+  margin-left: 180rpx;
+  padding: 10rpx 20rpx 20rpx 20rpx;
+  width: 490rpx;
+  height: 100rpx;
+  position: relative;
+  right: 0;
+  display: flex;
+  align-items: center;
 }
 
