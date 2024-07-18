@@ -57,7 +57,20 @@
         </view>
       </view>
       <view class="coach-sub">
-        
+        <view class="coach-sub-item">
+          <text class="coach-score">5</text>
+          <text class="dec">服务评价</text>
+        </view>
+        <image src="../../../images/student/slash_icon.png" class="star"></image>
+        <view class="coach-sub-item">
+          <text class="coach-defaul">123</text>
+          <text class="dec">服务次数</text>
+        </view>
+        <image src="../../../images/student/slash_icon.png" class="star"></image>
+        <view class="coach-sub-item">
+          <text class="coach-defaul">C1/C2</text>
+          <text class="dec">服务车型</text>
+        </view>
       </view>
     </view>
   </view>
