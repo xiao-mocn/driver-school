@@ -1,6 +1,4 @@
 {
   "usingComponents": {
-    "Tabs": "/components/Tabs/Tabs",
-    "List": "/components/List/index"
   }
 }

@@ -33,7 +33,7 @@
     <view class="coach-right">
       <navigator url="" open-type="navigate">
         <text>查看更多</text>
-        <image src="../../../images/student/next.png"></image>
+        <image src="../../../images/icons/next.png"></image>
       </navigator>
     </view>
   </view>

@@ -1,5 +1,0 @@
-<view>
-  <List wx:if="{{type === 'car'}}" type="{{type}}" data="{{carTypes}}"></List>
-  <List wx:elif="{{type === 'coach'}}" type="{{type}}" data="{{coachList}}"></List>
-  <List wx:elif="{{type === 'place'}}" type="{{type}}" data="{{venueList}}"></List>
-</view>

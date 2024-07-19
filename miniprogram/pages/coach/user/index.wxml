@@ -17,13 +17,13 @@
 <view class="user-content">
   <view class="income-container">
     <view class="left flex-center">
-      <text class="title">已学课时</text>
-      <text class="income">40</text>
+      <text class="title">本月收入</text>
+      <text class="income">￥40.00</text>
     </view>
     <image src="../../../images/student/slash_icon.png" class="star"></image>
     <view class="right flex-center">
-      <text class="title">剩余课时</text>
-      <text class="income">90</text>
+      <text class="title">可提现</text>
+      <text class="income">￥90.00</text>
     </view>
   </view>
   <view class="application-conntainer">

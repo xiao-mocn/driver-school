@@ -158,7 +158,7 @@ page {
   height: 40rpx;
 }
 .row-item .row-info text {
-  margin-left: 32rpx;
+  margin-left: 30rpx;
   color: rgb(55 ,55, 55);
   font-size: 30rpx;
 }
