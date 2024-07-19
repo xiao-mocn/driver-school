@@ -16,11 +16,7 @@
 <!-- 订单信息 -->
 <view class="order-container">
   <view class="order-item">
-    <!-- <text class="title">已学课时</text>
-    <text class="income">40</text> -->
   </view>
   <view class="order-item">
-    <!-- <text class="title">剩余课时</text>
-    <text class="income">90</text> -->
   </view>
 </view>
