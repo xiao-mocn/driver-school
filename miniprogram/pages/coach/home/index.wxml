@@ -1,30 +1,26 @@
-<view class="container">
-  <view class="remind-box" wx:if="{{remind}}">
-    <image class="remind-img" src="/images/loadding/loading.gif"></image>
+<view class="custom-navigation-bar">
+  <view class="navigation-bar-background"></view>
+  <view class="navigation-bar-content">
+    <text class="navigation-bar-title">我的</text>
   </view>
-  <block wx:else>
-    <image class="title" src="/images/loadding/title8.png"></image>
-    <view class="content">
-      <view class="hd" style="transform:rotateZ({{angle}}deg);">
-        <image class="logo" src="{{userInfo.avatarurl}}"></image>
-        <image class="wave" src="/images/loadding/wave.png" mode="aspectFill"></image>
-        <image class="wave wave-bg" src="/images/loadding/wave.png" mode="aspectFill"></image>
-      </view>
-      <view class="bd">
-         <image class="smalltitle" src="/images/loadding/confirm-word.png"></image>
-        <view>
-          <view class="confirm-btn" bindtap='goSign' data-type="student">
-            <text >学员入口</text>
-          </view>
-           <view class="confirm-btn" bindtap='goSign' data-type="coach">
-            <text >教练入口</text>
-          </view>
-           <view class="confirm-btn" bindtap='goSign' data-type="admin">
-            <text >管理入口</text>
-          </view>
-        </view>
-        <text class="copyright">© 2021 夏冥 倾情出品 </text>
-      </view>
-    </view>
-  </block>
+</view>
+<!--个人信息-->
+<view class="user-top">
+  <image src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" ></image>
+  <view class="info">
+    <tewxt class="name">黄晓明</tewxt>
+    <text class="phone">15051866908</text>
+  </view>
+  <image src="../../../images/icons/setting.png" class="setting" />
+</view>
+<!-- 订单信息 -->
+<view class="order-container">
+  <view class="order-item">
+    <!-- <text class="title">已学课时</text>
+    <text class="income">40</text> -->
+  </view>
+  <view class="order-item">
+    <!-- <text class="title">剩余课时</text>
+    <text class="income">90</text> -->
+  </view>
 </view>

@@ -11,7 +11,7 @@
     <tewxt class="name">黄晓明</tewxt>
     <text class="phone">15051866908</text>
   </view>
-  <image src="../../../images/student/setting.png" class="setting" />
+  <image src="../../../images/icons/setting.png" class="setting" />
 </view>
 <!-- 常用功能 -->
 <view class="user-content">
