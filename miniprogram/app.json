@@ -4,7 +4,8 @@
     "pages/student/home/index",
     "pages/student/user/index",
     "pages/coach/home/index",
-    "pages/coach/user/index"
+    "pages/coach/user/index",
+    "pages/boss/home/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
