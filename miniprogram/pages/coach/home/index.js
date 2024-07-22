@@ -4,6 +4,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    activeName: 'OrderHall'
   },
 
   /**
@@ -41,9 +42,12 @@ Page({
   },
 
   /**
-   * 页面相关事件处理函数--监听用户下拉动作
+   * 切换Tabs
    */
-  onPullDownRefresh: function () {
-
+  tabsChange: function (e) {
+    const activeName = e.currentTarget.dataset.name
+    this.setData({
+      activeName
+    })
   },
 })
