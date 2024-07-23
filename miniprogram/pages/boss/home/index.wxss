@@ -1,5 +1,12 @@
 page {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 750rpx;
+  background-color: rgb(246, 246, 246);
+  padding-bottom: 40rpx;
 }
 .custom-navigation-bar {
   position: fixed;
@@ -36,4 +43,134 @@ page {
   font-size: 32rpx;
   font-weight: 400;
   margin-top: 20rpx;
+}
+
+.income-container {
+  position: relative;
+  top: 150rpx;
+  width: 630rpx;
+  height: 160rpx;
+  padding: 30rpx;
+  background: #FFF;
+  border-radius: 30rpx;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.income-item {
+  position: relative;
+  width: 300rpx;
+  height: 160rpx;
+  background-color: rgb(252, 238, 232);
+  border-radius: 30rpx;
+}
+.income-item .title-bg {
+  position: absolute;
+  top: 0;
+  width: 130rpx;
+  height: 20rpx;
+  padding: 10rpx;
+  color: rgb(255, 255, 255);
+  font-size: 24rpx;
+  line-height: 20rpx;
+  text-align: center;
+  background: linear-gradient(to bottom, #ff7e5f, #feb47b);
+  border-top-left-radius: 20rpx;
+  border-bottom-right-radius: 20rpx;
+  /* opacity: 0.7; */
+}
+
+.income-item .right-bg {
+  position: absolute;
+  right: 0;
+  width: 130rpx;
+  height: 140rpx;
+  border-top-left-radius: 150rpx;
+  opacity: 0.5;
+}
+.income-item image {
+  position: absolute;
+  right: 12rpx;
+  top: 46rpx;
+  width: 100rpx;
+  height: 100rpx;
+  opacity: 0.7;
+}
+.income-item .income-icon {
+  width: 96rpx;
+  height: 96rpx;
+}
+.income-item .income-text {
+  position: relative;
+  top: 50rpx;
+  left: 30rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+  line-height: 32rpx;
+  color: rgb(140, 60, 50);
+}
+.income-item .income-btn {
+  position: relative;
+  display: block;
+  top: 50rpx;
+  left: 30rpx;
+  font-size: 24rpx;
+  font-weight: 400;
+  line-height: 32rpx;
+  color: rgb(170, 145, 131);
+}
+
+.application-container {
+  position: relative;
+  top: 150rpx;
+  width: 630rpx;
+  /* height: 340rpx; */
+  padding: 30rpx;
+  background: #FFF;
+  border-radius: 30rpx;
+  margin-top: 20rpx;
+}
+
+.application-container .title {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 50rpx;
+  color: rgb(50, 50, 50);
+  font-size: 40rpx;
+  font-weight: 500;
+  line-height: 50rpx;
+}
+.application-container .title .icon {
+  width: 6rpx;
+  height: 40rpx;
+  border-radius: 6rpx;
+  background: rgb(43, 108, 242);
+  margin-right: 20rpx;
+}
+.application-container .application-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 30rpx;
+}
+.application-container .application-list-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 130rpx;
+  height: 150rpx;
+  margin-bottom: 30rpx;
+}
+.application-container .application-list-item image {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 30rpx;
+}
+.application-container .application-list-item text {
+  color: rgb(34, 34, 34);
+  font-size: 30rpx;
+  line-height: 30rpx;
 }

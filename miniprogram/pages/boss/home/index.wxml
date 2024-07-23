@@ -4,4 +4,47 @@
     <text class="navigation-bar-title">首页</text>
   </view>
 </view>
-<view class=""></view>
+<view class="income-container">
+  <view class="income-item">
+    <view class="title-bg">
+      <text>账户余额</text>
+    </view>
+    <view class="right-bg"></view>
+    <image src="../../../images/boss/income.png" class="income-icon"></image>
+    <text class="income-text">￥0.00</text>
+    <text class="income-btn">查看详情</text>
+  </view>
+  <view class="income-item">
+    <view class="title-bg">
+      <text>推广活动</text>
+    </view>
+    <view class="right-bg"></view>
+    <image src="../../../images/boss/active.png"></image>
+    <text class="income-text">活动管理</text>
+    <text class="income-btn">查看详情</text>
+  </view>
+</view>
+<view class="application-container">
+  <view class="title">
+    <view class="icon" ></view>
+    <text>招生中心</text>
+  </view>
+  <view class="application-list">
+    <view wx:for="{{ admissionsCenterArr }}" wx:key="id" class="application-list-item">
+      <image src="{{item.icon}}" />
+      <text>{{item.name}}</text>
+    </view>
+  </view>
+</view>
+<view class="application-container">
+  <view class="title">
+    <view class="icon" ></view>
+    <text>分点功能</text>
+  </view>
+  <view class="application-list">
+    <view wx:for="{{ applicationArr }}" wx:key="id" class="application-list-item">
+      <image src="{{item.icon}}" />
+      <text>{{item.name}}</text>
+    </view>
+  </view>
+</view>
