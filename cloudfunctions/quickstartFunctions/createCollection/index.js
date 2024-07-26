@@ -8,41 +8,12 @@ const db = cloud.database();
 
 // 创建集合云函数入口函数
 exports.main = async (event, context) => {
+  console.log('开始创建集合', event, context);
   try {
     // 创建集合
-    await db.createCollection('sales');
-    await db.collection('sales').add({
-      // data 字段表示需新增的 JSON 数据
-      data: {
-        region: '华东',
-        city: '上海',
-        sales: 11
-      }
-    });
-    await db.collection('sales').add({
-      // data 字段表示需新增的 JSON 数据
-      data: {
-        region: '华东',
-        city: '南京',
-        sales: 11
-      }
-    });
-    await db.collection('sales').add({
-      // data 字段表示需新增的 JSON 数据
-      data: {
-        region: '华南',
-        city: '广州',
-        sales: 22
-      }
-    });
-    await db.collection('sales').add({
-      // data 字段表示需新增的 JSON 数据
-      data: {
-        region: '华南',
-        city: '深圳',
-        sales: 22
-      }
-    });
+    await db.createCollection('students');
+    await db.createCollection('coachs');
+    await db.createCollection('orders');
     return {
       success: true
     };

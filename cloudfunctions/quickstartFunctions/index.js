@@ -28,4 +28,4 @@ exports.main = async (event, context) => {
       return await genMpQrcode.main(event, context);
   }
 };
-        
+

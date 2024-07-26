@@ -1,3 +1,5 @@
+import { envId } from "../../../envList"
+
 //获取应用实例
 Page({
   /**
@@ -19,7 +21,8 @@ Page({
       { id: 6, name: '收入统计', icon: '../../../images/boss/income_total.png' },
       { id: 7, name: '活动统计', icon: '../../../images/boss/active_total.png' },
       { id: 8, name: '全局总览', icon: '../../../images/boss/total.png' },
-    ]
+    ],
+    envId: ''
 
   },
 
@@ -27,6 +30,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
+    this.setData({
+      envId: envId
+    });
+    wx.showLoading({
+      title: '',
+    });
+    wx.cloud.callFunction({
+      name: 'quickstartFunctions',
+      config: {
+        env: this.data.envId
+      },
+      data: {
+        type: 'getOpenId'
+      }
+    }).then((resp) => {
+      console.log('云函数调用成功:', resp);
+      wx.hideLoading();
+    }).catch((e) => {
+      console.log(e)
+      wx.hideLoading();
+    });
   },
 
   /**
