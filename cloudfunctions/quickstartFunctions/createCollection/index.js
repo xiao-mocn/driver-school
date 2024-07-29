@@ -8,7 +8,6 @@ const db = cloud.database();
 
 // 创建集合云函数入口函数
 exports.main = async (event, context) => {
-  console.log('开始创建集合', event, context);
   try {
     // 创建集合
     await db.createCollection('students');

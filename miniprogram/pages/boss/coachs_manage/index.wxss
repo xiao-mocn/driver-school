@@ -1,0 +1,10 @@
+page {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 750rpx;
+  background-color: rgb(246, 246, 246);
+  padding-bottom: 40rpx;
+}
