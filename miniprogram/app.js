@@ -11,6 +11,33 @@ App({
         //   如不填则使用默认环境（第一个创建的环境）
         env: 'dev-module-3g8dv9dob670ce47',
         traceUser: true,
+      }).then(() => {
+        wx.cloud.callFunction({
+        name: 'quickstartFunctions',
+        config: {
+          env: this.data.selectedEnv?.envId,
+        },
+        data: {
+          type: 'createCollection',
+        },
+      })
+      .then((resp) => {
+        if (resp.result.success) {
+          this.setData({
+            haveCreateCollection: true,
+          });
+        }
+        this.setData({
+          powerList,
+        });
+        wx.hideLoading();
+      })
+      .catch((e) => {
+        this.setData({
+          showUploadTip: true,
+        });
+        wx.hideLoading();
+      });
       });
     }
 

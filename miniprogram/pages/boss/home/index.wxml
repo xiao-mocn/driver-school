@@ -31,8 +31,10 @@
   </view>
   <view class="application-list">
     <view wx:for="{{ admissionsCenterArr }}" wx:key="id" class="application-list-item">
-      <image src="{{item.icon}}" />
-      <text>{{item.name}}</text>
+      <navigator url="{{ item.path }}">
+        <image src="{{item.icon}}" />
+        <text>{{item.name}}</text>
+      </navigator>
     </view>
   </view>
 </view>
@@ -43,8 +45,10 @@
   </view>
   <view class="application-list">
     <view wx:for="{{ applicationArr }}" wx:key="id" class="application-list-item">
-      <image src="{{item.icon}}" />
-      <text>{{item.name}}</text>
+      <navigator url="{{ item.path }}">
+        <image src="{{item.icon}}" />
+        <text>{{item.name}}</text>
+      </navigator>
     </view>
   </view>
 </view>

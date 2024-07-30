@@ -8,19 +8,25 @@ const db = cloud.database();
 
 // 创建集合云函数入口函数
 exports.main = async (event, context) => {
+  const collectionName = event.collectionName;
+  const data = event.data;
   try {
     // 创建集合
     await db.createCollection('students');
     await db.createCollection('coachs');
     await db.createCollection('orders');
+    await db.collection(collectionName).add({
+      // data 字段表示需新增的 JSON 数据
+      data: { ...data }
+    });
     return {
       success: true
     };
   } catch (e) {
     // 这里catch到的是该collection已经存在，从业务逻辑上来说是运行成功的，所以catch返回success给前端，避免工具在前端抛出异常
     return {
-      success: true,
-      data: 'create collection success'
+      success: false,
+      data: '新增失败'
     };
   }
 };
