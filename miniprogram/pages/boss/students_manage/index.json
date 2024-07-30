@@ -1,7 +1,7 @@
 {
   "usingComponents": {
   },
-  "navigationBarTitleText":"团队管理",
+  "navigationBarTitleText":"学员管理",
   "enablePullDownRefresh": true,
   "navigationBarBackgroundColor": "#528CF4"
 }

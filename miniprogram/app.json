@@ -7,7 +7,9 @@
     "pages/coach/user/index",
     "pages/boss/home/index",
     "pages/boss/coachs_manage/index",
-    "pages/boss/coachs_manage/edit/index"
+    "pages/boss/coachs_manage/edit/index",
+    "pages/boss/students_manage/index",
+    "pages/boss/students_manage/edit/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

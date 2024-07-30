@@ -7,7 +7,7 @@
   <view class="form">
     <view class="item">
       <text class="icon">*</text>
-      <text class="label">教练姓名: </text>
+      <text class="label">学员姓名: </text>
       <input base-input="true" placeholder-class="placeholder" placeholder="请输入姓名(必填)" />
     </view>
     <view class="item">
@@ -25,7 +25,7 @@
     </view>
     <view class="item">
       <text class="icon">*</text>
-      <text class="label">教练性别: </text>
+      <text class="label">学员性别: </text>
       <view class="radios">
         <custom-radio
           name="男"
@@ -57,12 +57,20 @@
   <view class="form">
     <view class="item">
       <text class="icon">*</text>
-      <text class="label">所属驾校: </text>
+      <text class="label">报考驾校: </text>
       <input base-input="true" placeholder-class="placeholder" placeholder="请输入所属驾校(必填)" />
+    </view>
+    <view class="item">
+      <text class="icon">*</text>
+      <text class="label">报班类型: </text>
+      <view class="radios">
+        <custom-radio name="初学" checked="初学"></custom-radio>
+        <custom-radio name="增驾" style="margin-left: 30rpx"></custom-radio>
+      </view>
     </view>
     <view class="item" style="align-items: start">
       <text class="icon">*</text>
-      <text class="label">教学类型: </text>
+      <text class="label">报班类型: </text>
       <view class="radios">
         <custom-radio
           class="custom-radio-item"

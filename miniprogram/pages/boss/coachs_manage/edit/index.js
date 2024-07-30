@@ -17,7 +17,7 @@ Page({
    */
   onLoad: function () {
     wx.setNavigationBarTitle({
-      title: '学员新增'
+      title: '新增'
     });
   },
 
