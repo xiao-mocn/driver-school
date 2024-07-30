@@ -6,11 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    list: [
-      { name: '张教练', phone: '15051836908', idCard: '452724199505244545'},
-      { name: '张教练', phone: '15051836908', idCard: '452724199505244545'},
-      { name: '张教练', phone: '15051836908', idCard: '452724199505244545'},
-    ],
+    list: [],
     isRefreshing: false,
     searchQuery: ''
   },

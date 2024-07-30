@@ -7,6 +7,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "coachs_manage/edit",
+          "pathName": "pages/boss/coachs_manage/edit/index",
+          "query": "type=add",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "students_manage",
           "pathName": "pages/boss/students_manage/index",
           "query": "",
@@ -16,13 +23,6 @@
         {
           "name": "students_manage_edit",
           "pathName": "pages/boss/students_manage/edit/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "coachs_manage/edit",
-          "pathName": "pages/boss/coachs_manage/edit/index",
           "query": "",
           "launchMode": "default",
           "scene": null

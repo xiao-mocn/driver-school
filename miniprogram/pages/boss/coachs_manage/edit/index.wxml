@@ -8,20 +8,38 @@
     <view class="item">
       <text class="icon">*</text>
       <text class="label">教练姓名: </text>
-      <input base-input="true" placeholder-class="placeholder" placeholder="请输入姓名(必填)" />
+      <input
+        value="{{formData.name}}"
+        data-name="name"
+        bindinput="inputChange"
+        base-input="true"
+        placeholder-class="placeholder"
+        placeholder="请输入姓名(必填)" />
     </view>
     <view class="item">
       <text class="icon">*</text>
       <text class="label">身份证号: </text>
-      <input base-input="true" placeholder-class="placeholder" placeholder="请输入身份证号" />
+      <input
+        value="{{formData.idCard}}"
+        data-name="idCard"
+        type="idcard"
+        bindinput="inputChange"
+        base-input="true"
+        placeholder-class="placeholder"
+        placeholder="请输入身份证号" />
     </view>
     <view class="item">
       <text class="icon">*</text>
       <text class="label">出生年月: </text>
-      <picker mode="date" value="{{date}}" start="2015-09-01" end="2999-09-01" bindchange="bindDateChange">
-        <view class="picker">{{dwate}}</view>
+      <picker
+        mode="date"
+        value="{{formData.birthday}}"
+        data-name="birthday"
+        start="1900-09-01"
+        end="2999-09-01"
+        bindchange="bindDateChange">
+        <view class="picker">{{ formData.birthday }}</view>
       </picker>
-      <!-- <input base-input="true" placeholder-class="placeholder" placeholder="请输入出生年月" /> -->
     </view>
     <view class="item">
       <text class="icon">*</text>
@@ -29,14 +47,16 @@
       <view class="radios">
         <custom-radio
           name="男"
-          checked="{{ checkedValue === 'man' }}"
+          checked="{{ formData.gender === 'man' }}"
           value="man"
+          data-name="gender"
           bindchange="handleRadioChange"
         />
         <custom-radio
           name="女"
-          checked="{{ checkedValue === 'women' }}"
+          checked="{{ formData.gender === 'women' }}"
           value="women"
+          data-name="gender"
           style="margin-left: 30rpx"
           bindchange="handleRadioChange"
         />
@@ -45,7 +65,14 @@
     <view class="item">
       <text class="icon">*</text>
       <text class="label">手机号码: </text>
-      <input base-input="true" placeholder-class="placeholder" placeholder="请输入出生年月" />
+      <input
+        value="{{formData.phone}}"
+        data-name="phone"
+        type="number"
+        bindinput="inputChange"
+        base-input="true"
+        placeholder-class="placeholder"
+        placeholder="请输入手机号码" />
     </view>
   </view>
 </view>
@@ -58,7 +85,13 @@
     <view class="item">
       <text class="icon">*</text>
       <text class="label">所属驾校: </text>
-      <input base-input="true" placeholder-class="placeholder" placeholder="请输入所属驾校(必填)" />
+      <input
+        value="{{formData.school}}"
+        data-name="school"
+        bindinput="inputChange"
+        base-input="true"
+        placeholder-class="placeholder"
+        placeholder="请输入所属驾校(必填)" />
     </view>
     <view class="item" style="align-items: start">
       <text class="icon">*</text>
@@ -66,85 +99,96 @@
       <view class="radios">
         <custom-radio
           class="custom-radio-item"
+          data-name="carType"
           name="C1"
-          checked="{{ checkedValue === 'man' }}"
+          checked="{{ formData.carType === 'C1' }}"
           value="C1"
           bindchange="handleRadioChange"
         />
         <custom-radio
           class="custom-radio-item"
+          data-name="carType"
           name="C2"
-          checked="{{ checkedValue === 'women' }}"
+          checked="{{ formData.carType === 'C2' }}"
           value="C2"
           style="margin-left: 30rpx"
           bindchange="handleRadioChange"
         />
         <custom-radio
           class="custom-radio-item"
+          data-name="carType"
           name="C5"
-          checked="{{ checkedValue === 'women' }}"
+          checked="{{ formData.carType === 'C5' }}"
           value="C5"
           style="margin-left: 30rpx"
           bindchange="handleRadioChange"
         />
         <custom-radio
           class="custom-radio-item"
+          data-name="carType"
           name="C6"
-          checked="{{ checkedValue === 'women' }}"
+          checked="{{ formData.carType === 'C6' }}"
           value="C6"
           style="margin-left: 30rpx"
           bindchange="handleRadioChange"
         />
         <custom-radio
           class="custom-radio-item"
+          data-name="carType"
           name="A1"
-          checked="{{ checkedValue === 'women' }}"
+          checked="{{ formData.carType === 'A1' }}"
           value="A1"
           bindchange="handleRadioChange"
         />
         <custom-radio
           class="custom-radio-item"
+          data-name="carType"
           name="A2"
-          checked="{{ checkedValue === 'women' }}"
+          checked="{{ formData.carType === 'A2' }}"
           value="A2"
           style="margin-left: 30rpx"
           bindchange="handleRadioChange"
         />
         <custom-radio
           class="custom-radio-item"
+          data-name="carType"
           name="A3"
-          checked="{{ checkedValue === 'women' }}"
+          checked="{{ formData.carType === 'A3' }}"
           value="A3"
           style="margin-left: 30rpx"
           bindchange="handleRadioChange"
         />
         <custom-radio
           class="custom-radio-item"
+          data-name="carType"
           name="B1"
-          checked="{{ checkedValue === 'women' }}"
+          checked="{{ formData.carType === 'B1' }}"
           value="B1"
           style="margin-left: 30rpx"
           bindchange="handleRadioChange"
         />
         <custom-radio
           class="custom-radio-item"
+          data-name="carType"
           name="B2"
-          checked="{{ checkedValue === 'women' }}"
+          checked="{{ formData.carType === 'B2' }}"
           value="B2"
           bindchange="handleRadioChange"
         />
         <custom-radio
           class="custom-radio-item"
+          data-name="carType"
           name="D"
-          checked="{{ checkedValue === 'women' }}"
+          checked="{{ formData.carType === 'D' }}"
           value="D"
           style="margin-left: 30rpx"
           bindchange="handleRadioChange"
         />
         <custom-radio
           class="custom-radio-item"
+          data-name="carType"
           name="E"
-          checked="{{ checkedValue === 'women' }}"
+          checked="{{ formData.carType === 'E' }}"
           value="E"
           style="margin-left: 30rpx"
           bindchange="handleRadioChange"

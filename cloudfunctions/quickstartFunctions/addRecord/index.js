@@ -9,12 +9,10 @@ const db = cloud.database();
 // 创建集合云函数入口函数
 exports.main = async (event, context) => {
   const collectionName = event.collectionName;
+  console.log('collectionName ===', collectionName);
   const data = event.data;
+  console.log('data ===', data);
   try {
-    // 创建集合
-    await db.createCollection('students');
-    await db.createCollection('coachs');
-    await db.createCollection('orders');
     await db.collection(collectionName).add({
       // data 字段表示需新增的 JSON 数据
       data: { ...data }
