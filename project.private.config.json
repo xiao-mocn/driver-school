@@ -7,6 +7,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "coachs_manage/edit",
+          "pathName": "pages/boss/coachs_manage/edit/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "coach_manage",
+          "pathName": "pages/boss/coachs_manage/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "boss-home",
           "pathName": "pages/boss/home/index",
           "query": "",

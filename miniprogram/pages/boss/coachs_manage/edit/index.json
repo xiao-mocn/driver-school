@@ -1,7 +1,8 @@
 {
   "usingComponents": {
+    "custom-radio": "../../../../components/radio/index"
   },
-  "navigationBarTitleText":"通告管理",
+  "navigationBarTitleText":"新增学员",
   "enablePullDownRefresh": true,
   "navigationBarBackgroundColor": "#528CF4"
 }

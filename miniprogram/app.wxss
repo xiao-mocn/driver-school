@@ -1,7 +1,5 @@
 /**app.wxss**/
 /**app.wxss**/
-@import 'wxui.wxss';
-@import 'default.wxss';
 page {
   background-color: #F5F6F7;
   font-family: -apple-system-font,Helvetica Neue,Helvetica,sans-serif;

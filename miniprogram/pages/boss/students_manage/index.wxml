@@ -1,0 +1,32 @@
+
+<view class="search-container">
+  <image src="../../../images/icons/search.png" />
+  <input type="text" confirm-type="search" placeholder="搜索团队成员姓名" bindconfirm="onConfirm" bindinput="onInput"/>
+  <view class="add-btn">
+    <text >新增</text>
+    <image src="../../../images/icons/add.png" />
+  </view>
+</view>
+  <scroll-view
+    scroll-y
+    class="scroll-view"
+    bindscrolltolower="onReachBottom"
+    bindrefresherrefresh="onPullDownRefresh"
+    refresher-enabled="{{false}}"
+    refresher-triggered="{{isRefreshing}}"
+  >
+    <block wx:for="{{list}}" wx:key="id">
+      <view class="list-item">
+        <image src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" />
+        <view class="info">
+          <text class="baseInfo">{{item.name + '  ' +item.phone }}</text>
+          <text class="idCard">身份证：{{item.idCard}}</text>
+        </view>
+        <view class="options btn-area">
+          <view class="edit" type="primary">编辑</view>
+          <view class="delete" type="warn">删除</view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+<!-- </view> -->

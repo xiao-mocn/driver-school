@@ -1,25 +1,24 @@
-import { envId } from "../../../envList"
-
 //获取应用实例
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    list: [
-      { name: '张教练', phone: '15051836908', idCard: '452724199505244545'},
-      { name: '张教练', phone: '15051836908', idCard: '452724199505244545'},
-      { name: '张教练', phone: '15051836908', idCard: '452724199505244545'},
-    ],
-    isRefreshing: false,
-    searchQuery: ''
+    date: '1996-01-01',
+    checkedValue: 'man',
+    items: [
+      { value: 'option1', name: 'Option 1', checked: false },
+      { value: 'option2', name: 'Option 2', checked: false }
+    ]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    console.log('刷新')
+    wx.setNavigationBarTitle({
+      title: '学员新增'
+    });
   },
 
   /**
@@ -54,5 +53,24 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+  },
+  handleButtonClick() {
+
+  },
+  handleRadioChange(e) {
+    console.log(e);
+    this.setData({
+      checkedValue: e.detail.value
+    });
+  },
+  checkboxChange(e) {
+    const values = e.detail.value;
+    const items = this.data.items.map(item => ({
+      ...item,
+      checked: values.includes(item.value)
+    }));
+    this.setData({
+      items
+    });
   }
 })

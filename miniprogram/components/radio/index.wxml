@@ -1,0 +1,7 @@
+<view class="radio-container">
+  <view
+    class="custom-radio {{checked ? 'checked' : ''}}"
+    bindtap="handleRadioChange"
+  ></view>
+  <label>{{name}}</label>
+</view>

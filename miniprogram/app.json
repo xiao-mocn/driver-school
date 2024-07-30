@@ -5,7 +5,9 @@
     "pages/student/user/index",
     "pages/coach/home/index",
     "pages/coach/user/index",
-    "pages/boss/home/index"
+    "pages/boss/home/index",
+    "pages/boss/coachs_manage/index",
+    "pages/boss/coachs_manage/edit/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
