@@ -6,12 +6,12 @@ Page({
    */
   data: {
     formData: {
-      name: '莫荣包',
-      idCard: '452724199605032538',
+      name: '',
+      idCard: '',
       birthday: '2024-01-01',
       gender: 'man',
-      phone: '15051836908',
-      school: '上海驾校',
+      phone: '',
+      school: '',
       classType: 'beginner',
       carType: 'C1'
     },
@@ -29,13 +29,12 @@ Page({
     wx.setNavigationBarTitle({
       title: type === 'add' ? '新增' : '编辑'
     });
-    if (type === 'edit') {
-      this.getCoachInfo()
-    }
+    this.getCoachInfo()
   },
   getCoachInfo: function () {
     const eventChannel = this.getOpenerEventChannel();
     eventChannel.on('acceptDataFromOpenerPage', (data) => {
+      console.log('data ==', data);
       this.setData({
         formData: data.data
       });
@@ -139,8 +138,8 @@ Page({
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
         mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
       })
-      wx.navigateBack({
-        delta: 1  // 返回到上级页面
+      wx.redirectTo({
+        url: '/pages/boss/students_manage/index',
       });
     })
     .catch((err) => {
@@ -152,7 +151,49 @@ Page({
   },
   // 更新
   callFunctionUpdate() {
-    
+    wx.showLoading({
+      title: '正在提交',
+    });
+    wx.cloud.callFunction({
+      name: 'quickstartFunctions',
+      config: {
+        env: envId,
+      },
+      data: {
+        type: 'updateRecord',
+        collectionName: 'students',
+        data: this.data.formData
+      }
+    })
+    .then((resp) => {
+      console.log('resp ==', resp);
+      const { success } = resp.result
+      wx.hideLoading();
+      if (!success) {
+        wx.showToast({
+          title: '更新失败',
+          icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
+          duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
+          mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
+        })
+        return
+      }
+      wx.showToast({
+        title: '更新成功',
+        icon: 'success', // 提示图标，可选值：'success', 'loading', 'none'
+        duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
+        mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
+      })
+      wx.redirectTo({
+        url: '/pages/boss/students_manage/index',
+      });
+    })
+    .catch((err) => {
+      console.log('err ==', err);
+      wx.showToast({
+        title: '更新失败',
+      })
+    })
   },
   handleCancel() {
     wx.navigateBack({

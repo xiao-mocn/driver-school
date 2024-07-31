@@ -7,17 +7,19 @@ const db = cloud.database();
 
 // 修改数据库信息云函数入口函数
 exports.main = async (event, context) => {
+  const collectionName = event.collectionName;
+  const data = event.data;
+  const _id = data._id;
+  delete data._id;
   try {
     // 遍历修改数据库信息
-    for (let i = 0; i < event.data.length; i++) {
-      await db.collection('sales').where({
-        _id: event.data[i]._id
-      }).update({
-        data: {
-          sales: event.data[i].sales
-        },
-      });
-    }
+    await db.collection(collectionName).where({
+      _id: _id
+    }).update({
+      data: {
+        ...data
+      },
+    })
     return {
       success: true,
       data: event.data

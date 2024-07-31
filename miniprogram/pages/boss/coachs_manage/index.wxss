@@ -59,9 +59,10 @@ page {
 .scroll-view {
   position: relative;
   width: 750rpx;
-  height: calc(100vh - 130rpx);
+  height: calc(100vh - 160rpx);
   top: 100rpx;
   padding-top: 30rpx;
+  padding-bottom: 30rpx;
   display: flex;
   flex-direction: column;
   align-items: center;

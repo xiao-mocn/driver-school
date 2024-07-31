@@ -1,8 +1,8 @@
 
 <view class="search-container">
   <image src="../../../images/icons/search.png" />
-  <input type="text" confirm-type="search" placeholder="搜索学员姓名" bindconfirm="onConfirm" bindinput="onInput"/>
-  <view class="add-btn">
+  <input type="text" value="{{searchQuery}}" confirm-type="search" placeholder="搜索学员姓名" bindconfirm="onConfirm" bindinput="onInput"/>
+  <view class="add-btn" bindtap="handelAdd">
     <text >新增</text>
     <image src="../../../images/icons/add.png" />
   </view>

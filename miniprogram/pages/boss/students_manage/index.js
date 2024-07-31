@@ -56,11 +56,25 @@ Page({
     })
     this.getList()
   },
+  onConfirm(e) {
+    console.log('e ===', e)
+    const value = e.detail.value
+    this.setData({
+      searchQuery: value
+    })
+    this.getList()
+  },
+  onInput(e) {
+  },
 
   getList() {
     wx.showLoading({
       title: '',
     });
+    const data = {}
+    if (this.data.searchQuery) {
+      data.name = this.data.searchQuery
+    }
     wx.cloud.callFunction({
       name: 'quickstartFunctions',
       config: {
@@ -69,8 +83,7 @@ Page({
       data: {
         type: 'selectRecord',
         collectionName: 'students',
-        data: {
-        }
+        data: data
       }
     }).then(res => {
       console.log('res ===', res)
@@ -85,11 +98,31 @@ Page({
       wx.hideLoading();
     })
   },
+  handelAdd() {
+    wx.navigateTo({
+      url: `/pages/boss/students_manage/edit/index?type=add`,
+      success: function (res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', { 
+          data: {
+            name: '莫荣包',
+            idCard: '452724199605032538',
+            birthday: '2024-01-01',
+            gender: 'man',
+            phone: '15051836908',
+            school: '上海驾校',
+            classType: 'beginner',
+            carType: 'C1'
+          }
+        })
+      }
+    })
+  },
   handelEdit(e) {
     const row = e.currentTarget.dataset.row;
     console.log('row ===', row);
     wx.navigateTo({
-      url: `/pages/boss/studwents_manage/edit/index?type=edit`,
+      url: `/pages/boss/students_manage/edit/index?type=edit`,
       success: function (res) {
         // 通过eventChannel向被打开页面传送数据
         res.eventChannel.emit('acceptDataFromOpenerPage', { data: row })
