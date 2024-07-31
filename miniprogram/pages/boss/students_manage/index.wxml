@@ -10,9 +10,8 @@
 <scroll-view
   scroll-y
   class="scroll-view"
-  bindscrolltolower="onReachBottom"
   bindrefresherrefresh="onPullDownRefresh"
-  refresher-enabled="{{false}}"
+  refresher-enabled="{{true}}"
   refresher-triggered="{{isRefreshing}}"
 >
   <block wx:for="{{list}}" wx:key="id">
@@ -23,8 +22,8 @@
         <text class="idCard">身份证：{{item.idCard}}</text>
       </view>
       <view class="options btn-area">
-        <view class="edit" type="primary">编辑</view>
-        <view class="delete" type="warn">删除</view>
+        <view class="edit" type="primary" data-row="{{ item }}" bindtap="handelEdit">编辑</view>
+        <view class="delete" type="warn" data-row="{{ item }}" bindtap="handelDelete">删除</view>
       </view>
     </view>
   </block>

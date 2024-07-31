@@ -12,12 +12,11 @@ exports.main = async (event, context) => {
     for (let i = 0; i < event.data.length; i++) {
       await db.collection('sales').where({
         _id: event.data[i]._id
-      })
-        .update({
-          data: {
-            sales: event.data[i].sales
-          },
-        });
+      }).update({
+        data: {
+          sales: event.data[i].sales
+        },
+      });
     }
     return {
       success: true,
