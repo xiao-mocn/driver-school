@@ -3,8 +3,8 @@ Page({
   data: {
     carouselImages: [],
     iconArr:[
-      { id: 1, iconName: '公司信息', iconUrl: '../../../images/student/company.png', pageAddress: '/pages/sign/sign', dec: '公司详情' },
-      { id: 2, iconName: '预约课时', iconUrl: '../../../images/student/appointment.png', pageAddress: '', dec: '课时详情' },
+      { id: 1, iconName: '公司信息', iconUrl: '../../../images/student/company.png', type: 'company', pageAddress: '/pages/gallery/index', dec: '公司详情' },
+      { id: 2, iconName: '预约课时', iconUrl: '../../../images/student/appointment.png', pageAddress: '/pages/student/coachList/index', dec: '课时详情' },
       { id: 3, iconName: '返现活动', iconUrl: '../../../images/student/activity.png', pageAddress: '/pages/sign/sign', dec: '更多优惠' }
     ],
     envId,
@@ -104,5 +104,29 @@ Page({
         })
       }
     })
+  },
+  handleIcon(e) {
+    const item = e.currentTarget.dataset.item
+    if (item.type === 'company') {
+      wx.navigateTo({
+        url: item.pageAddress,
+        success: function (res) {
+          // 通过eventChannel向被打开页面传送数据
+          res.eventChannel.emit('acceptDataFromOpenerPage', { 
+            data: {
+              title: item.title,
+              list: [{
+                des: item.des,
+                id: item.id
+              }]
+            }
+          })
+        }
+      })
+    } else {
+      wx.navigateTo({
+        url: item.pageAddress
+      })
+    }
   }
 })

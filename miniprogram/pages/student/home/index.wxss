@@ -92,6 +92,9 @@ page {
   border-radius: 10rpx;
   box-shadow: 0 3rpx 5rpx 1rpx #ccc;
 }
+.icons .navigator:active {
+  background-color: #dddbdb;
+}
 
 .icons .navigator image {
   width: 66rpx;

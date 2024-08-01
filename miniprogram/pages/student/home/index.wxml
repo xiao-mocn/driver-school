@@ -26,7 +26,7 @@
     </view>
   </view>
   <view class="icons">
-    <view wx:for="{{iconArr}}" wx:key="id" url="{{item.pageAddress}}" class="navigator">
+    <view wx:for="{{iconArr}}" wx:key="id" url="{{item.pageAddress}}" data-item="{{item}}" class="navigator" bindtap="handleIcon">
       <image mode="widthFix" src="{{item.iconUrl}}"></image>
       <view class="text">{{item.iconName}}</view>
       <view class="sub">{{item.dec}}</view>
@@ -37,7 +37,7 @@
       <text>热门教练</text>
     </view>
     <view class="coach-right">
-      <navigator url="" open-type="navigate">
+      <navigator url="/pages/student/coachList/index" open-type="navigate">
         <text>查看更多</text>
         <image src="../../../images/icons/next.png"></image>
       </navigator>
