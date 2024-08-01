@@ -1,0 +1,15 @@
+
+page {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 750rpx;
+  background-color: rgb(246, 246, 246);
+  padding-bottom: 40rpx;
+}
+
+.order-container {
+  width: 690rpx;
+  padding: 30px;
+}

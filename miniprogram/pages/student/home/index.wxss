@@ -28,7 +28,7 @@ page {
   position: relative;
   display: flex;
   align-items: center;
-  border-radius: 8rpx;
+  border-radius: 50rpx;
   box-shadow: 0 3rpx 5rpx 1rpx #ccc;
 }
 
@@ -83,7 +83,7 @@ page {
   justify-content: space-between;
 }
 
-.icons navigator {
+.icons .navigator {
   width: 220rpx;
   display: flex;
   flex-direction: column;
@@ -93,7 +93,7 @@ page {
   box-shadow: 0 3rpx 5rpx 1rpx #ccc;
 }
 
-.icons navigator image {
+.icons .navigator image {
   width: 66rpx;
   margin: 24rpx;
 }
@@ -106,7 +106,7 @@ page {
 }
 
 .icons .sub {
- margin-top: 20rpx;
+  margin-top: 20rpx;
   color: rgb(153, 153, 153);
   font-size: 24rpx;
   line-height: 30rpx;

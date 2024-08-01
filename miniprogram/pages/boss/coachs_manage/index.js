@@ -112,7 +112,9 @@ Page({
             phone: '15051836908',
             school: '上海驾校',
             classType: 'beginner',
-            carType: 'C1'
+            carType: 'C1',
+            starscore: 0,
+            studentCount: 0
           }
         })
       }
@@ -134,7 +136,7 @@ Page({
     const _this = this
     wx.showModal({
       title: '提示',
-      content: '是否要删除该学生',
+      content: '是否要删除该成员',
       success (res) {
         if (res.confirm) {
           _this.callFunctionDelete(row)

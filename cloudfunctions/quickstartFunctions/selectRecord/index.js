@@ -10,9 +10,10 @@ exports.main = async (event, context) => {
   const collectionName = event.collectionName;
   console.log('collectionName ===', collectionName);
   const data = event.data;
+  const limit = event.limit || 999; // 默认限制返回10条数据，如果没有传入limit参数
   const checkResult = await db.collection(collectionName).where({
     ...data
-  }).get();
+  }).limit(limit).get();
   if (checkResult.data.length > 0) {
     return {
       success: true,

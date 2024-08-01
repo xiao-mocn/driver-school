@@ -7,6 +7,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "coachList",
+          "pathName": "pages/student/coachList/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "gallery",
+          "pathName": "pages/gallery/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "coachs_manage/edit",
           "pathName": "pages/boss/coachs_manage/edit/index",
           "query": "type=add",

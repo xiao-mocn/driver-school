@@ -1,0 +1,49 @@
+<view class="search-container">
+  <image src="../../../images/icons/search.png" />
+  <input type="text" value="{{searchQuery}}" confirm-type="search" placeholder="搜索教练姓名" bindconfirm="onConfirm" bindinput="onInput"/>
+</view>
+<scroll-view
+  scroll-y
+  class="scroll-view"
+  bindrefresherrefresh="onPullDownRefresh"
+  refresher-enabled="{{true}}"
+  refresher-triggered="{{isRefreshing}}"
+>
+  <view class="coach-list">
+    <view class="coach-item" wx:for="{{ coachList }}" wx:key="id">
+      <view class="coach-base">
+        <image src="{{item.avatar}}" class="avatar"></image>
+        <view class="coach-info">
+          <view class="coach-title">
+            <text>{{item.name}}</text>
+            <navigator url="" open-type="navigate">
+              <view class="appointment-container">
+                <image src="../../../images/student/appointment-icon.png"></image>
+                <text>预约</text>
+              </view>
+            </navigator>
+          </view>
+          <view class="coach-dec">
+            <text>简介：驾驶是一种乐趣，一起学习这门艺术</text>
+          </view>
+        </view>
+      </view>
+      <view class="coach-sub">
+        <view class="coach-sub-item">
+          <text class="coach-score">{{item.starscore}}</text>
+          <text class="dec">服务评价</text>
+        </view>
+        <image src="../../../images/student/slash_icon.png" class="star"></image>
+        <view class="coach-sub-item">
+          <text class="coach-defaul">{{item.studentCount}}</text>
+          <text class="dec">服务次数</text>
+        </view>
+        <image src="../../../images/student/slash_icon.png" class="star"></image>
+        <view class="coach-sub-item">
+          <text class="coach-defaul">{{item.carType}}</text>
+          <text class="dec">服务车型</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</scroll-view>

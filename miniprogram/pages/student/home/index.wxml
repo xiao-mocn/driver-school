@@ -1,4 +1,10 @@
-<view>
+<scroll-view
+    scroll-y
+    class="coach-list"
+    bindrefresherrefresh="onPullDownRefresh"
+    refresher-enabled="{{true}}"
+    refresher-triggered="{{isRefreshing}}"
+  >
   <!-- 轮播图 -->
   <view class="top swiper-container">
     <swiper autoplay indicator-dots circular>
@@ -11,20 +17,20 @@
     <view class="notice-left clearfix">
       <text>通知公告</text>
     </view>
-    <navigator class="notice-righ clearfix" url="/pages/_index/gonggao/gonggao" open-type="navigate">
+    <view class="notice-righ clearfix" url="" open-type="navigate">
       <swiper autoplay="true" circular="true" class="swiper_container" interval="7000" vertical="true">
-        <swiper-item wx:for="{{noticeArr}}" wx:key="id">
+        <swiper-item wx:for="{{noticeArr}}" wx:key="id" data-item="{{item}}" bindtap="handleNotice">
           <view class="swiper_item">{{item.title}}</view>
         </swiper-item>
       </swiper>
-    </navigator>
+    </view>
   </view>
   <view class="icons">
-    <navigator wx:for="{{iconArr}}" wx:key="id" url="{{item.pageAddress}}" open-type="navigate">
+    <view wx:for="{{iconArr}}" wx:key="id" url="{{item.pageAddress}}" class="navigator">
       <image mode="widthFix" src="{{item.iconUrl}}"></image>
       <view class="text">{{item.iconName}}</view>
       <view class="sub">{{item.dec}}</view>
-    </navigator>
+    </view>
   </view>
   <view class="coach-navigator">
     <view class="coach-left">
@@ -58,20 +64,20 @@
       </view>
       <view class="coach-sub">
         <view class="coach-sub-item">
-          <text class="coach-score">5</text>
+          <text class="coach-score">{{item.starscore}}</text>
           <text class="dec">服务评价</text>
         </view>
         <image src="../../../images/student/slash_icon.png" class="star"></image>
         <view class="coach-sub-item">
-          <text class="coach-defaul">123</text>
+          <text class="coach-defaul">{{item.studentCount}}</text>
           <text class="dec">服务次数</text>
         </view>
         <image src="../../../images/student/slash_icon.png" class="star"></image>
         <view class="coach-sub-item">
-          <text class="coach-defaul">C1/C2</text>
+          <text class="coach-defaul">{{item.carType}}</text>
           <text class="dec">服务车型</text>
         </view>
       </view>
     </view>
   </view>
-</view>
+</scroll-view>

@@ -1,0 +1,163 @@
+page {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 750rpx;
+  background-color: rgb(246, 246, 246);
+  padding-bottom: 40rpx;
+}
+
+.search-container {
+  position: fixed;
+  top: 0;
+  z-index: 2024;
+  padding: 30rpx;
+  width: 690rpx;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  background-color: #528CF4;
+}
+.search-container image{
+  position: absolute;
+  width: 30rpx;
+  height: 30rpx;
+  left: 660rpx;
+  opacity: 0.6;
+}
+.search-container input{
+  width: 600rpx;
+  height: 30rpx;
+  padding: 10rpx 30rpx;
+  padding-right: 50rpx;
+  background: rgb(223, 220, 220);
+  border-radius: 40rpx;
+  font-size: 28rpx;
+  color: rgb(117, 116, 116);
+}
+
+.scroll-view {
+  position: relative;
+  width: 750rpx;
+  height: calc(100vh - 160rpx);
+  top: 100rpx;
+  padding-top: 30rpx;
+  padding-bottom: 30rpx;
+  
+}
+.coach-list {
+  width: 750rpx;
+  padding-bottom: 40rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.coach-list .coach-item {
+  width: 690rpx;
+  background: #fff;
+  margin-bottom: 20rpx;
+  border-radius: 20rpx;
+}
+.coach-list .coach-item .coach-base {
+  padding: 20rpx 20rpx 0 20rpx;
+  width: 670rpx;
+  display: flex;
+}
+
+.coach-list .coach-item .coach-base .avatar{
+  width: 160rpx;
+  height: 160rpx;
+}
+.coach-list .coach-item .coach-base .coach-info{
+  flex: 1;
+  margin-left: 20rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+.coach-info .coach-title {
+  font-weight: bold;
+  font-size: 34rpx;
+  color: rgb(33, 33, 33);
+  display: flex;
+  justify-content: space-between;
+}
+
+.coach-info .coach-title .appointment-container {
+  position: relative;
+  right: 20rpx;
+  width: 120rpx;
+  height: 46rpx;
+  display: flex;
+  align-items: center;
+  border-radius: 20rpx;
+  margin-top: 10rpx;
+  background-color: rgba(150, 191, 191, 0.6);
+  font-size: 26rpx;
+  color: #557878;
+  line-height: 40rpx;
+}
+
+.coach-info .coach-title .appointment-container image{
+  width: 30rpx;
+  height: 30rpx;
+  margin-left: 10rpx;
+}
+
+.coach-info .coach-title .appointment-container text{
+  margin-left: 10rpx;
+}
+
+.coach-info .coach-dec{
+  width: 490rpx;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 26rpx;
+  color: rgb(153, 153, 153);
+  margin-top: 36rpx;
+}
+
+.coach-sub {
+  margin-left: 180rpx;
+  padding: 10rpx 20rpx 20rpx 20rpx;
+  width: 490rpx;
+  height: 100rpx;
+  position: relative;
+  right: 0;
+  display: flex;
+  align-items: center;
+}
+.coach-sub-item {
+  width: 130rpx;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.coach-score {
+  font-size: 30rpx;
+  font-weight: 550;
+  color: #fe9602;
+  line-height: 40rpx;
+}
+.coach-sub-item .coach-defaul{
+  font-size: 30rpx;
+  font-weight: 600;
+  color: rgb(33, 33, 33);
+  line-height: 40rpx;
+}
+.coach-sub-item .dec{
+  font-size: 26rpx;
+  font-weight: 400;
+  color: rgb(150, 150, 150);
+  line-height: 40rpx;
+}
+.coach-sub image{
+  width: 40rpx;
+  height: 100rpx;
+}
