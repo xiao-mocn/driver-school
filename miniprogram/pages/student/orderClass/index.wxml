@@ -1,2 +1,34 @@
 <view class="order-container">
+  <view class="coach-info">
+    <view class="base-info">
+      <image src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" />
+      <view class="text-info">
+        <view class="name">
+          <text>张三</text>
+          <text class="score">5.0</text>
+          <text class="text">分</text>
+        </view>
+        <view class="sub">
+          <text >服务次数: 5</text>
+          <text >服务车型: A1</text>
+        </view>
+      </view>
+    </view>
+    <view class="coach-dec" wx:if="{{false}}">
+      <text >我拥有丰富的驾驶经验和专业的培训技巧，致力于帮助每一位新手司机快速掌握驾驶技能，确保您的行车安全。我的教学方法注重理论与实践相结合，不仅会在车内为您详细讲解驾驶技巧和注意事项，还会在车外指导您进行实际操作，确保您能够真正掌握驾驶要领</text>
+    </view>
+    <view class="coach-school">
+      <image src="../../../images/icons/address.png" />
+      <text style="margin-left: 20rpx;">北京汽车学院</text>
+    </view>
+  </view>
+  <view class="selectDate-container">
+    <text class="title">预约时段</text>
+    <view class="selectDate-options">
+      <view class="option" wx:for="{{dateOptions}}">
+        <text>今天</text>
+        <text>04-01</text>
+      </view>
+    </view>
+  </view>
 </view>

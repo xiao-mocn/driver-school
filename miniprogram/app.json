@@ -4,6 +4,7 @@
     "pages/student/home/index",
     "pages/student/user/index",
     "pages/student/coachList/index",
+    "pages/student/orderClass/index",
     "pages/coach/home/index",
     "pages/coach/user/index",
     "pages/boss/home/index",
