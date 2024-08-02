@@ -31,4 +31,7 @@
       </view>
     </view>
   </view>
+  <view class="pay-container">
+    <text class="title">支付手段</text>
+  </view>
 </view>

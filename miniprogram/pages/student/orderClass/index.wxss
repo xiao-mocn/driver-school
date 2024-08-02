@@ -100,7 +100,7 @@ page {
   flex-direction: column;
   padding: 30rpx;
   width: 630rpx;
-  height: 300rpx;
+  min-height: 300rpx;
   border-radius: 20rpx;
   margin-top: 20rpx;
   background: #FFFFFF;
@@ -136,4 +136,15 @@ page {
 .selectDate-container .selectDate-options .active{
   background-color: #fe9602;
   border: 2rpx solid #fe9602;
+}
+
+.pay-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 30rpx;
+  width: 630rpx;
+  border-radius: 20rpx;
+  margin-top: 20rpx;
+  background: #FFFFFF;
 }
