@@ -1,0 +1,10 @@
+<view class="tab-bar">
+  <view
+    wx:for="{{ tabBarList }}"
+    wx:key="path"
+    class="tab-item {{index === 0 ? 'border-left-radius' : ''}}"
+    data-path="{{item.path}}"
+    bindtap="switchTab">
+    {{item.name}}
+  </view>
+</view>

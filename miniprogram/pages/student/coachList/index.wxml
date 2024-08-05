@@ -16,12 +16,10 @@
         <view class="coach-info">
           <view class="coach-title">
             <text>{{item.name}}</text>
-            <navigator url="" open-type="navigate">
-              <view class="appointment-container">
-                <image src="../../../images/student/appointment-icon.png"></image>
-                <text>预约</text>
-              </view>
-            </navigator>
+            <view class="appointment-container" data-info="{{item}}" bindtap="handleAppointment">
+              <image src="../../../images/student/appointment-icon.png"></image>
+              <text>预约</text>
+            </view>
           </view>
           <view class="coach-dec">
             <text>简介：驾驶是一种乐趣，一起学习这门艺术</text>

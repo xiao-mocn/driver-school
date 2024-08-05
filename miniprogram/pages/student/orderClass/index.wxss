@@ -69,6 +69,23 @@ page {
   font-weight: 400;
   color: #a09f9f;
 }
+.coach-info .base-info .prices {
+  position: absolute;
+  top: 140rpx;
+  right: 40rpx;
+  display: flex;
+  align-items: baseline;
+}
+.coach-info .base-info .sysbol {
+  color: #ef5135;
+  font-size: 24rpx;
+  line-height: 30rpx;
+}
+.coach-info .base-info .number {
+  color: #ef5135;
+  font-size: 36rpx;
+  line-height: 30rpx;
+}
 .coach-info .coach-dec {
   width: 570rpx;
   padding: 30rpx;
@@ -112,12 +129,12 @@ page {
 }
 .selectDate-container .selectDate-options {
   width: 630rpx;
-  height: 120rpx;
   margin-top: 30rpx;
   display: flex;
   justify-content: space-between;
 }
-.selectDate-container .selectDate-options .option{
+.selectDate-container .selectDate-options .option {
+  position: relative;
   width: 100rpx;
   height: 100rpx;
   padding: 10rpx;
@@ -130,12 +147,59 @@ page {
   color: #1e1d1d;
   background-color: #eeeeee;
 }
-.selectDate-container .selectDate-options .option:active{
-  background-color: #a09f9f;
+.selectDate-container .selectDate-options .option:active {
+  background-color: #f9ddb6;
 }
-.selectDate-container .selectDate-options .active{
-  background-color: #fe9602;
+.selectDate-container .selectDate-options .active {
+  background-color: #f9ddb6;
   border: 2rpx solid #fe9602;
+}
+.selectDate-container .selectDate-options image {
+  position: absolute;
+  z-index: 1000;
+  bottom: 0;
+  right: 0;
+  width: 26rpx;
+  height: 20rpx;
+}
+.selectDate-container .timePeriods .active {
+  background-color: #f9ddb6;
+  border: 2rpx solid #fe9602;
+}
+.selectDate-container .timePeriods image {
+  position: absolute;
+  z-index: 1000;
+  bottom: 0;
+  right: 0;
+  width: 26rpx;
+  height: 20rpx;
+}
+
+.selectDate-container .timePeriods {
+  width: 630rpx;
+  margin-top: 30rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 30rpx;
+}
+.selectDate-container .timePeriods .timePeriod {
+  position: relative;
+  width: 180rpx;
+  height: 110rpx;
+  padding: 10rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10rpx;
+  font-size: 28rpx;
+  color: #777676;
+  margin-bottom: 30rpx;
+  background-color: #eeeeee;
+}
+.selectDate-container .timePeriods .timePeriod .reducible {
+  color: #fe9602;
 }
 
 .pay-container {
@@ -147,4 +211,69 @@ page {
   border-radius: 20rpx;
   margin-top: 20rpx;
   background: #FFFFFF;
+}
+.pay-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 630rpx;
+  margin-top: 30rpx;
+}
+.pay-list .pay-list-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.pay-list .pay-list-item image {
+  width: 50rpx;
+  height: 50rpx;
+}
+.pay-list .pay-list-item text {
+  margin-left: 40rpx;
+  color: #1e1d1d;
+  font-size: 30rpx;
+  line-height: 30rpx;
+}
+.pay-list .pay-list-item .icon {
+  position: absolute;
+  right: 0;
+  width: 10rpx;
+  height: 10rpx;
+  border-radius: 100%;
+  border: 8rpx solid #5f8be2;
+}
+.bottom-btn {
+  width: 690rpx;
+  height: 80rpx;
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.bottom-btn .btn {
+  width: 300rpx;
+  height: 80rpx;
+  background-color: #fe9602;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFF;
+  font-size: 30rpx;
+  font-weight: 400;
+  border-radius: 20rpx;
+}
+.bottom-btn .cancel {
+  background-color: rgb(255, 255, 255);
+  color: #4b4a4a;
+}
+
+.btn:active {
+  background-color: #e1e1e2;
+}
+/* 隐藏默认的 checkbox */
+.checkbox-hidden {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }

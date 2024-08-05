@@ -67,3 +67,4 @@
     <text>立即登录</text>
   </view>
 </view>
+<custom-tab-bar tabBarList="{{tabBarList}}"></custom-tab-bar>

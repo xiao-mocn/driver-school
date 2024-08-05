@@ -1,4 +1,4 @@
-import { envId } from "../../../envList"
+import { envId, studentBars } from "../../../envList"
 Page({
   data: {
     carouselImages: [],
@@ -11,6 +11,7 @@ Page({
     isRefreshing: false,
     noticeArr: [{title: '欢迎来到通告信息', id: 1, des: '欢迎来到通告信息详情' }, {title: '标题2', id: 2, des: '标题2详情' }],
     coachList: [],
+    tabBarList: studentBars
   },
 
   onLoad: function(options) {
@@ -128,5 +129,19 @@ Page({
         url: item.pageAddress
       })
     }
-  }
+  },
+  handleAppointment (e) {
+    const info = e.currentTarget.dataset.info
+    wx.navigateTo({
+      url: '/pages/student/orderClass/index',
+      success: function (res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', { 
+          data: {
+            ...info
+          }
+        })
+      }
+    })
+  },
 })

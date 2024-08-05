@@ -4,14 +4,18 @@
       <image src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" />
       <view class="text-info">
         <view class="name">
-          <text>张三</text>
-          <text class="score">5.0</text>
+          <text>{{coachInfo.name}}</text>
+          <text class="score">{{coachInfo.starscore}}</text>
           <text class="text">分</text>
         </view>
         <view class="sub">
-          <text >服务次数: 5</text>
-          <text >服务车型: A1</text>
+          <text >服务次数: {{coachInfo.studentCount}}</text>
+          <text >服务车型: {{coachInfo.carType}}</text>
         </view>
+      </view>
+      <view class="prices">
+        <text class="sysbol">￥</text>
+        <text class="number">{{prices}}</text>
       </view>
     </view>
     <view class="coach-dec" wx:if="{{false}}">
@@ -19,19 +23,54 @@
     </view>
     <view class="coach-school">
       <image src="../../../images/icons/address.png" />
-      <text style="margin-left: 20rpx;">北京汽车学院</text>
+      <text style="margin-left: 20rpx;">{{coachInfo.school}}</text>
     </view>
   </view>
   <view class="selectDate-container">
     <text class="title">预约时段</text>
     <view class="selectDate-options">
-      <view class="option" wx:for="{{dateOptions}}">
-        <text>今天</text>
-        <text>04-01</text>
+      <view
+        class="option {{item.selected ? 'active ' : ''}}"
+        wx:for="{{dateOptions}}"
+        wx:key="formattedDate"
+        data-date="{{item}}"
+        bindtap="onDateSelect">
+        <text>{{item.weekday}}</text>
+        <text>{{item.date}}</text>
+        <image wx:if="{{item.selected}}" src="../../../images/icons/checked.png" />
+      </view>
+    </view>
+    <view class="timePeriods">
+      <view
+        wx:for="{{timePeriods}}"
+        wx:key="period"
+        class="timePeriod {{ item.selected ? 'active' : ''}}"
+        data-period="{{item.period}}"
+        bindtap="onPeriodSelect">
+        <text>{{item.name}}</text>
+        <text wx:if="{{!item.isFree}}">已满</text>
+        <text wx:if="{{item.isFree}}" class="reducible">可约</text>
+        <text>{{item.period}}</text>
+        <image wx:if="{{item.selected}}" src="../../../images/icons/checked.png" />
       </view>
     </view>
   </view>
   <view class="pay-container">
     <text class="title">支付手段</text>
+    <view class="pay-list">
+      <view class="pay-list-item">
+        <image src="../../../images/icons/wxPay.png" />
+        <text>微信支付</text>
+        <view class="icon"></view>
+      </view>
+    </view>
+  </view>
+  <view class="bottom-btn">
+    <view class="btn cancel" bindtap="handleCancel">
+      <text>返回</text>
+    </view>
+    <view class="btn" bindtap="handleButtonClick">
+      <text>提交</text>
+    </view>
   </view>
 </view>

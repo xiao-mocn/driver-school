@@ -14,16 +14,17 @@ exports.main = async (event, context) => {
   console.log('data ===', data);
   try {
     // 先查询是否存在相同的 IDCard
-    const checkResult = await db.collection(collectionName).where({
-      idCard: data.idCard
-    }).get();
-    console.log('checkResult ===', checkResult);
-    if (checkResult.data.length > 0) {
-      // 如果存在相同的 IDCard，返回不能重复添加的提示
-      return {
-        success: false,
-        message: '身份证号Z已存在，不能重复添加'
-      };
+    if (collectionName === 'students' || collectionName === 'coachs') {
+      const checkResult = await db.collection(collectionName).where({
+        idCard: data.idCard
+      }).get();
+      if (checkResult.data.length > 0) {
+        // 如果存在相同的 IDCard，返回不能重复添加的提示
+        return {
+          success: false,
+          message: '身份证号Z已存在，不能重复添加'
+        };
+      }
     }
     await db.collection(collectionName).add({
       // data 字段表示需新增的 JSON 数据

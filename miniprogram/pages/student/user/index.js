@@ -1,9 +1,11 @@
 //获取应用实例
+import { envId, studentBars } from "../../../envList"
 Page({
   /**
    * 页面的初始数据
    */
   data: {
+    tabBarList: studentBars
   },
 
   /**
