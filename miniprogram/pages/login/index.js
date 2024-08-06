@@ -15,6 +15,15 @@ Page({
   },
   //首次点击允许获取用户信息并且授权
   getUserInfo: function (e) {
+    return new Promise((resolve, reject) => {
+      if (e.detail.userInfo != undefined) {
+        var userInfo = e.detail.userInfo
+        wx.setStorageSync('userInfo', userInfo);
+        resolve(userInfo)
+      } else {
+        reject(e)
+      }
+    })
     // var that = this
     // if(e.detail.userInfo != undefined){
     //   var userInfo = e.detail.userInfo
@@ -68,16 +77,7 @@ Page({
 
   },
   submitLogin: function (e) {
-    wx.getUserProfile({
-      desc: '用于完善用户信息',
-      success: (res) => {
-        console.log(res)
-        // wx.setStorageSync('userInfo', res.userInfo)
-        // wx.reLaunch({
-        //   url: '/pages/_index/index/index'
-        // })
-      }
-    })
+    
     // const username = e.detail.value.username;
     // const password = e.detail.value.password;
     // const type = this.data.loginType;
