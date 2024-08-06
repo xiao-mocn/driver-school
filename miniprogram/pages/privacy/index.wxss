@@ -1,0 +1,28 @@
+
+page {
+  position: relative;
+  width: 750rpx;
+}
+.text-container {
+  padding: 30rpx;
+  position: relative;
+}
+.text-container .title {
+  font-size: 32rpx;
+  line-height: 40rpx;
+  color: rgb(62, 62, 62);
+  margin-bottom: 20rpx;
+  font-weight: bold;
+  margin-top: 20rpx;
+}
+.text-container text {
+  font-size: 28rpx;
+  line-height: 40rpx;
+  color: rgb(62, 62, 62);
+  margin-top: 20rpx;
+}
+.text-container .content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}

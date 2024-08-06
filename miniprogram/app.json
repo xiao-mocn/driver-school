@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/loadding/index",
+    "pages/login/index",
     "pages/student/home/index",
     "pages/student/user/index",
     "pages/student/coachList/index",
@@ -9,6 +9,7 @@
     "pages/coach/user/index",
     "pages/boss/home/index",
     "pages/gallery/index",
+    "pages/privacy/index",
     "pages/boss/coachs_manage/index",
     "pages/boss/coachs_manage/edit/index",
     "pages/boss/students_manage/index",
@@ -17,7 +18,7 @@
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#1bd0ad",
-    "navigationBarTitleText": "平安驾考",
+    "navigationBarTitleText": "预约驾考",
     "navigationBarTextStyle": "white"
   },
   "sitemapLocation": "sitemap.json",

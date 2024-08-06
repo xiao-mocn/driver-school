@@ -7,6 +7,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "privacy",
+          "pathName": "pages/privacy/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "login",
+          "pathName": "pages/login/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "orderClass",
           "pathName": "pages/student/orderClass/index",
           "query": "",
@@ -86,13 +100,6 @@
         {
           "name": "student-home",
           "pathName": "pages/student/home/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "loadding",
-          "pathName": "pages/loadding/index",
           "query": "",
           "launchMode": "default",
           "scene": null

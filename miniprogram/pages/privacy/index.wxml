@@ -1,0 +1,7 @@
+<view class="text-container">
+  <text>{{beginText}}</text>
+  <view class="content" wx:for="{{detailTexts}}" wx:key="index">
+    <text class="title">{{item.title}}</text>
+    <text wx:for="{{item.contents}}" wx:for-item="textItem" wx:key="textItem">{{textItem}}</text>
+  </view>
+</view>

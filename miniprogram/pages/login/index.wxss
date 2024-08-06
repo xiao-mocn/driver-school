@@ -1,14 +1,13 @@
-/* .loading-pic{position:fixed;top:0;left:0;right:0;bottom:0;background-color:#fff;}
-.loading-pic image{width:750rpx;height:375rpx;margin-top:250rpx;}
-.loading-pic view{width:190rpx;height:190rpx;position:fixed;top:68%;left:52%;margin-left:-95rpx;margin-top:-95rpx;}
-.warrant .white{width:540rpx;height:521rpx;background-color:#fff;border-radius:15rpx;position:fixed;top:50%;left:54%;margin-left:-299.5rpx;margin-top:-345rpx;z-index:9;}
-.warrant .white .pictrue{background-image:url("https://bmob-cdn-24322.bmobcloud.com/2019/05/27/f739521c40e46df880a10443785a9034.png");background-repeat:no-repeat;background-size:100% 100%;width:240rpx;height:245rpx;margin:10rpx auto 0 auto;}
-.warrant .white .tip{font-size:30rpx;color:#8a8a8a;text-align:center;margin-top:44rpx;padding:0 30rpx;}
-.warrant .white .but{width:328rpx;height:80rpx;line-height:80rpx;font-size:30rpx;background-color:#1bd0ad;color:#fff;border-radius:50rpx;margin-top:70rpx;}
-.warrant .white .but::after{border:none;}
-.warrant .white .but:active{background-color:#1bd0ad;}
-.warrant .mask{position:fixed;top:0;right:0;left:0;bottom:0;background-color:rgba(0, 0, 0, 0.5);} */
-/**start.wxss**/
+
+text, view, button, input {
+  font-family: -apple-system-font, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+list, ul, ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 .container {
   background: #1bd0ad;
   align-items: stretch;
@@ -39,7 +38,7 @@
 }
 .title{
   position: absolute;
-  top: 30rpx;
+  top: 60rpx;
   left: 50%;
   width: 600rpx;
   height: 200rpx;
@@ -126,7 +125,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  align-items: center;
   animation: bd-rise 2s cubic-bezier(0.23,1,0.32,1) .75s forwards;
   opacity: 0;
 }
@@ -135,40 +134,43 @@
   to {opacity: 1; transform: translate3d(0,0,0); }
 }
 form {
-  flex: 1;
+  position: relative;
+  top: 0;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
+  align-items: center;
 }
 .input-group {
+  width: 600rpx;
   display: flex;
   align-items: center;
   padding: 25rpx 10rpx;
-  margin: 40rpx 3%;
+  margin: 30rpx 0;
   background: #fff;
-  border-radius: 5px;
-  border: 2px solid #f4f4f4;
+  border-radius: 14rpx;
+  border: 2rpx solid #f4f4f4;
   transition: all .25s ease-in-out;
 }
 .input-group.active {
   border: 2px solid #7acfa6;
 }
 .input-label {
+  width: 130rpx;
   color: #888;
-  font-size: 13pt;
-  height: 25rpx;
-  line-height: 25rpx;
-  padding: 0 25rpx;
-  border-right: 1px solid #d8d8d8; 
+  font-size: 30rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  padding-left: 25rpx;
+  border-right: 2rpx solid #d8d8d8; 
 }
 .input-group input,
 .input-group picker {
   flex: 1;
-  font-size: 13pt;
-  min-height: 52rpx;
+  font-size: 30rpx;
+  min-height: 40rpx;
   height: 52rpx;
   line-height: 52rpx;
+  color: #393838;
   padding: 0 25rpx;
 }
 .input-placeholder,
@@ -194,17 +196,18 @@ form {
   height: 85rpx;
   text-align: center;
 }
-.confirm-btn {
-  font-size: 13pt;
-  line-height: 85rpx;
+.content .confirm-btn {
+  font-size: 34rpx !important;
+  line-height: 50rpx !important;
+  width: 600rpx !important;
   height: 85rpx;
   background: #1bd0ad;
   color: #fff;
   text-align: center;
-  border-radius: 50px;
-  margin: 50rpx 20%;
+  border-radius: 50rpx;
+  margin-top: 30rpx;
 }
-.confirm-btn:active {
+.content .confirm-btn:active {
   opacity: .8;
 }
 .help {
@@ -294,4 +297,50 @@ page .wx-video-bar{
   right: 0;
   padding: 30rpx;
   text-align: center;
+}
+.bd .serve-title {
+  width: 600rpx;
+  font-size: 30rpx;
+  color: #a6a5a5;
+  line-height: 40rpx;
+}
+.bd .models {
+  width: 600rpx;
+  height: 40rpx;
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.bd .models text {
+  font-size: 30rpx;
+  color: #6583f8;
+  line-height: 40rpx;
+}
+.bd .models text:active {
+  opacity: 0.1;
+}
+
+.bd .privacy {
+  width: 600rpx;
+  height: 40rpx;
+  display: flex;
+  margin-top: 20rpx;
+  margin-left: 10rpx;
+  align-items: center;
+}
+.bd .privacy image {
+  width: 28rpx;
+  height: 28rpx;
+}
+.bd .privacy .icon-box {
+  width: 24rpx;
+  height: 24rpx;
+  border: 2rpx solid #d6d6d6;
+}
+.bd .privacy text {
+  font-size: 30rpx;
+  color: #a6a5a5;
+  line-height: 40rpx;
+  margin-left: 10rpx;
 }
