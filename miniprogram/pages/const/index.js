@@ -38,6 +38,7 @@ export const images = {
     order_2: 'https://6465-dev-module-3g8dv9dob670ce47-1304291956.tcb.qcloud.la/images/coach/order_2.png?sign=1039125599368abd5ecd4ddc4bdc60c5&t=1723018502',
   },
   icons: {
+    defaultAvatar: 'https://6465-dev-module-3g8dv9dob670ce47-1304291956.tcb.qcloud.la/images/icons/defaultAvatar.png?sign=1f13fc0ca40d4a09dd768b58d5010e57&t=1723029325',
     add: 'https://6465-dev-module-3g8dv9dob670ce47-1304291956.tcb.qcloud.la/images/icons/add.png?sign=d97f56ea5419455222cd235828702aa9&t=1723018143',
     address: 'https://6465-dev-module-3g8dv9dob670ce47-1304291956.tcb.qcloud.la/images/icons/address.png?sign=c9f20d493d1e6e40a7d02b1a21e4797e&t=1723018162',
     checked: 'https://6465-dev-module-3g8dv9dob670ce47-1304291956.tcb.qcloud.la/images/icons/checked.png?sign=d6d8ec2b30517da22d3e8b63f56b2bb6&t=1723018186',

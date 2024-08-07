@@ -5,7 +5,7 @@ Page({
     iconArr:[
       { id: 1, iconName: '公司信息', iconUrl: images.student.company, type: 'company', pageAddress: '/pages/gallery/index', dec: '公司详情' },
       { id: 2, iconName: '预约课时', iconUrl: images.student.appointment, pageAddress: '/pages/student/coachList/index', dec: '课时详情' },
-      { id: 3, iconName: '返现活动', iconUrl: images.student.activity, pageAddress: '/pages/sign/sign', dec: '更多优惠' }
+      { id: 3, iconName: '返现活动', iconUrl: images.student.activity, pageAddress: '', dec: '更多优惠' }
     ],
     envId,
     images,

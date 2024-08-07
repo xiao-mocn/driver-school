@@ -6,6 +6,10 @@ page {
   align-items: center;
   background-color: rgb(246, 246, 246);
 }
+.scroll-view {
+  width: 710rpx;
+  height: 100vh;
+}
 
 .swiper-container swiper {
   width: 710rpx;
@@ -147,7 +151,7 @@ page {
 
 .coach-list {
   width: 710rpx;
-  padding-bottom: 40rpx;
+  padding-bottom: 50rpx;
 }
 
 .coach-list .coach-item {
