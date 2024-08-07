@@ -1,17 +1,22 @@
 //获取应用实例
-import { envId, studentBars } from "../../../envList"
+import { studentBars, images } from "../../const/index"
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    tabBarList: studentBars
+    tabBarList: studentBars,
+    userInfo: {},
+    images,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
+    this.setData({
+      userInfo: wx.getStorageSync('userInfo')
+    })
   },
 
   /**

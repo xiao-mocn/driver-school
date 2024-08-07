@@ -1,3 +1,4 @@
+import { images } from '../../const/index'
 //获取应用实例
 Page({
 
@@ -5,6 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    images,
   },
 
   /**

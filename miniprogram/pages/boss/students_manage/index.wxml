@@ -1,10 +1,10 @@
 
 <view class="search-container">
-  <image src="../../../images/icons/search.png" />
+  <image src="{{ images.icons.search }}" />
   <input type="text" value="{{searchQuery}}" confirm-type="search" placeholder="搜索学员姓名" bindconfirm="onConfirm" bindinput="onInput"/>
   <view class="add-btn" bindtap="handelAdd">
     <text >新增</text>
-    <image src="../../../images/icons/add.png" />
+    <image src="{{ images.icons.add }}" />
   </view>
 </view>
 <scroll-view

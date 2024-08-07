@@ -11,7 +11,7 @@
     <tewxt class="name">黄晓明</tewxt>
     <text class="phone">15051866908</text>
   </view>
-  <image src="../../../images/icons/setting.png" class="setting" />
+  <image src=" {{ images.icons.setting }}" class="setting" />
 </view>
 <!-- 常用功能 -->
 <view class="user-content">
@@ -20,7 +20,7 @@
       <text class="title">已学课时</text>
       <text class="income">40</text>
     </view>
-    <image src="../../../images/student/slash_icon.png" class="star"></image>
+    <image src=" {{ images.student.slash_icon }}" class="star"></image>
     <view class="right flex-center">
       <text class="title">剩余课时</text>
       <text class="income">90</text>
@@ -29,38 +29,38 @@
   <view class="application-conntainer">
     <navigator class="row-item">
       <view class="row-info">
-        <image src="../../../images/icons/user.png" />
+        <image src=" {{ images.icons.user }}" />
         <text>个人信息</text>
       </view>
-      <image src="../../../images/icons/next.png" />
+      <image src=" {{ images.icons.next }}" />
     </navigator>
     <navigator class="row-item">
       <view class="row-info">
-        <image src="../../../images/icons/order.png" />
+        <image src=" {{ images.icons.order }}" />
         <text>我的订单</text>
       </view>
-      <image src="../../../images/icons/next.png" />
+      <image src=" {{ images.icons.next }}" />
     </navigator>
     <navigator class="row-item">
       <view class="row-info">
-        <image src="../../../images/icons/wallet.png" />
+        <image src=" {{ images.icons.wallet }}" />
         <text>我的钱包</text>
       </view>
-      <image src="../../../images/icons/next.png" />
+      <image src=" {{ images.icons.next }}" />
     </navigator>
     <navigator class="row-item">
       <view class="row-info">
-        <image src="../../../images/icons/star.png" />
+        <image src=" {{ images.icons.star }}" />
         <text>我的评价</text>
       </view>
-      <image src="../../../images/icons/next.png" />
+      <image src=" {{ images.icons.next }}" />
     </navigator>
     <navigator class="row-item">
       <view class="row-info">
-        <image src="../../../images/icons/password.png" />
+        <image src=" {{ images.icons.password }}" />
         <text>我的密码</text>
       </view>
-      <image src="../../../images/icons/next.png" />
+      <image src=" {{ images.icons.next }}" />
     </navigator>
   </view>
   <view class="bottom-btn">

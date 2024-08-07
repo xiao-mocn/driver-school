@@ -11,7 +11,7 @@
     <tewxt class="name">黄晓明</tewxt>
     <text class="phone">15051866908</text>
   </view>
-  <image src="../../../images/icons/setting.png" class="setting" />
+  <image src="{{ images.icons.setting }}" class="setting" />
 </view>
 <!-- 订单信息 -->
 <view class="order-container">

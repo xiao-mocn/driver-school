@@ -1,4 +1,4 @@
-import { envId } from "../../../envList"
+import { envId, images } from "../../const/index"
 
 //获取应用实例
 Page({
@@ -9,7 +9,8 @@ Page({
     list: [],
     isRefreshing: false,
     searchQuery: '',
-    envId: envId
+    envId,
+    images
   },
 
   /**

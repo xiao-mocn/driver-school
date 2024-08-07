@@ -27,7 +27,7 @@ exports.main = async (event, context) => {
   } catch (e) {
     return {
       success: false,
-      errMsg: e
+      errMsg: e.errMsg
     };
   }
 };

@@ -39,7 +39,7 @@
     <view class="coach-right">
       <navigator url="/pages/student/coachList/index" open-type="navigate">
         <text>查看更多</text>
-        <image src="../../../images/icons/next.png"></image>
+        <image src="{{ images.icons.next }}"></image>
       </navigator>
     </view>
   </view>
@@ -51,7 +51,7 @@
           <view class="coach-title">
             <text>{{item.name}}</text>
             <view class="appointment-container" data-info="{{item}}" bindtap="handleAppointment">
-              <image src="../../../images/student/appointment-icon.png"></image>
+              <image src="{{ images.student.appointment_icon }}"></image>
               <text>预约</text>
             </view>
           </view>
@@ -65,12 +65,12 @@
           <text class="coach-score">{{item.starscore}}</text>
           <text class="dec">服务评价</text>
         </view>
-        <image src="../../../images/student/slash_icon.png" class="star"></image>
+        <image src="{{ images.student.slash_icon }}" class="star"></image>
         <view class="coach-sub-item">
           <text class="coach-defaul">{{item.studentCount}}</text>
           <text class="dec">服务次数</text>
         </view>
-        <image src="../../../images/student/slash_icon.png" class="star"></image>
+        <image src="{{ images.student.slash_icon }}" class="star"></image>
         <view class="coach-sub-item">
           <text class="coach-defaul">{{item.carType}}</text>
           <text class="dec">服务车型</text>

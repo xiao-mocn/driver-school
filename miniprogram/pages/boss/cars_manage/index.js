@@ -1,4 +1,4 @@
-import { envId } from "../../../envList"
+import { envId } from "../../../const/index"
 
 //获取应用实例
 Page({

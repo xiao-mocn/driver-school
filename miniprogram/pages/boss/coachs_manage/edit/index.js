@@ -1,5 +1,5 @@
 //获取应用实例
-import { envId } from "../../../../envList";
+import { envId, images } from "../../../const/index";
 Page({
   /**
    * 页面的初始数据
@@ -18,7 +18,8 @@ Page({
       carType: 'C1'
     },
     pageType: '',
-    envId: envId,
+    envId,
+    images,
   },
   /**
    * 生命周期函数--监听页面加载

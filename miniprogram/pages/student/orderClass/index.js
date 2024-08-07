@@ -1,5 +1,5 @@
 //获取应用实例
-import { envId } from "../../../envList"
+import { envId } from "../../const/index"
 Page({
   /**
    * 页面的初始数据

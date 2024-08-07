@@ -1,13 +1,14 @@
-import { envId, studentBars } from "../../../envList"
+import { envId, studentBars, images } from "../../const/index"
 Page({
   data: {
     carouselImages: [],
     iconArr:[
-      { id: 1, iconName: '公司信息', iconUrl: '../../../images/student/company.png', type: 'company', pageAddress: '/pages/gallery/index', dec: '公司详情' },
-      { id: 2, iconName: '预约课时', iconUrl: '../../../images/student/appointment.png', pageAddress: '/pages/student/coachList/index', dec: '课时详情' },
-      { id: 3, iconName: '返现活动', iconUrl: '../../../images/student/activity.png', pageAddress: '/pages/sign/sign', dec: '更多优惠' }
+      { id: 1, iconName: '公司信息', iconUrl: images.student.company, type: 'company', pageAddress: '/pages/gallery/index', dec: '公司详情' },
+      { id: 2, iconName: '预约课时', iconUrl: images.student.appointment, pageAddress: '/pages/student/coachList/index', dec: '课时详情' },
+      { id: 3, iconName: '返现活动', iconUrl: images.student.activity, pageAddress: '/pages/sign/sign', dec: '更多优惠' }
     ],
     envId,
+    images,
     isRefreshing: false,
     noticeArr: [{title: '欢迎来到通告信息', id: 1, des: '欢迎来到通告信息详情' }, {title: '标题2', id: 2, des: '标题2详情' }],
     coachList: [],
@@ -21,7 +22,7 @@ Page({
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function (ww) {
     this.setData({
       isRefreshing: true
     })

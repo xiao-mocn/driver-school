@@ -1,10 +1,13 @@
+import { envId, images } from "../../const/index"
 //获取应用实例
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    activeName: 'OrderHall'
+    activeName: 'OrderHall',
+    envId,
+    images
   },
 
   /**

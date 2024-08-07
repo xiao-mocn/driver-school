@@ -1,4 +1,4 @@
-import { envId } from "../../../envList"
+import { envId, images } from "../../const/index"
 Page({
   /**
    * 页面的初始数据
@@ -7,7 +7,8 @@ Page({
     envId: '',
     coachList: [],
     isRefreshing: false,
-    searchQuery: ''
+    searchQuery: '',
+    images,
   },
 
   /**

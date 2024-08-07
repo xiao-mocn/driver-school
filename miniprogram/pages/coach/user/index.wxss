@@ -43,7 +43,7 @@ page {
   position: relative;
   top: 130rpx;
   width: 690rpx;
-  height: 120rpx;
+  height: 150rpx;
   padding: 0rpx 30rpx 50rpx 30rpx;
   background: linear-gradient(to bottom, #feb47b, #f9c59d);
   display: flex;

@@ -1,10 +1,10 @@
 <view class="container">
-  <image class="title" src="/images/loadding/confirm-word.png"></image>
+  <image class="title" src="{{images.login.confirm_word}}"></image>
   <view class="content">
     <view class="hd" style="transform:rotateZ({{angle}}deg);">
       <image class="logo" src="{{userInfo.avatarurl}}"></image>
-      <image class="wave" src="/images/loadding/wave.png" mode="aspectFill"></image>
-      <image class="wave wave-bg" src="/images/loadding/wave.png" mode="aspectFill"></image>
+      <image class="wave" src="{{images.login.wave}}" mode="aspectFill"></image>
+      <image class="wave wave-bg" src="{{images.login.wave}}" mode="aspectFill"></image>
     </view>
     <view class="bd">
       <text class="serve-title">登录模式:{{ loginType === 'student' ? '学生' : (loginType === 'coach' ? '教练' : '管理员') }}</text>
@@ -23,7 +23,7 @@
           <input name="password" type="password" placeholder="请输入密码" />
         </view>
         <view class="privacy">
-          <image wx:if="{{checked}}" src="/images/icons/checked.png" bind:tap="handleCheck"/>
+          <image wx:if="{{checked}}" src="{{ images.icons.checked }}" bind:tap="handleCheck"/>
           <view wx:else class="icon-box" bind:tap="handleCheck"></view>
           <text>我已阅读并同意</text>
           <text style="color:#6583f8" bindtap="goToPrivacy">隐私政策</text>

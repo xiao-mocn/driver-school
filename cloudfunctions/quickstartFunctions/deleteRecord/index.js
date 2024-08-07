@@ -17,11 +17,10 @@ exports.main = async (event, context) => {
       data: res
     };
   } catch (e) {
-    console.error(e);
     return {
       success: false,
       message: '删除失败',
-      error: e
+      errMsg: e.errMsg
     };
   }
 };

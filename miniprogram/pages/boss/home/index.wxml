@@ -10,7 +10,7 @@
       <text>账户余额</text>
     </view>
     <view class="right-bg"></view>
-    <image src="../../../images/boss/income.png" class="income-icon"></image>
+    <image src="{{images.boss.income}}" class="income-icon"></image>
     <text class="income-text">￥0.00</text>
     <text class="income-btn">查看详情</text>
   </view>
@@ -19,7 +19,7 @@
       <text>推广活动</text>
     </view>
     <view class="right-bg"></view>
-    <image src="../../../images/boss/active.png"></image>
+    <image src="{{images.boss.active}}"></image>
     <text class="income-text">活动管理</text>
     <text class="income-btn">查看详情</text>
   </view>
