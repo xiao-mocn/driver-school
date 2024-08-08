@@ -1,15 +1,9 @@
-<view class="custom-navigation-bar">
-  <view class="navigation-bar-background"></view>
-  <view class="navigation-bar-content">
-    <text class="navigation-bar-title">我的</text>
-  </view>
-</view>
 <!--个人信息-->
 <view class="user-top">
-  <image src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" ></image>
+  <image src="{{userInfo.avatarUrl || images.icons.defaultAvatar}}" ></image>
   <view class="info">
-    <tewxt class="name">黄晓明</tewxt>
-    <text class="phone">15051866908</text>
+    <tewxt class="name">{{ userInfo.name || '未登录' }}</tewxt>
+    <text class="phone">{{ userInfo.phone }}</text>
   </view>
   <image src=" {{ images.icons.setting }}" class="setting" />
 </view>
@@ -18,12 +12,12 @@
   <view class="income-container">
     <view class="left flex-center">
       <text class="title">已学课时</text>
-      <text class="income">40</text>
+      <text class="income">{{ userInfo.finishClass || 0 }}</text>
     </view>
     <image src=" {{ images.student.slash_icon }}" class="star"></image>
     <view class="right flex-center">
       <text class="title">剩余课时</text>
-      <text class="income">90</text>
+      <text class="income">{{ userInfo.totalClass || 0 }}</text>
     </view>
   </view>
   <view class="application-conntainer">
@@ -67,4 +61,3 @@
     <text>立即登录</text>
   </view>
 </view>
-<custom-tab-bar tabBarList="{{tabBarList}}"></custom-tab-bar>

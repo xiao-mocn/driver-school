@@ -80,4 +80,3 @@
     </view>
   </view>
 </scroll-view>
-<custom-tab-bar tabBarList="{{tabBarList}}"></custom-tab-bar>

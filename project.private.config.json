@@ -7,6 +7,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "individualCenter",
+          "pathName": "pages/individualCenter/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "home",
+          "pathName": "pages/home/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "privacy",
           "pathName": "pages/privacy/index",
           "query": "",

@@ -1,22 +1,17 @@
 //获取应用实例
-import { studentBars, images } from "../../const/index"
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    tabBarList: studentBars,
     userInfo: {},
-    images,
+    loginType: 'student'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
-    this.setData({
-      userInfo: wx.getStorageSync('userInfo') || {}
-    })
   },
 
   /**

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "student-home": "../student/home/index",
+    "coach-home": "../coach/home/index",
+    "boss-home": "../boss/home/index"
+  },
+  "navigationBarTitleText":"首页",
+  "navigationBarBackgroundColor": "#feb47b"
+}

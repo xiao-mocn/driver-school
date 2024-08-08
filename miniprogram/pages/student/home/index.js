@@ -1,5 +1,5 @@
 import { envId, studentBars, images } from "../../const/index"
-Page({
+Component({
   data: {
     carouselImages: [],
     iconArr:[
@@ -14,104 +14,88 @@ Page({
     coachList: [],
     tabBarList: studentBars
   },
-
-  onLoad: function(options) {
-    this.getCoachList()
-    this.getBanners()
+  lifetimes: {
+    attached: function(options) {
+      console.log('页面加载')
+      this.getCoachList()
+      this.getBanners()
+    },
   },
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function (ww) {
-    this.setData({
-      isRefreshing: true
-    })
-    this.getCoachList()
-    this.getBanners()
-  },
-  handleTabsItemChange: function (e) {
-    const changeIndex = e.detail.index
-    let { tabs, tabsType } = this.data
-    tabs.forEach((item, index) => {
-      if (index === changeIndex) {
-        item.isActive = true
-        tabsType = item.type
-      } else {
-        item.isActive = false
-      }
-    })
-    this.setData({ tabs, tabsType })
-  },
-  getCoachList() {
-    wx.showLoading({
-      title: '',
-    });
-    wx.cloud.callFunction({
-      name: 'quickstartFunctions',
-      config: {
-        env: envId,
-      },
-      data: {
-        type: 'selectRecord',
-        collectionName: 'coachs',
-        limit: 5,
-      }
-    }).then(res => {
-      const result = res.result
+  methods: {
+    /**
+     * 页面相关事件处理函数--监听用户下拉动作
+     */
+    onPullDownRefresh: function (ww) {
       this.setData({
-        coachList: result.data,
-        isRefreshing: false
+        isRefreshing: true
       })
-      wx.hideLoading();
-    })
-  },
-  getBanners() {
-    wx.showLoading({
-      title: '',
-    });
-    wx.cloud.callFunction({
-      name: 'quickstartFunctions',
-      config: {
-        env: envId,
-      },
-      data: {
-        type: 'selectRecord',
-        collectionName: 'banners',
-        limit: 3,
-      }
-    }).then(res => {
-      this.setData({
-        carouselImages: res.result.data,
-        isRefreshing: false
+      this.getCoachList()
+      this.getBanners()
+    },
+    handleTabsItemChange: function (e) {
+      const changeIndex = e.detail.index
+      let { tabs, tabsType } = this.data
+      tabs.forEach((item, index) => {
+        if (index === changeIndex) {
+          item.isActive = true
+          tabsType = item.type
+        } else {
+          item.isActive = false
+        }
       })
-      wx.hideLoading();
-    }).catch(err => {
-      wx.hideLoading();
-    })
-  },
-  handleNotice(e) {
-    const item = e.currentTarget.dataset.item
-    wx.navigateTo({
-      url: `/pages/gallery/index`,
-      success: function (res) {
-        // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('acceptDataFromOpenerPage', { 
-          data: {
-            title: item.title,
-            list: [{
-              des: item.des,
-              id: item.id
-            }]
-          }
+      this.setData({ tabs, tabsType })
+    },
+    getCoachList() {
+      wx.showLoading({
+        title: '',
+      });
+      wx.cloud.callFunction({
+        name: 'quickstartFunctions',
+        config: {
+          env: envId,
+        },
+        data: {
+          type: 'selectRecord',
+          collectionName: 'coachs',
+          limit: 5,
+        }
+      }).then(res => {
+        const result = res.result
+        this.setData({
+          coachList: result.data,
+          isRefreshing: false
         })
-      }
-    })
-  },
-  handleIcon(e) {
-    const item = e.currentTarget.dataset.item
-    if (item.type === 'company') {
+        wx.hideLoading();
+      })
+    },
+    getBanners() {
+      wx.showLoading({
+        title: '',
+      });
+      wx.cloud.callFunction({
+        name: 'quickstartFunctions',
+        config: {
+          env: envId,
+        },
+        data: {
+          type: 'selectRecord',
+          collectionName: 'banners',
+          limit: 3,
+        }
+      }).then(res => {
+        this.setData({
+          carouselImages: res.result.data,
+          isRefreshing: false
+        })
+        wx.hideLoading();
+      }).catch(err => {
+        wx.hideLoading();
+      })
+    },
+    handleNotice(e) {
+      const item = e.currentTarget.dataset.item
       wx.navigateTo({
-        url: item.pageAddress,
+        url: `/pages/gallery/index`,
         success: function (res) {
           // 通过eventChannel向被打开页面传送数据
           res.eventChannel.emit('acceptDataFromOpenerPage', { 
@@ -125,24 +109,44 @@ Page({
           })
         }
       })
-    } else {
-      wx.navigateTo({
-        url: item.pageAddress
-      })
-    }
-  },
-  handleAppointment (e) {
-    const info = e.currentTarget.dataset.info
-    wx.navigateTo({
-      url: '/pages/student/orderClass/index',
-      success: function (res) {
-        // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('acceptDataFromOpenerPage', { 
-          data: {
-            ...info
+    },
+    handleIcon(e) {
+      const item = e.currentTarget.dataset.item
+      if (item.type === 'company') {
+        wx.navigateTo({
+          url: item.pageAddress,
+          success: function (res) {
+            // 通过eventChannel向被打开页面传送数据
+            res.eventChannel.emit('acceptDataFromOpenerPage', { 
+              data: {
+                title: item.title,
+                list: [{
+                  des: item.des,
+                  id: item.id
+                }]
+              }
+            })
           }
         })
+      } else {
+        wx.navigateTo({
+          url: item.pageAddress
+        })
       }
-    })
+    },
+    handleAppointment (e) {
+      const info = e.currentTarget.dataset.info
+      wx.navigateTo({
+        url: '/pages/student/orderClass/index',
+        success: function (res) {
+          // 通过eventChannel向被打开页面传送数据
+          res.eventChannel.emit('acceptDataFromOpenerPage', { 
+            data: {
+              ...info
+            }
+          })
+        }
+      })
+    },
   },
 })

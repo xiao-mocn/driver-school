@@ -1,6 +1,5 @@
 {
   "usingComponents": {
-    "custom-tab-bar": "../../../components/customBar/index"
   },
   "navigationBarTitleText":"首页",
   "navigationBarBackgroundColor": "#feb47b"
