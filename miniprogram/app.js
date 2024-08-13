@@ -14,6 +14,9 @@ App({
       })
     }
 
-    this.globalData = {};
+    this.globalData = {
+      isLoggedIn: false, // 初始状态为未登录
+      
+    };
   }
 });

@@ -24,3 +24,24 @@ export const getUserProfile = function () {
     });
   })
 }
+
+export const checkLoginAndNavigate = (url) => {
+  const app = getApp();
+  if (app.globalData.isLoggedIn) {
+    wx.navigateTo({
+      url: url
+    });
+  } else {
+    wx.showModal({
+      title: '提示',
+      content: '您还未登录，请先登录。',
+      success(res) {
+        if (res.confirm) {
+          wx.navigateTo({
+            url: '/pages/login/login' // 跳转到登录页面
+          });
+        }
+      }
+    });
+  }
+}

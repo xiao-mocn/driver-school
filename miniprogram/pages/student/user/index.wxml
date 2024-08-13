@@ -57,7 +57,7 @@
       <image src=" {{ images.icons.next }}" />
     </navigator>
   </view>
-  <view class="bottom-btn">
-    <text>立即登录</text>
+  <view class="bottom-btn" bindtap="onLogin">
+    <text>{{ globalData.isLoggedIn ? '立即退出' : '立即登录' }}</text>
   </view>
 </view>
