@@ -13,12 +13,13 @@ Page({
     images,
   },
   onLoad: function(options) {
-  },
-  onReady: function() {
-  },
-
-  onShow: function() {
-
+    const userInfo = wx.getStorageSync('userInfo')
+    console.log(userInfo)
+    if (userInfo && userInfo.isLogin) {
+      wx.switchTab({
+        url: '/pages/home/index'
+      })
+    }
   },
   handleChangeEntry(e) {
     const type = e.currentTarget.dataset.type
@@ -69,10 +70,16 @@ Page({
       wxInfo,
       loginType: this.data.loginType
     }).then(res => {
+      res.loginType = 'student'
+      res.isLogin = true
       wx.setStorageSync('userInfo', res)
-      wx.redirectTo({
-        url: '/pages/student/home/index'
+      wx.switchTab({
+        url: '/pages/home/index'
       })
+      // 获取 App 实例
+      const app = getApp();
+      // 修改全局变量中的 isLoggedIn 值
+      app.globalData.isLoggedIn = true;
       wx.hideLoading();
     }).catch(err => {
       wx.showToast({
@@ -90,9 +97,15 @@ Page({
       password,
       wxInfo,
     }).then(res => {
+      res.loginType = 'coach'
+      res.isLogin = true
       wx.setStorageSync('userInfo', res)
-      wx.redirectTo({
-        url: '/pages/coach/home/index'
+      // 获取 App 实例
+      const app = getApp();
+      // 修改全局变量中的 isLoggedIn 值
+      app.globalData.isLoggedIn = true;
+      wx.switchTab({
+        url: '/pages/home/index'
       })
       wx.hideLoading();
     }).catch(err => {

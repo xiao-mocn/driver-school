@@ -58,6 +58,6 @@
     </navigator>
   </view>
   <view class="bottom-btn" bindtap="onLogin">
-    <text>{{ globalData.isLoggedIn ? '立即退出' : '立即登录' }}</text>
+    <text>{{ userInfo.isLogin ? '立即退出' : '立即登录' }}</text>
   </view>
 </view>

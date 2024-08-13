@@ -36,6 +36,7 @@ export const images = {
   coach: {
     order_1: 'https://6465-dev-module-3g8dv9dob670ce47-1304291956.tcb.qcloud.la/images/coach/order_1.png?sign=5eb26e9ba9f630c84606a7c4c91b3afe&t=1723018488',
     order_2: 'https://6465-dev-module-3g8dv9dob670ce47-1304291956.tcb.qcloud.la/images/coach/order_2.png?sign=1039125599368abd5ecd4ddc4bdc60c5&t=1723018502',
+    tab_line: 'https://6465-dev-module-3g8dv9dob670ce47-1304291956.tcb.qcloud.la/images/coach/tab_line.png?sign=729a7249b515c6fb7e51cc2fae0ecd95&t=1723561333'
   },
   icons: {
     defaultAvatar: 'https://6465-dev-module-3g8dv9dob670ce47-1304291956.tcb.qcloud.la/images/icons/defaultAvatar.png?sign=1f13fc0ca40d4a09dd768b58d5010e57&t=1723029325',

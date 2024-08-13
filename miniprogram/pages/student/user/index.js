@@ -21,7 +21,12 @@ Component({
   },
   methods: {
     onLogin: function () {
-      console.log('登录')
+      wx.removeStorage({
+        key: 'userInfo'
+      })
+      wx.navigateTo({
+        url: '/pages/login/index',
+      })
     },
   },
 })

@@ -18,7 +18,7 @@ exports.main = async (event, context) => {
     delete info._id;
     if (!info.password) {
       // 如果初次登录，则密码与账号一样，都是身份证号
-      if (password === username) {
+      if (password !== username) {
         return {
           success: false,
           errMsg: '密码错误'

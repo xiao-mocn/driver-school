@@ -5,13 +5,19 @@ Page({
    */
   data: {
     userInfo: {},
-    loginType: 'student'
+    loginType: 'student',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
+    const userInfo = wx.getStorageSync('userInfo') || {}
+    console.log(userInfo)
+    this.setData({
+      userInfo,
+      loginType: userInfo.loginType
+    })
   },
 
   /**

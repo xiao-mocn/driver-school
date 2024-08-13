@@ -1,122 +1,126 @@
-<view class="custom-navigation-bar">
-  <view class="navigation-bar-background"></view>
-  <view class="navigation-bar-content">
-    <text class="navigation-bar-title">我的</text>
-  </view>
-</view>
 <!--个人信息-->
-<view class="user-top">
-  <image src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" ></image>
-  <view class="info">
-    <tewxt class="name">黄晓明</tewxt>
-    <text class="phone">15051866908</text>
-  </view>
-  <image src="{{ images.icons.setting }}" class="setting" />
-</view>
-<!-- 订单信息 -->
-<view class="order-container">
-  <view class="order-item">
-    <view class="text">
-      <text class="text-title">今日订单(个)</text>
-      <text class="text-num">3</text>
+<scroll-view
+    scroll-y
+    class="scroll-view"
+    type="list"
+    bindrefresherrefresh="onPullDownRefresh"
+    refresher-enabled="{{true}}"
+    refresher-triggered="{{isRefreshing}}"
+  >
+  <view class="user-top">
+    <image src="{{ userInfo.avatarUrl || images.icons.defaultAvatar }}" ></image>
+    <view class="info">
+      <text class="name">{{ userInfo.name || '未登录' }}</text>
+      <text class="phone">{{userInfo.phone}}</text>
     </view>
-    <image src="../../../images/coach/order_1.png" />
+    <image src="{{ images.icons.setting }}" class="setting" />
   </view>
-  <view class="order-item">
-    <view class="text">
-      <text class="text-title">本月订单(个)</text>
-      <text class="text-num">10</text>
-    </view>
-    <image src="../../../images/coach/order_2.png" />
-  </view>
-</view>
-<!-- tabs -->
-<view class="tabs">
-  <view class="tabs-item" bindtap="tabsChange" data-name="OrderHall" >
-    <text class="{{ activeName == 'OrderHall' ? 'tabs-active' : '' }}">接单大厅</text>
-    <image src="../../../images/coach/tab_line.png" wx:if="{{ activeName == 'OrderHall' }}" />
-  </view>
-  <view class="tabs-item" bindtap="tabsChange" data-name="PendingService">
-    <text class="{{ activeName == 'PendingService' ? 'tabs-active' : '' }}">待服务</text>
-    <image src="../../../images/coach/tab_line.png" wx:if="{{ activeName == 'PendingService' }}"/>
-  </view>
-</view>
-<!-- 订单列表 -->
-<view class="order-list">
-  <view class="order-list-item">
-    <view class="user-info">
-      <image class="avatar" src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" ></image>
-      <text class="name">用户1</text>
-      <text class="phone">15051836908</text>
-    </view>
-    <text class="sub">河南省金水区花园路国际企业中心A座</text>
-    <view class="order-info">
-      <view class="detail">
-        <text>预约车型：</text>
-        <text>C1/C2</text>
+  <!-- 订单信息 -->
+  <view class="order-container">
+    <view class="order-item">
+      <view class="text">
+        <text class="text-title">今日订单(个)</text>
+        <text class="text-num">{{userInfo.todayOrdNum || 0}}</text>
       </view>
-      <view class="detail">
-        <text>预约时间：</text>
-        <text>2024-06-12 07:00-09:00</text>
-      </view>
+      <image src="{{ images.coach.order_1 }}" />
     </view>
-    <button class="btn" type="primary" bindtap="onTap">立即确认</button>
+    <view class="order-item">
+      <view class="text">
+        <text class="text-title">本月订单(个)</text>
+        <text class="text-num">{{userInfo.monthOdrNum || 0}}</text>
+      </view>
+      <image src="{{ images.coach.order_2 }}" />
+    </view>
   </view>
-  <view class="order-list-item">
-    <view class="user-info">
-      <image class="avatar" src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" ></image>
-      <text class="name">用户1</text>
-      <text class="phone">15051836908</text>
+  <!-- tabs -->
+  <view class="tabs">
+    <view class="tabs-item" bindtap="tabsChange" data-name="OrderHall" >
+      <text class="{{ activeName == 'OrderHall' ? 'tabs-active' : '' }}">接单大厅</text>
+      <image src="{{ images.coach.tab_line }}" wx:if="{{ activeName == 'OrderHall' }}" />
     </view>
-    <text class="sub">河南省金水区花园路国际企业中心A座</text>
-    <view class="order-info">
-      <view class="detail">
-        <text>预约车型：</text>
-        <text>C1/C2</text>
-      </view>
-      <view class="detail">
-        <text>预约时间：</text>
-        <text>2024-06-12 07:00-09:00</text>
-      </view>
+    <view class="tabs-item" bindtap="tabsChange" data-name="PendingService">
+      <text class="{{ activeName == 'PendingService' ? 'tabs-active' : '' }}">待服务</text>
+      <image src="{{ images.coach.tab_line }}" wx:if="{{ activeName == 'PendingService' }}"/>
     </view>
-    <button class="btn" type="primary" bindtap="onTap">立即确认</button>
   </view>
-  <view class="order-list-item">
-    <view class="user-info">
-      <image class="avatar" src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" ></image>
-      <text class="name">用户1</text>
-      <text class="phone">15051836908</text>
-    </view>
-    <text class="sub">河南省金水区花园路国际企业中心A座</text>
-    <view class="order-info">
-      <view class="detail">
-        <text>预约车型：</text>
-        <text>C1/C2</text>
+  <!-- 订单列表 -->
+  <view class="order-list">
+    <view class="order-list-item">
+      <view class="user-info">
+        <image class="avatar" src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" ></image>
+        <text class="name">用户1</text>
+        <text class="phone">15051836908</text>
       </view>
-      <view class="detail">
-        <text>预约时间：</text>
-        <text>2024-06-12 07:00-09:00</text>
+      <text class="sub">河南省金水区花园路国际企业中心A座</text>
+      <view class="order-info">
+        <view class="detail">
+          <text>预约车型：</text>
+          <text>C1/C2</text>
+        </view>
+        <view class="detail">
+          <text>预约时间：</text>
+          <text>2024-06-12 07:00-09:00</text>
+        </view>
       </view>
+      <button class="btn" type="primary" bindtap="onTap">立即确认</button>
     </view>
-    <button class="btn" type="primary" bindtap="onTap">立即确认</button>
+    <view class="order-list-item">
+      <view class="user-info">
+        <image class="avatar" src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" ></image>
+        <text class="name">用户1</text>
+        <text class="phone">15051836908</text>
+      </view>
+      <text class="sub">河南省金水区花园路国际企业中心A座</text>
+      <view class="order-info">
+        <view class="detail">
+          <text>预约车型：</text>
+          <text>C1/C2</text>
+        </view>
+        <view class="detail">
+          <text>预约时间：</text>
+          <text>2024-06-12 07:00-09:00</text>
+        </view>
+      </view>
+      <button class="btn" type="primary" bindtap="onTap">立即确认</button>
+    </view>
+    <view class="order-list-item">
+      <view class="user-info">
+        <image class="avatar" src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" ></image>
+        <text class="name">用户1</text>
+        <text class="phone">15051836908</text>
+      </view>
+      <text class="sub">河南省金水区花园路国际企业中心A座</text>
+      <view class="order-info">
+        <view class="detail">
+          <text>预约车型：</text>
+          <text>C1/C2</text>
+        </view>
+        <view class="detail">
+          <text>预约时间：</text>
+          <text>2024-06-12 07:00-09:00</text>
+        </view>
+      </view>
+      <button class="btn" type="primary" bindtap="onTap">立即确认</button>
+    </view>
+    <view class="order-list-item">
+      <view class="user-info">
+        <image class="avatar" src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" ></image>
+        <text class="name">用户1</text>
+        <text class="phone">15051836908</text>
+      </view>
+      <text class="sub">河南省金水区花园路国际企业中心A座</text>
+      <view class="order-info">
+        <view class="detail">
+          <text>预约车型：</text>
+          <text>C1/C2</text>
+        </view>
+        <view class="detail">
+          <text>预约时间：</text>
+          <text>2024-06-12 07:00-09:00</text>
+        </view>
+      </view>
+      <button class="btn" type="primary" bindtap="onTap">立即确认</button>
+    </view>
   </view>
-  <view class="order-list-item">
-    <view class="user-info">
-      <image class="avatar" src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" ></image>
-      <text class="name">用户1</text>
-      <text class="phone">15051836908</text>
-    </view>
-    <text class="sub">河南省金水区花园路国际企业中心A座</text>
-    <view class="order-info">
-      <view class="detail">
-        <text>预约车型：</text>
-        <text>C1/C2</text>
-      </view>
-      <view class="detail">
-        <text>预约时间：</text>
-        <text>2024-06-12 07:00-09:00</text>
-      </view>
-    </view>
-    <button class="btn" type="primary" bindtap="onTap">立即确认</button>
-  </view>
-</view>
+</scroll-view>
+

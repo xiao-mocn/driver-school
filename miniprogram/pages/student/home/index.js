@@ -1,4 +1,4 @@
-import { envId, studentBars, images } from "../../const/index"
+import { envId, images } from "../../const/index"
 Component({
   data: {
     carouselImages: [],
@@ -11,8 +11,7 @@ Component({
     images,
     isRefreshing: false,
     noticeArr: [{title: '欢迎来到通告信息', id: 1, des: '欢迎来到通告信息详情' }, {title: '标题2', id: 2, des: '标题2详情' }],
-    coachList: [],
-    tabBarList: studentBars
+    coachList: []
   },
   lifetimes: {
     attached: function(options) {
