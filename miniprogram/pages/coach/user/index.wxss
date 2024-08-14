@@ -139,6 +139,9 @@ page {
   font-size: 30rpx;
   font-weight: 400;
 }
+.bottom-btn:active {
+  background-color: #f6f6f6;
+}
 .flex-center {
   display: flex;
   align-items: center;

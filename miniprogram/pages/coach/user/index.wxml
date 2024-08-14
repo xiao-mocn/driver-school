@@ -1,9 +1,9 @@
 <!--个人信息-->
 <view class="user-top">
-  <image src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" ></image>
+  <image src="{{ userInfo.avatarUrl || images.icons.defaultAvatar }}" ></image>
   <view class="info">
-    <tewxt class="name">黄晓明</tewxt>
-    <text class="phone">15051866908</text>
+    <tewxt class="name">{{ userInfo.name || '未登录' }}</tewxt>
+    <text class="phone">{{ userInfo.phone }}</text>
   </view>
   <image src="{{ images.icons.setting }}" class="setting" />
 </view>
@@ -12,12 +12,12 @@
   <view class="income-container">
     <view class="left flex-center">
       <text class="title">本月收入</text>
-      <text class="income">￥40.00</text>
+      <text class="income">￥{{ userInfo.monthIncomeNum || 0 }}</text>
     </view>
     <image src="{{ images.student.slash_icon }}" class="star"></image>
     <view class="right flex-center">
       <text class="title">可提现</text>
-      <text class="income">￥90.00</text>
+      <text class="income">￥{{ userInfo.withdrawableIncome || 0 }}</text>
     </view>
   </view>
   <view class="application-conntainer">
@@ -57,7 +57,7 @@
       <image src="{{ images.icons.next }}" />
     </navigator>
   </view>
-  <view class="bottom-btn">
-    <text>立即登录</text>
+  <view class="bottom-btn" bindtap="onLogin">
+    <text>{{ userInfo.isLogin ? '立即退出' : '立即登录' }}</text>
   </view>
 </view>
