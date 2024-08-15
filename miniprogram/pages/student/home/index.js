@@ -15,12 +15,15 @@ Component({
   },
   lifetimes: {
     attached: function(options) {
+      this.initData()
+    },
+  },
+  methods: {
+    initData() {
       console.log('页面加载')
       this.getCoachList()
       this.getBanners()
     },
-  },
-  methods: {
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */

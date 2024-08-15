@@ -169,6 +169,7 @@ page {
 .coach-list .coach-item .coach-base .avatar{
   width: 160rpx;
   height: 160rpx;
+  border-radius: 50%;
 }
 .coach-list .coach-item .coach-base .coach-info{
   flex: 1;

@@ -26,6 +26,13 @@ exports.main = async (event, context) => {
         };
       }
     }
+    if (collectionName === 'orders') {
+      const checkResult = await db.collection(collectionName).where({
+        coachInfo: data.coachInfo,
+        selectedDates: data.selectedDates,
+        status: data.status
+      }).get();
+    }
     await db.collection(collectionName).add({
       // data 字段表示需新增的 JSON 数据
       data: { ...data }

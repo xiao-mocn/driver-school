@@ -1,20 +1,13 @@
 //获取应用实例
-import { envId, images } from "../../const/index"
+import { images } from "../../const/index"
+import callCloudFunction from '../../utils/cloudFunctionUtils'
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    envId,
     images,
-    coachInfo: {
-      name: '',
-      avatar: '',
-      starscore: '',
-      studentCount: '',
-      carType: '',
-      school: ''
-    },
+    coachInfo: {},
     selectedDates: [],
     prices: 30.00,
     selectedDate: '',
@@ -30,16 +23,25 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function () {
+  onShow: function () {
+    const userInfo = wx.getStorageSync('userInfo')
+    if (!userInfo) {
+      wx.redirectTo({
+        url: '/pages/login/index',
+      })
+      return
+    }
+    const dates = this.getCurrentDate()
+    this.setData({
+      dateOptions: dates
+    })
     this.getCoachInfo()
   },
   getCoachInfo: function () {
     const eventChannel = this.getOpenerEventChannel();
     eventChannel.on('acceptDataFromOpenerPage', (data) => {
-      const dates = this.getCurrentDate()
       this.setData({
         coachInfo: data.data,
-        dateOptions: dates,
         selectedDates: data.data.selectedDates || []
       })
       this.setTimePeriodStatus()
@@ -189,65 +191,55 @@ Page({
       })
     }
     // 新增order信息
-    wx.cloud.callFunction({
-      name: 'quickstartFunctions',
-      config: {
-        env: envId,
-      },
+    let coachInfo = {}
+    let status = 'created'
+    // 随便一个教练信息存在即可
+    if (this.data.coachInfo.name) {
+      coachInfo = {
+        ...this.data.coachInfo,
+        studentCount: this.data.coachInfo.studentCount ? this.data.coachInfo.studentCount + 1 : 1,
+      }
+      status = 'running'
+    }
+    
+    callCloudFunction('quickstartFunctions', {
+      type: 'addRecord',
+      collectionName: 'orders',
       data: {
-        type: 'addRecord',
-        collectionName: 'orders',
-        data: {
-          coachInfo: {
-            ...this.data.coachInfo,
-            studentCount: this.data.coachInfo.studentCount ? this.data.coachInfo.studentCount + 1 : 1,
-          },
-          selectedDates: this.data.selectedDates,
-          status: 'created',
-        }
+        coachInfo,
+        selectedDates: this.data.selectedDates,
+        status,
       }
     }).then((resp) => {
-      const { success, message } = resp.result
       wx.hideLoading();
-      if (!success) {
-        wx.showToast({
-          title: message,
-          icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
-          duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
-          mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
-        })
-        return
-      }
       wx.showToast({
         title: '提交成功',
         icon: 'success', // 提示图标，可选值：'success', 'loading', 'none'
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
         mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
       })
+      
       // 更新教练信息
-      wx.cloud.callFunction({
-        name: 'quickstartFunctions',
-        config: {
-          env: envId,
-        },
-        data: {
+      if (coachInfo.name) {
+        console.log('coachInfo===', coachInfo)
+        console.log(this.data.selectedDates)
+        callCloudFunction('quickstartFunctions', {
           type: 'updateRecord',
           collectionName: 'coaches',
           data: {
-            ...this.data.coachInfo,
-            studentCount: this.data.coachInfo.studentCount ? this.data.coachInfo.studentCount + 1 : 1,
+            ...coachInfo,
             selectedDates: this.data.selectedDates
           }
-        }
+        })
+      }
+      wx.switchTab({
+        url: '/pages/home/index',
       })
-      wx.navigateBack({
-        delta: 1  // 返回到上级页面
-      });
     }).catch((err) => {
       wx.showToast({
         title: '提交失败',
       })
     })
-    console.log(this.data.selectedDates)
+    
   }
 })
