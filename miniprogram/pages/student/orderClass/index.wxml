@@ -1,16 +1,16 @@
 <view class="order-container">
-  <view class="coach-info" wx:if="{{ coachInfo }}">
+  <view class="coach-info">
     <view class="base-info">
       <image src="{{ coachInfo.avatarUrl || images.icons.defaultAvatar }}" />
       <view class="text-info">
         <view class="name">
-          <text>{{coachInfo.name}}</text>
-          <text class="score">{{coachInfo.starscore}}</text>
+          <text>{{coachInfo.name || '未指定'}}</text>
+          <text class="score">{{coachInfo.starscore || 0}}</text>
           <text class="text">分</text>
         </view>
         <view class="sub">
-          <text >服务次数: {{coachInfo.studentCount}}</text>
-          <text >服务车型: {{coachInfo.carType}}</text>
+          <text >服务次数: {{coachInfo.studentCount || 0}}</text>
+          <text >服务车型: {{coachInfo.carType || 0}}</text>
         </view>
       </view>
       <view class="prices">
@@ -23,7 +23,7 @@
     </view>
     <view class="coach-school">
       <image src="{{images.icons.address}}" />
-      <text style="margin-left: 20rpx;">{{coachInfo.school}}</text>
+      <text style="margin-left: 20rpx;">{{coachInfo.school || '未指定'}}</text>
     </view>
   </view>
   <view class="selectDate-container">
