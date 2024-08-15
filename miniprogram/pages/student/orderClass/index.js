@@ -1,11 +1,12 @@
 //获取应用实例
-import { envId } from "../../const/index"
+import { envId, images } from "../../const/index"
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     envId,
+    images,
     coachInfo: {
       name: '',
       avatar: '',

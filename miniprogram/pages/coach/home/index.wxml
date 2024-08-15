@@ -64,63 +64,6 @@
       </view>
       <button class="btn" type="primary" bindtap="onTap">立即确认</button>
     </view>
-    <view class="order-list-item">
-      <view class="user-info">
-        <image class="avatar" src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" ></image>
-        <text class="name">用户1</text>
-        <text class="phone">15051836908</text>
-      </view>
-      <text class="sub">河南省金水区花园路国际企业中心A座</text>
-      <view class="order-info">
-        <view class="detail">
-          <text>预约车型：</text>
-          <text>C1/C2</text>
-        </view>
-        <view class="detail">
-          <text>预约时间：</text>
-          <text>2024-06-12 07:00-09:00</text>
-        </view>
-      </view>
-      <button class="btn" type="primary" bindtap="onTap">立即确认</button>
-    </view>
-    <view class="order-list-item">
-      <view class="user-info">
-        <image class="avatar" src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" ></image>
-        <text class="name">用户1</text>
-        <text class="phone">15051836908</text>
-      </view>
-      <text class="sub">河南省金水区花园路国际企业中心A座</text>
-      <view class="order-info">
-        <view class="detail">
-          <text>预约车型：</text>
-          <text>C1/C2</text>
-        </view>
-        <view class="detail">
-          <text>预约时间：</text>
-          <text>2024-06-12 07:00-09:00</text>
-        </view>
-      </view>
-      <button class="btn" type="primary" bindtap="onTap">立即确认</button>
-    </view>
-    <view class="order-list-item">
-      <view class="user-info">
-        <image class="avatar" src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" ></image>
-        <text class="name">用户1</text>
-        <text class="phone">15051836908</text>
-      </view>
-      <text class="sub">河南省金水区花园路国际企业中心A座</text>
-      <view class="order-info">
-        <view class="detail">
-          <text>预约车型：</text>
-          <text>C1/C2</text>
-        </view>
-        <view class="detail">
-          <text>预约时间：</text>
-          <text>2024-06-12 07:00-09:00</text>
-        </view>
-      </view>
-      <button class="btn" type="primary" bindtap="onTap">立即确认</button>
-    </view>
   </view>
 </scroll-view>
 

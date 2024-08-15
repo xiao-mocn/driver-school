@@ -1,7 +1,7 @@
 <view class="order-container">
-  <view class="coach-info">
+  <view class="coach-info" wx:if="{{ coachInfo }}">
     <view class="base-info">
-      <image src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" />
+      <image src="{{ coachInfo.avatarUrl || images.icons.defaultAvatar }}" />
       <view class="text-info">
         <view class="name">
           <text>{{coachInfo.name}}</text>
@@ -22,7 +22,7 @@
       <text >我拥有丰富的驾驶经验和专业的培训技巧，致力于帮助每一位新手司机快速掌握驾驶技能，确保您的行车安全。我的教学方法注重理论与实践相结合，不仅会在车内为您详细讲解驾驶技巧和注意事项，还会在车外指导您进行实际操作，确保您能够真正掌握驾驶要领</text>
     </view>
     <view class="coach-school">
-      <image src="../../../images/icons/address.png" />
+      <image src="{{images.icons.address}}" />
       <text style="margin-left: 20rpx;">{{coachInfo.school}}</text>
     </view>
   </view>
@@ -37,7 +37,7 @@
         bindtap="onDateSelect">
         <text>{{item.weekday}}</text>
         <text>{{item.date}}</text>
-        <image wx:if="{{item.selected}}" src="../../../images/icons/checked.png" />
+        <image wx:if="{{item.selected}}" src="{{ images.icons.checked}}" />
       </view>
     </view>
     <view class="timePeriods">
@@ -51,7 +51,7 @@
         <text wx:if="{{!item.isFree}}">已满</text>
         <text wx:if="{{item.isFree}}" class="reducible">可约</text>
         <text>{{item.period}}</text>
-        <image wx:if="{{item.selected}}" src="../../../images/icons/checked.png" />
+        <image wx:if="{{item.selected}}" src="{{ images.icons.checked }}" />
       </view>
     </view>
   </view>
@@ -59,7 +59,7 @@
     <text class="title">支付手段</text>
     <view class="pay-list">
       <view class="pay-list-item">
-        <image src="../../../images/icons/wxPay.png" />
+        <image src="{{ images.icons.wxPay }}" />
         <text>微信支付</text>
         <view class="icon"></view>
       </view>

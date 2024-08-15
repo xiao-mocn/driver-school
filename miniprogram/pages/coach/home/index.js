@@ -1,4 +1,5 @@
 import { images } from "../../const/index"
+import callCloudFunction from '../../utils/cloudFunctionUtils'
 //获取应用实例
 Component({
   /**
@@ -24,15 +25,35 @@ Component({
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
-    onPullDownRefresh: function (ww) {
+    onPullDownRefresh: function () {
       this.setData({
         isRefreshing: true
       })
       this.getOrderList()
     },
     getOrderList() {
-      this.setData({
-        isRefreshing: false
+      wx.showToast({
+        title: '加载中',
+        icon: 'loading'
+      })
+      callCloudFunction('quickstartFunctions', {
+        type: 'selectRecord',
+        collectionName: 'orders',
+        data: {
+          ...this.data.formData
+        }
+      }).then((res) => {
+        console.log('res ===', res)
+        this.setData({
+          isRefreshing: false
+        })
+        wx.hideLoading()
+      }).catch((err) => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '加载中',
+          icon: 'loading'
+        })
       })
     },
     /**
