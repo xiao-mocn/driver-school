@@ -13,7 +13,7 @@ Page({
       { id: 4, name: '公告管理', icon: images.boss.announcement },
     ],
     applicationArr: [
-      { id: 1, name: '团队管理', icon: images.boss.team, path: '/pages/boss/coachs_manage/index' },
+      { id: 1, name: '团队管理', icon: images.boss.team, path: '/pages/boss/coaches_manage/index' },
       { id: 2, name: '车辆管理', icon: images.boss.car, path: '/pages/boss/cars_manage/index' },
       { id: 3, name: '学员管理', icon: images.boss.add_students, path: '/pages/boss/students_manage/index' },
       { id: 4, name: '学员统计', icon: images.boss.student_total },

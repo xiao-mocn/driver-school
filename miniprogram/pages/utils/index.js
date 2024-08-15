@@ -26,8 +26,8 @@ export const getUserProfile = function () {
 }
 
 export const checkLoginAndNavigate = (url) => {
-  const app = getApp();
-  if (app.globalData.isLoggedIn) {
+  const userInfo = wx.getStorageSync('userInfo')
+  if (userInfo) {
     wx.navigateTo({
       url: url
     });

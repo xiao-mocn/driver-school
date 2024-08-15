@@ -32,7 +32,7 @@ Page({
       },
       data: {
         type: 'selectRecord',
-        collectionName: 'coachs',
+        collectionName: 'coaches',
         data: data
       }
     }).then(res => {

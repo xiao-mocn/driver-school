@@ -7,15 +7,12 @@ Component({
   data: {
     userInfo: {},
     images,
-    globalData: {}
   },
   lifetimes: {
     attached: function(options) {
       console.log('attached')
-      const app = getApp()
       this.setData({
-        userInfo: wx.getStorageSync('userInfo') || {},
-        globalData: app.globalData
+        userInfo: wx.getStorageSync('userInfo') || {}
       })
     },
   },
@@ -28,5 +25,10 @@ Component({
         url: '/pages/login/index',
       })
     },
+    onSetting() {
+      wx.navigateTo({
+        url: '/pages/personalInformation/index',
+      })
+    }
   },
 })

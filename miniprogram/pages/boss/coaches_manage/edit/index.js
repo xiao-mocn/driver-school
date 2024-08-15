@@ -119,7 +119,7 @@ Page({
       },
       data: {
         type: 'addRecord',
-        collectionName: 'coachs',
+        collectionName: 'coaches',
         data: this.data.formData
       }
     })
@@ -142,7 +142,7 @@ Page({
         mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
       })
       wx.redirectTo({
-        url: '/pages/boss/coachs_manage/index',
+        url: '/pages/boss/coaches_manage/index',
       });
     })
     .catch((err) => {
@@ -164,7 +164,7 @@ Page({
       },
       data: {
         type: 'updateRecord',
-        collectionName: 'coachs',
+        collectionName: 'coaches',
         data: this.data.formData
       }
     })
@@ -188,7 +188,7 @@ Page({
         mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
       })
       wx.redirectTo({
-        url: '/pages/boss/coachs_manage/index',
+        url: '/pages/boss/coaches_manage/index',
       });
     })
     .catch((err) => {

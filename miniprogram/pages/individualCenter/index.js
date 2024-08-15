@@ -12,7 +12,6 @@ Page({
    */
   onShow: function () {
     const userInfo = wx.getStorageSync('userInfo') || {}
-    console.log(userInfo)
     this.setData({
       userInfo,
       loginType: userInfo.loginType

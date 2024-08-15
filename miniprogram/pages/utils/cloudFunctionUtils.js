@@ -1,4 +1,3 @@
-// utils/cloudFunctionUtils.js
 import { envId } from "../const/index"
 /**
  * 调用云函数的通用方法

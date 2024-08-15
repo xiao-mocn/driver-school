@@ -7,6 +7,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "personalInformation",
+          "pathName": "pages/personalInformation/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "individualCenter",
           "pathName": "pages/individualCenter/index",
           "query": "",
@@ -56,8 +63,8 @@
           "scene": null
         },
         {
-          "name": "coachs_manage/edit",
-          "pathName": "pages/boss/coachs_manage/edit/index",
+          "name": "coaches_manage/edit",
+          "pathName": "pages/boss/coaches_manage/edit/index",
           "query": "type=add",
           "launchMode": "default",
           "scene": null
@@ -78,7 +85,7 @@
         },
         {
           "name": "coach_manage",
-          "pathName": "pages/boss/coachs_manage/index",
+          "pathName": "pages/boss/coaches_manage/index",
           "query": "",
           "launchMode": "default",
           "scene": null
@@ -86,13 +93,6 @@
         {
           "name": "boss-home",
           "pathName": "pages/boss/home/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "coach-home",
-          "pathName": "pages/coach/home/index",
           "query": "",
           "launchMode": "default",
           "scene": null

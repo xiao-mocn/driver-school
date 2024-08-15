@@ -5,7 +5,7 @@
     <tewxt class="name">{{ userInfo.name || '未登录' }}</tewxt>
     <text class="phone">{{ userInfo.phone }}</text>
   </view>
-  <image src=" {{ images.icons.setting }}" class="setting" />
+  <image src=" {{ images.icons.setting }}" class="setting" bindtap="onSetting" />
 </view>
 <!-- 常用功能 -->
 <view class="user-content">
@@ -21,7 +21,7 @@
     </view>
   </view>
   <view class="application-conntainer">
-    <navigator class="row-item">
+    <navigator class="row-item" url="/pages/personalInformation/index">
       <view class="row-info">
         <image src=" {{ images.icons.user }}" />
         <text>个人信息</text>

@@ -83,7 +83,7 @@ Page({
       },
       data: {
         type: 'selectRecord',
-        collectionName: 'coachs',
+        collectionName: 'coaches',
         data: data
       }
     }).then(res => {
@@ -101,7 +101,7 @@ Page({
   },
   handelAdd() {
     wx.navigateTo({
-      url: `/pages/boss/coachs_manage/edit/index?type=add`,
+      url: `/pages/boss/coaches_manage/edit/index?type=add`,
       success: function (res) {
         // 通过eventChannel向被打开页面传送数据
         res.eventChannel.emit('acceptDataFromOpenerPage', { 
@@ -125,7 +125,7 @@ Page({
     const row = e.currentTarget.dataset.row;
     console.log('row ===', row);
     wx.navigateTo({
-      url: `/pages/boss/coachs_manage/edit/index?type=edit`,
+      url: `/pages/boss/coaches_manage/edit/index?type=edit`,
       success: function (res) {
         // 通过eventChannel向被打开页面传送数据
         res.eventChannel.emit('acceptDataFromOpenerPage', { data: row })
@@ -156,7 +156,7 @@ Page({
       },
       data: {
         type: 'deleteRecord',
-        collectionName: 'coachs',
+        collectionName: 'coaches',
         _id: row._id
       }
     }).then((res) => {

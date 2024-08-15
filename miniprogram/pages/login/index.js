@@ -76,10 +76,6 @@ Page({
       wx.switchTab({
         url: '/pages/home/index'
       })
-      // 获取 App 实例
-      const app = getApp();
-      // 修改全局变量中的 isLoggedIn 值
-      app.globalData.isLoggedIn = true;
       wx.hideLoading();
     }).catch(err => {
       wx.showToast({
@@ -92,7 +88,7 @@ Page({
   redirectToCoach(username, password, wxInfo) {
     callCloudFunction('quickstartFunctions', {
       type: 'login',
-      collectionName: 'coachs',
+      collectionName: 'coaches',
       username,
       password,
       wxInfo,
@@ -101,9 +97,6 @@ Page({
       res.isLogin = true
       wx.setStorageSync('userInfo', res)
       // 获取 App 实例
-      const app = getApp();
-      // 修改全局变量中的 isLoggedIn 值
-      app.globalData.isLoggedIn = true;
       wx.switchTab({
         url: '/pages/home/index'
       })

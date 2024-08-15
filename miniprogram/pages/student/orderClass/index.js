@@ -231,7 +231,7 @@ Page({
         },
         data: {
           type: 'updateRecord',
-          collectionName: 'coachs',
+          collectionName: 'coaches',
           data: {
             ...this.data.coachInfo,
             studentCount: this.data.coachInfo.studentCount ? this.data.coachInfo.studentCount + 1 : 1,

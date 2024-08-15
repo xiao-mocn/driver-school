@@ -14,7 +14,7 @@ exports.main = async (event, context) => {
   console.log('data ===', data);
   try {
     // 先查询是否存在相同的 IDCard
-    if (collectionName === 'students' || collectionName === 'coachs') {
+    if (collectionName === 'students' || collectionName === 'coaches') {
       const checkResult = await db.collection(collectionName).where({
         idCard: data.idCard
       }).get();

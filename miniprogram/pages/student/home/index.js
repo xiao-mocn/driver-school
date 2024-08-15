@@ -55,7 +55,7 @@ Component({
         },
         data: {
           type: 'selectRecord',
-          collectionName: 'coachs',
+          collectionName: 'coaches',
           limit: 5,
         }
       }).then(res => {
