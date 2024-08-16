@@ -48,7 +48,7 @@
     <block wx:for="{{ activeName === 'OrderHall' ? orderHallList : pendingOrderList }}" wx:key="_id">
       <view class="order-list-item">
         <view class="user-info">
-          <image class="avatar" src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" ></image>
+          <image class="avatar" src="{{ item.studentInfo.avatarUrl || images.icons.defaultAvatar }}" ></image>
           <text class="name">{{ item.studentInfo.name }}</text>
           <text class="phone">{{ item.studentInfo.phone }}</text>
         </view>
@@ -60,7 +60,7 @@
           </view>
           <view class="detail">
             <text>预约时间：</text>
-            <text>{{  }}</text>
+            <text>{{ item.selectedDate + ' ' + item.selectedTimePeriod }}</text>
           </view>
         </view>
         <button class="btn" type="primary" bindtap="onTap">立即确认</button>

@@ -49,7 +49,6 @@ Component({
           ...this.data.formData
         }
       }).then((res) => {
-        console.log('res ===', res)
         this.setData({
           totalList: res,
           orderHallList: res.filter(item => item.status === 'created'),
@@ -70,6 +69,8 @@ Component({
      */
     tabsChange: function (e) {
       const activeName = e.currentTarget.dataset.name
+      console.log('orderHallList ==', this.data.orderHallList)
+      console.log('pendingOrderList ==', this.data.pendingOrderList)
       this.setData({
         activeName
       })

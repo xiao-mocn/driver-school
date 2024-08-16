@@ -32,7 +32,7 @@ exports.main = async (event, context) => {
         const checkResult = await db.collection('coaches').where({
           _id,
         }).get();
-        const { selectedDates } = checkResult.data[0] || []
+        const selectedDates = checkResult.data[0].selectedDates || []
         for (let i = 0; i < selectedDates.length; i++) {
           const item = selectedDates[i];
           const itemDate = `${item.weekday}:${item.year}:${item.date}`
@@ -47,9 +47,7 @@ exports.main = async (event, context) => {
           _id
         }).update({
           data: {
-            ...coachInfo,
-            selectedTimePeriod: data.selectedTimePeriod,
-            selectedDate: data.selectedDate,
+            ...coachInfo
           },
         })
       }
