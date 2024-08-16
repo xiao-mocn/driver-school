@@ -176,14 +176,23 @@ Page({
       title: '正在提交',
     });
     const dateInfoArr = this.data.selectedDate.split(':')
-    if (this.data.selectedDates.length > 0) {
-      this.data.selectedDates.forEach((i) => {
-        if (`${i.weekday}:${i.year}:${i.date}` === this.data.selectedDate) {
-          i.timePeriods.push(this.data.selectedTimePeriod)
-        }
-      })
+    const selectedDates = this.data.selectedDates
+    if (selectedDates.length > 0) {
+      const filterItem = selectedDates.filter((i) => {
+        return `${i.weekday}:${i.year}:${i.date}` === this.data.selectedDate
+      })[0]
+      if (filterItem) {
+        filterItem.timePeriods.push(this.data.selectedTimePeriod)
+      } else {
+        selectedDates.push({
+          year: dateInfoArr[1],
+          date: dateInfoArr[2],
+          weekday: dateInfoArr[0],
+          timePeriods: [this.data.selectedTimePeriod]
+        })
+      }
     } else {
-      this.data.selectedDates.push({
+      selectedDates.push({
         year: dateInfoArr[1],
         date: dateInfoArr[2],
         weekday: dateInfoArr[0],
@@ -194,21 +203,26 @@ Page({
     let coachInfo = {}
     let status = 'created'
     // 随便一个教练信息存在即可
-    if (this.data.coachInfo.name) {
+    if (this.data.coachInfo._id) {
       coachInfo = {
         ...this.data.coachInfo,
         studentCount: this.data.coachInfo.studentCount ? this.data.coachInfo.studentCount + 1 : 1,
+        incomeNum: (coachInfo.incomeNum || 0) + this.data.prices,
+        withdrawableIncome: (coachInfo.withdrawableIncome || 0) + this.data.prices
       }
       status = 'running'
     }
-    
     callCloudFunction('quickstartFunctions', {
       type: 'addRecord',
       collectionName: 'orders',
       data: {
         coachInfo,
-        selectedDates: this.data.selectedDates,
+        studentInfo: wx.getStorageSync('userInfo'),
+        selectedDates,
         status,
+        selectedTimePeriod: this.data.selectedTimePeriod,
+        selectedDate: this.data.selectedDate,
+        prices: this.data.prices,
       }
     }).then((resp) => {
       wx.hideLoading();
@@ -218,26 +232,12 @@ Page({
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
         mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
       })
-      
-      // 更新教练信息
-      if (coachInfo.name) {
-        console.log('coachInfo===', coachInfo)
-        console.log(this.data.selectedDates)
-        callCloudFunction('quickstartFunctions', {
-          type: 'updateRecord',
-          collectionName: 'coaches',
-          data: {
-            ...coachInfo,
-            selectedDates: this.data.selectedDates
-          }
-        })
-      }
       wx.switchTab({
         url: '/pages/home/index',
       })
     }).catch((err) => {
       wx.showToast({
-        title: '提交失败',
+        title: err || '提交失败',
       })
     })
     

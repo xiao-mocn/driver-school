@@ -10,12 +10,15 @@ Component({
   },
   lifetimes: {
     attached: function(options) {
+      this.initData()
+    },
+  },
+  methods: {
+    initData() {
       this.setData({
         userInfo: wx.getStorageSync('userInfo') || {},
       })
     },
-  },
-  methods: {
     onLogin: function () {
       wx.removeStorage({
         key: 'userInfo'

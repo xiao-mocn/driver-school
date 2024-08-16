@@ -114,7 +114,7 @@ Page({
             school: '上海驾校',
             classType: 'beginner',
             carType: 'C1',
-            starscore: 0,
+            starscore: 5,
             studentCount: 0
           }
         })

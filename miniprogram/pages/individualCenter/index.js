@@ -16,6 +16,14 @@ Page({
       userInfo,
       loginType: userInfo.loginType
     })
+    this.initComponentData()
+  },
+  initComponentData() {
+    const componentName = this.data.loginType === 'student' ? 'studentUser' : 'coachUser'
+    const component = this.selectComponent(`#${componentName}`)
+    if (component) {
+      component.initData()
+    }
   },
 
   /**

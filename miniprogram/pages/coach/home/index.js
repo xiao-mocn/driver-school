@@ -9,19 +9,25 @@ Component({
     activeName: 'OrderHall',
     images,
     userInfo: {},
+    totalList: [],
+    orderHallList: [],
+    pendingOrderList: [],
     isRefreshing: false
   },
 
   lifetimes: {
     attached: function(options) {
       console.log('页面加载')
+      this.initData()
+    },
+  },
+  methods: {
+    initData() {
       this.setData({
         userInfo: wx.getStorageSync('userInfo')
       })
       this.getOrderList()
     },
-  },
-  methods: {
     /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
@@ -45,14 +51,17 @@ Component({
       }).then((res) => {
         console.log('res ===', res)
         this.setData({
+          totalList: res,
+          orderHallList: res.filter(item => item.status === 'created'),
+          pendingOrderList: res.filter(item => item.status === 'running'),
           isRefreshing: false
         })
         wx.hideLoading()
       }).catch((err) => {
+        console.log(err)
         wx.hideLoading()
-        wx.showToast({
-          title: '加载中',
-          icon: 'loading'
+        this.setData({
+          isRefreshing: false
         })
       })
     },

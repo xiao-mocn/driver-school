@@ -10,7 +10,7 @@ Page({
       idCard: '',
       birthday: '2024-01-01',
       gender: 'man',
-      starscore: 0,
+      starscore: 5,
       studentCount: 0,
       phone: '',
       school: '',

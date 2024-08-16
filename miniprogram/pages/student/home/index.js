@@ -20,7 +20,6 @@ Component({
   },
   methods: {
     initData() {
-      console.log('页面加载')
       this.getCoachList()
       this.getBanners()
     },

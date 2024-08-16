@@ -11,8 +11,8 @@
 <view class="user-content">
   <view class="income-container">
     <view class="left flex-center">
-      <text class="title">本月收入</text>
-      <text class="income">￥{{ userInfo.monthIncomeNum || 0 }}</text>
+      <text class="title">总共收入</text>
+      <text class="income">￥{{ userInfo.incomeNum || 0 }}</text>
     </view>
     <image src="{{ images.student.slash_icon }}" class="star"></image>
     <view class="right flex-center">

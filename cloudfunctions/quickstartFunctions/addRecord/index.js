@@ -9,9 +9,7 @@ const db = cloud.database();
 // 创建集合云函数入口函数
 exports.main = async (event, context) => {
   const collectionName = event.collectionName;
-  console.log('collectionName ===', collectionName);
   const data = event.data;
-  console.log('data ===', data);
   try {
     // 先查询是否存在相同的 IDCard
     if (collectionName === 'students' || collectionName === 'coaches') {
@@ -22,16 +20,39 @@ exports.main = async (event, context) => {
         // 如果存在相同的 IDCard，返回不能重复添加的提示
         return {
           success: false,
-          message: '身份证号Z已存在，不能重复添加'
+          message: '身份证号已存在，不能重复添加'
         };
       }
     }
     if (collectionName === 'orders') {
-      const checkResult = await db.collection(collectionName).where({
-        coachInfo: data.coachInfo,
-        selectedDates: data.selectedDates,
-        status: data.status
-      }).get();
+      const coachInfo = data.coachInfo
+      if (coachInfo._id) {
+        const _id = coachInfo._id
+        delete coachInfo._id
+        const checkResult = await db.collection('coaches').where({
+          _id,
+        }).get();
+        const { selectedDates } = checkResult.data[0] || []
+        for (let i = 0; i < selectedDates.length; i++) {
+          const item = selectedDates[i];
+          const itemDate = `${item.weekday}:${item.year}:${item.date}`
+          if (itemDate === data.selectedDate && item.timePeriods.indexOf(data.selectedTimePeriod) !== -1) {
+            return {
+              success: false,
+              errMsg: '该时间段已预约，请选择其他时间段'
+            };
+          }
+        }
+        await db.collection('coaches').where({
+          _id
+        }).update({
+          data: {
+            ...coachInfo,
+            selectedTimePeriod: data.selectedTimePeriod,
+            selectedDate: data.selectedDate,
+          },
+        })
+      }
     }
     await db.collection(collectionName).add({
       // data 字段表示需新增的 JSON 数据
@@ -42,7 +63,7 @@ exports.main = async (event, context) => {
       data: '新增成功'
     };
   } catch (e) {
-    // 这里catch到的是该collection已经存在，从业务逻辑上来说是运行成功的，所以catch返回success给前端，避免工具在前端抛出异常
+    console.error(e);
     return {
       success: false,
       errMsg: e.errMsg

@@ -8,7 +8,6 @@ const db = cloud.database();
 // 查询数据库集合云函数入口函数
 exports.main = async (event, context) => {
   const collectionName = event.collectionName;
-  console.log('collectionName ===', collectionName);
   const data = event.data;
   const limit = event.limit || 999; // 默认限制返回10条数据，如果没有传入limit参数
   const checkResult = await db.collection(collectionName).where({
@@ -21,7 +20,7 @@ exports.main = async (event, context) => {
     };
   } else {
     return {
-      success: false,
+      success: true,
       data: []
     };
   }
