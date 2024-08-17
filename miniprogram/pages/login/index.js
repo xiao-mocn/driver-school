@@ -72,6 +72,7 @@ Page({
     }).then(res => {
       res.loginType = 'student'
       res.isLogin = true
+      delete res.password
       wx.setStorageSync('userInfo', res)
       wx.switchTab({
         url: '/pages/home/index'
@@ -95,6 +96,7 @@ Page({
     }).then(res => {
       res.loginType = 'coach'
       res.isLogin = true
+      delete res.password
       wx.setStorageSync('userInfo', res)
       // 获取 App 实例
       wx.switchTab({
@@ -126,6 +128,13 @@ Page({
       wx.hideLoading();
       return
     }
+    wx.setStorageSync('userInfo', {
+      loginType: 'boss',
+      isLogin: true,
+      ...wxInfo,
+      username: 'admin',
+      password: '!123456789'
+    })
     wx.redirectTo({
       url: '/pages/boss/home/index'
     })

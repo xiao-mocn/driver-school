@@ -25,7 +25,7 @@
         <view class="privacy">
           <image wx:if="{{checked}}" src="{{ images.icons.checked }}" bind:tap="handleCheck"/>
           <view wx:else class="icon-box" bind:tap="handleCheck"></view>
-          <text>我已阅读并同意</text>
+          <text bind:tap="handleCheck">我已阅读并同意</text>
           <text style="color:#6583f8" bindtap="goToPrivacy">隐私政策</text>
         </view>
         <button formType="submit" class="confirm-btn">登录</button>

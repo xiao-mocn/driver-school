@@ -1,5 +1,6 @@
 //获取应用实例
-import { envId, images } from "../../../const/index";
+import { images } from "../../../const/index";
+import callCloudFunction from '../../../utils/cloudFunctionUtils'
 Page({
   /**
    * 页面的初始数据
@@ -15,10 +16,14 @@ Page({
       phone: '',
       school: '',
       classType: 'beginner',
-      carType: 'C1'
+      carType: 'C1',
+      studentCount: 0,
+      todayOrdNum: 0,
+      monthOdrNum: 0,
+      incomeNum: 0,
+      withdrawableIncome: 0
     },
     pageType: '',
-    envId,
     images,
   },
   /**
@@ -112,43 +117,26 @@ Page({
     wx.showLoading({
       title: '正在提交',
     });
-    wx.cloud.callFunction({
-      name: 'quickstartFunctions',
-      config: {
-        env: envId,
-      },
-      data: {
-        type: 'addRecord',
-        collectionName: 'coaches',
-        data: this.data.formData
-      }
+    callCloudFunction('quickstartFunctions', {
+      type: 'addRecord',
+      collectionName: 'coaches',
+      data: this.data.formData
     })
     .then((resp) => {
-      const { success, message } = resp.result
       wx.hideLoading();
-      if (!success) {
-        wx.showToast({
-          title: message,
-          icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
-          duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
-          mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
-        })
-        return
-      }
       wx.showToast({
         title: '新增成功',
         icon: 'success', // 提示图标，可选值：'success', 'loading', 'none'
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
         mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
       })
-      wx.redirectTo({
-        url: '/pages/boss/coaches_manage/index',
+      wx.navigateBack({
+        delta: 1 // 返回到上级页面
       });
     })
     .catch((err) => {
-      console.log('err ==', err);
       wx.showToast({
-        title: '提交失败',
+        title: err || '提交失败',
       })
     })
   },
@@ -157,44 +145,28 @@ Page({
     wx.showLoading({
       title: '正在提交',
     });
-    wx.cloud.callFunction({
-      name: 'quickstartFunctions',
-      config: {
-        env: envId,
-      },
-      data: {
-        type: 'updateRecord',
-        collectionName: 'coaches',
-        data: this.data.formData
-      }
+    callCloudFunction('quickstartFunctions', {
+      type: 'updateRecord',
+      collectionName: 'coaches',
+      data: this.data.formData
     })
     .then((resp) => {
       console.log('resp ==', resp);
-      const { success } = resp.result
       wx.hideLoading();
-      if (!success) {
-        wx.showToast({
-          title: '更新失败',
-          icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
-          duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
-          mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
-        })
-        return
-      }
       wx.showToast({
         title: '更新成功',
         icon: 'success', // 提示图标，可选值：'success', 'loading', 'none'
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
         mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
       })
-      wx.redirectTo({
-        url: '/pages/boss/coaches_manage/index',
+      wx.navigateBack({
+        delta: 1 // 返回到上级页面
       });
     })
     .catch((err) => {
       console.log('err ==', err);
       wx.showToast({
-        title: '更新失败',
+        title: err || '更新失败',
       })
     })
   },

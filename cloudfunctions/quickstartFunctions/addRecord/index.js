@@ -20,7 +20,7 @@ exports.main = async (event, context) => {
         // 如果存在相同的 IDCard，返回不能重复添加的提示
         return {
           success: false,
-          message: '身份证号已存在，不能重复添加'
+          errMsg: '身份证号已存在，不能重复添加'
         };
       }
     }

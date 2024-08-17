@@ -1,3 +1,2 @@
 <student-home id="studentHome" wx:if="{{ loginType === 'student'}}"></student-home>
 <coach-home id="coachHome" wx:if="{{ loginType === 'coach'}}"></coach-home>
-<boss-home wx:if="{{ loginType === 'boss'}}"></boss-home>

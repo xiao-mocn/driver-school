@@ -19,8 +19,7 @@ exports.main = async (event, context) => {
   } catch (e) {
     return {
       success: false,
-      message: '删除失败',
-      errMsg: e.errMsg
+      errMsg: e.errMsg || '删除失败',
     };
   }
 };

@@ -1,4 +1,5 @@
-import { envId, images } from "../../const/index"
+import { images } from "../../const/index"
+import callCloudFunction from "../../utils/cloudFunctionUtils"
 Component({
   data: {
     carouselImages: [],
@@ -7,7 +8,6 @@ Component({
       { id: 2, iconName: '预约课时', iconUrl: images.student.appointment, pageAddress: '/pages/student/orderClass/index', dec: '课时详情' },
       { id: 3, iconName: '返现活动', iconUrl: images.student.activity, pageAddress: '', dec: '更多优惠' }
     ],
-    envId,
     images,
     isRefreshing: false,
     noticeArr: [{title: '欢迎来到通告信息', id: 1, des: '欢迎来到通告信息详情' }, {title: '标题2', id: 2, des: '标题2详情' }],
@@ -50,20 +50,14 @@ Component({
       wx.showLoading({
         title: '',
       });
-      wx.cloud.callFunction({
-        name: 'quickstartFunctions',
-        config: {
-          env: envId,
-        },
-        data: {
-          type: 'selectRecord',
-          collectionName: 'coaches',
-          limit: 5,
-        }
+      callCloudFunction('quickstartFunctions', {
+        type: 'selectRecord',
+        collectionName: 'coaches',
+        limit: 5,
       }).then(res => {
-        const result = res.result
+        console.log('res ====', res)
         this.setData({
-          coachList: result.data,
+          coachList: res,
           isRefreshing: false
         })
         wx.hideLoading();
@@ -73,23 +67,15 @@ Component({
       wx.showLoading({
         title: '',
       });
-      wx.cloud.callFunction({
-        name: 'quickstartFunctions',
-        config: {
-          env: envId,
-        },
-        data: {
-          type: 'selectRecord',
-          collectionName: 'banners',
-          limit: 3,
-        }
+      callCloudFunction('quickstartFunctions', {
+        type: 'selectRecord',
+        collectionName: 'banners',
+        limit: 3,
       }).then(res => {
         this.setData({
-          carouselImages: res.result.data,
+          carouselImages: res,
           isRefreshing: false
         })
-        wx.hideLoading();
-      }).catch(err => {
         wx.hideLoading();
       })
     },

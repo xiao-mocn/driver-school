@@ -1,10 +1,10 @@
-import { envId, images } from "../../const/index"
+import { images } from "../../const/index"
+import callCloudFunction from '../../utils/cloudFunctionUtils'
 Page({
   /**
    * 页面的初始数据
    */
   data: {
-    envId: '',
     coachList: [],
     isRefreshing: false,
     searchQuery: '',
@@ -25,21 +25,14 @@ Page({
     if (this.data.searchQuery) {
       data.name = this.data.searchQuery
     }
-    wx.cloud.callFunction({
-      name: 'quickstartFunctions',
-      config: {
-        env: envId,
-      },
-      data: {
-        type: 'selectRecord',
-        collectionName: 'coaches',
-        data: data
-      }
+    callCloudFunction('quickstartFunctions', {
+      type: 'selectRecord',
+      collectionName: 'coaches',
+      data: data
     }).then(res => {
       console.log('res ===', res)
-      const result = res.result
       this.setData({
-        coachList: result.data,
+        coachList: res,
         isRefreshing: false
       })
       wx.hideLoading();

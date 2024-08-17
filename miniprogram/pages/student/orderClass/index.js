@@ -208,8 +208,6 @@ Page({
         ...this.data.coachInfo,
         selectedDates,
         studentCount: this.data.coachInfo.studentCount ? this.data.coachInfo.studentCount + 1 : 1,
-        incomeNum: (coachInfo.incomeNum || 0) + this.data.prices,
-        withdrawableIncome: (coachInfo.withdrawableIncome || 0) + this.data.prices
       }
       status = 'running'
     }

@@ -49,7 +49,7 @@
       </view>
       <image src=" {{ images.icons.next }}" />
     </navigator>
-    <navigator class="row-item">
+    <navigator class="row-item" url="/pages/editPassWord/index">
       <view class="row-info">
         <image src=" {{ images.icons.password }}" />
         <text>我的密码</text>

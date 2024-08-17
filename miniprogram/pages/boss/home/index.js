@@ -22,28 +22,19 @@ Page({
       { id: 7, name: '活动统计', icon: images.boss.active_total },
       { id: 8, name: '全局总览', icon: images.boss.total },
     ],
-    images,
-
+    images
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function () {
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    const userInfo = wx.getStorageSync('userInfo')
+    if (!userInfo) {
+      wx.redirectTo({
+        url: '/pages/login/index',
+      })
+      return
+    }
   },
 
   /**

@@ -1,4 +1,5 @@
-import { envId, images } from "../../const/index"
+import { images } from "../../const/index"
+import callCloudFunction from "../../utils/cloudFunctionUtils";
 
 //获取应用实例
 Page({
@@ -9,45 +10,14 @@ Page({
     list: [],
     isRefreshing: false,
     searchQuery: '',
-    envId,
     images
   },
-
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function () {
-    this.getList()
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getList()
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
@@ -76,21 +46,14 @@ Page({
     if (this.data.searchQuery) {
       data.name = this.data.searchQuery
     }
-    wx.cloud.callFunction({
-      name: 'quickstartFunctions',
-      config: {
-        env: envId,
-      },
-      data: {
-        type: 'selectRecord',
-        collectionName: 'students',
-        data: data
-      }
+    callCloudFunction('quickstartFunctions', {
+      type: 'selectRecord',
+      collectionName: 'students',
+      data: data
     }).then(res => {
       console.log('res ===', res)
-      const result = res.result
       this.setData({
-        list: result.data,
+        list: res,
         isRefreshing: false
       })
       wx.hideLoading();
@@ -113,7 +76,10 @@ Page({
             phone: '15051836908',
             school: '上海驾校',
             classType: 'beginner',
-            carType: 'C1'
+            carType: 'C1',
+            selectedDates: [],
+            finishClass: 0,
+            totalClass: 0
           }
         })
       }
@@ -147,16 +113,10 @@ Page({
     
   },
   callFunctionDelete(row) {
-    wx.cloud.callFunction({
-      name: 'quickstartFunctions',
-      config: {
-        env: envId,
-      },
-      data: {
-        type: 'deleteRecord',
-        collectionName: 'students',
-        _id: row._id
-      }
+    callCloudFunction('quickstartFunctions', {
+      type: 'deleteRecord',
+      collectionName: 'students',
+      _id: row._id
     }).then((res) => {
       console.log('res ===', res)
       wx.showToast({
@@ -166,7 +126,7 @@ Page({
     }).catch((err) => {
       console.log('err ===', err)
       wx.showToast({
-        title: '删除失败',
+        title: err || '删除失败',
       })
     })
   }

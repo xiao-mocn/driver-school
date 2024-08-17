@@ -16,7 +16,7 @@
 >
   <block wx:for="{{list}}" wx:key="id">
     <view class="list-item">
-      <image src="https://img0.baidu.com/it/u=1450269893,1819089861&fm=253&app=138&size=w931&n=0&f=JPEG&fmt=auto?sec=1721494800&t=e0b1b1d9183d7422130d346e65bbb596" />
+      <image src="{{ item.avatarUrl || images.icons.defaultAvatar }}" />
       <view class="info">
         <text class="baseInfo">{{item.name + '  ' +item.phone }}</text>
         <text class="idCard">身份证：{{item.idCard}}</text>

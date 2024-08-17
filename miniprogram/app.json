@@ -9,6 +9,8 @@
     "pages/coach/user/index",
     "pages/gallery/index",
     "pages/privacy/index",
+    "pages/boss/home/index",
+    "pages/editPassWord/index",
     "pages/personalInformation/index",
     "pages/boss/coaches_manage/index",
     "pages/boss/coaches_manage/edit/index",
