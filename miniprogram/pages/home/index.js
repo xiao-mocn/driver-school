@@ -15,7 +15,7 @@ Page({
     const userInfo = wx.getStorageSync('userInfo')
     this.setData({
       userInfo,
-      loginType: userInfo.loginType
+      loginType: userInfo.loginType || 'student'
     })
     this.initData()
   },
