@@ -46,23 +46,13 @@
       <view class="item">
         <text class="icon">*</text>
         <text class="label">教练性别: </text>
-        <view class="radios">
-          <custom-radio
-            name="男"
-            checked="{{ formData.gender === 'man' }}"
-            value="man"
-            data-name="gender"
-            bindchange="handleRadioChange"
-          />
-          <custom-radio
-            name="女"
-            checked="{{ formData.gender === 'women' }}"
-            value="women"
-            data-name="gender"
-            style="margin-left: 30rpx"
-            bindchange="handleRadioChange"
-          />
-        </view>
+        <picker
+          mode="selector"
+          data-name="gender"
+          range="{{genders}}"
+          bindchange="handleRadioChange">
+          <view class="picker">{{ formData.gender }}</view>
+        </picker>
       </view>
       <view class="item">
         <text class="icon">*</text>
@@ -126,23 +116,13 @@
       <view class="item">
         <text class="icon">*</text>
         <text class="label">学员性别: </text>
-        <view class="radios">
-          <custom-radio
-            name="男"
-            checked="{{ formData.gender === 'man' }}"
-            value="man"
-            data-name="gender"
-            bindchange="handleRadioChange"
-          />
-          <custom-radio
-            name="女"
-            checked="{{ formData.gender === 'women' }}"
-            value="women"
-            data-name="gender"
-            style="margin-left: 30rpx"
-            bindchange="handleRadioChange"
-          />
-        </view>
+        <picker
+          mode="selector"
+          data-name="gender"
+          range="{{genders}}"
+          bindchange="handleRadioChange">
+          <view class="picker">{{ formData.gender }}</view>
+        </picker>
       </view>
       <view class="item">
         <text class="icon">*</text>

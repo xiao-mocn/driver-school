@@ -19,6 +19,8 @@ Page({
       totalClass: 0,
     },
     pageType: '',
+    genders: ['男', '女'],
+    carTypes: ['C1', 'C2', 'C3', 'C4', 'A1', 'A2', 'A3', 'B1', 'B2', 'D', 'E', 'F'],
   },
   /**
    * 生命周期函数--监听页面加载
@@ -165,6 +167,13 @@ Page({
   handleCancel() {
     wx.navigateBack({
       delta: 1  // 返回到上级页面
+    });
+  },
+  onPickerChange(e) {
+    const fieldName = e.currentTarget.dataset.name;
+    const value = this.data[`${fieldName}s`][e.detail.value]
+    this.setData({
+      ['formData.' + fieldName]: value
     });
   },
   handleRadioChange(e) {

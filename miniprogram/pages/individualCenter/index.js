@@ -22,6 +22,7 @@ Page({
     const loginType = this.data.loginType
     const componentName = loginType === 'student' ? 'studentUser' : loginType === 'coach' ? 'coachUser' : 'bossUser'
     const component = this.selectComponent(`#${componentName}`)
+    console.log('user ====', loginType, component)
     if (component) {
       component.initData()
     }

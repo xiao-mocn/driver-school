@@ -19,8 +19,8 @@
   <view class="order-container">
     <view class="order-item">
       <view class="text">
-        <text class="text-title">今日订单(个)</text>
-        <text class="text-num">{{userInfo.monthOrdNum || 0}}</text>
+        <text class="text-title">本月订单(个)</text>
+        <text class="text-num">{{ monthOrdNum || 0}}</text>
       </view>
       <image src="{{ images.coach.order_1 }}" />
     </view>

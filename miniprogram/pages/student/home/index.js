@@ -122,14 +122,22 @@ Component({
       }
     },
     handleAppointment (e) {
-      const info = e.currentTarget.dataset.info
+      const coachInfo = e.currentTarget.dataset.info
+      const userInfo = wx.getStorageSync('userInfo')
+      if (coachInfo.carTypes.indexOf(userInfo.carType) === -1) {
+        wx.showToast({
+          title: '预约车型不符，请重新预约',
+          icon: 'none'
+        })
+        return
+      }
       wx.navigateTo({
         url: '/pages/student/orderClass/index',
         success: function (res) {
           // 通过eventChannel向被打开页面传送数据
           res.eventChannel.emit('acceptDataFromOpenerPage', { 
             data: {
-              ...info
+              ...coachInfo
             }
           })
         }

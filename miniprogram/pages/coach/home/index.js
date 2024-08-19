@@ -23,8 +23,14 @@ Component({
   },
   methods: {
     initData() {
+      const userInfo = wx.getStorageSync('userInfo')
+      const monthlyOrderInfo = userInfo?.monthlyOrderInfo || {}
+      console.log('monthlyOrderInfo ==', monthlyOrderInfo)
+      const currentYear = new Date().getFullYear()
+      const currentMonth = new Date().getMonth() + 1 > 9 ? new Date().getMonth() + 1 : '0' + (new Date().getMonth() + 1)
       this.setData({
-        userInfo: wx.getStorageSync('userInfo')
+        userInfo: wx.getStorageSync('userInfo'),
+        monthOrdNum: monthlyOrderInfo[currentYear + '-' + currentMonth] || 0
       })
       this.getOrderList()
     },

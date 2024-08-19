@@ -6,7 +6,8 @@ Page({
    */
   data: {
     formData: {},
-    loginType: ''
+    loginType: '',
+    genders: ['男', '女']
   },
   /**
    * 生命周期函数--监听页面显示

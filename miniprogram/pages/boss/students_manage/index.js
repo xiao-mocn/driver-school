@@ -72,7 +72,7 @@ Page({
             name: '莫荣包',
             idCard: '452724199605032538',
             birthday: '2024-01-01',
-            gender: 'man',
+            gender: '男',
             phone: '15051836908',
             school: '上海驾校',
             classType: 'beginner',

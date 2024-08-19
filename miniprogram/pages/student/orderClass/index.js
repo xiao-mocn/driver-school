@@ -183,6 +183,7 @@ Page({
       data: {
         coachId: this.data.coachInfo._id,
         studentId: wx.getStorageSync('userInfo')._id,
+        studentInfo: wx.getStorageSync('userInfo'),
         orderTime: this.data.selectedDate,
         orderTimePeriod: this.data.selectedTimePeriod,
         status,
