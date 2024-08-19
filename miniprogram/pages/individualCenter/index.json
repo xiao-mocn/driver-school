@@ -1,7 +1,8 @@
 {
   "usingComponents": {
     "student-user": "../student/user/index",
-    "coach-user": "../coach/user/index"
+    "coach-user": "../coach/user/index",
+    "boss-user": "../boss/user/index"
   },
   "navigationBarTitleText":"个人中心",
   "navigationBarBackgroundColor": "#feb47b"

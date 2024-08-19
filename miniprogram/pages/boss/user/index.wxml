@@ -1,0 +1,35 @@
+<!--个人信息-->
+<view class="user-top">
+  <image src="{{userInfo.avatarUrl || images.icons.defaultAvatar}}" ></image>
+  <view class="info">
+    <tewxt class="name">{{ userInfo.name || userInfo.nickName || '未登录' }}</tewxt>
+    <text class="phone">{{ userInfo.phone }}</text>
+  </view>
+  <image src=" {{ images.icons.setting }}" class="setting" bindtap="onSetting" />
+</view>
+<!-- 常用功能 -->
+<view class="user-content">
+  <view class="income-container">
+    <view class="left flex-center">
+      <text class="title">总收入</text>
+      <text class="income">{{ userInfo.finishClass || 0 }}</text>
+    </view>
+    <image src=" {{ images.student.slash_icon }}" class="star"></image>
+    <view class="right flex-center">
+      <text class="title">本月收入</text>
+      <text class="income">{{ userInfo.totalClass || 0 }}</text>
+    </view>
+  </view>
+  <view class="application-conntainer">
+    <navigator class="row-item" url="/pages/editPassWord/index">
+      <view class="row-info">
+        <image src=" {{ images.icons.password }}" />
+        <text>我的密码</text>
+      </view>
+      <image src=" {{ images.icons.next }}" />
+    </navigator>
+  </view>
+  <view class="bottom-btn" bindtap="onLogin">
+    <text>{{ userInfo.isLogin ? '立即退出' : '立即登录' }}</text>
+  </view>
+</view>

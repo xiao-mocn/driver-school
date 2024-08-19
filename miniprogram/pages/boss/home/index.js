@@ -1,7 +1,7 @@
 import { images } from "../../const/index"
 
 //获取应用实例
-Page({
+Component({
   /**
    * 页面的初始数据
    */
@@ -24,37 +24,20 @@ Page({
     ],
     images
   },
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-    const userInfo = wx.getStorageSync('userInfo')
-    if (!userInfo) {
-      wx.redirectTo({
-        url: '/pages/login/index',
-      })
-      return
+  lifetimes: {
+    attached: function(options) {
+      this.initData()
+    },
+  },
+  methods: {
+    initData() {
+      const userInfo = wx.getStorageSync('userInfo')
+      if (!userInfo) {
+        wx.redirectTo({
+          url: '/pages/login/index',
+        })
+        return
+      }
     }
   },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  }
 })

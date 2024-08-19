@@ -20,7 +20,8 @@ Page({
     this.initData()
   },
   initData() {
-    const componentName = this.data.loginType === 'student' ? 'studentHome' : 'coachHome'
+    const loginType = this.data.loginType
+    const componentName = loginType === 'student' ? 'studentHome' : loginType === 'coach' ? 'coachHome' : 'bossHome'
     const component = this.selectComponent(`#${componentName}`)
     console.log(component)
     if (component) {

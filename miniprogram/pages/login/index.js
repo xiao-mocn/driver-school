@@ -112,31 +112,28 @@ Page({
     })
   },
   redirectToBoos(username, password, wxInfo) {
-    if (username !== 'admin'){
+    callCloudFunction('quickstartFunctions', {
+      type: 'login',
+      collectionName: 'boss',
+      username,
+      password,
+      wxInfo,
+    }).then(res => {
+      res.loginType = 'boss'
+      res.isLogin = true
+      delete res.password
+      wx.setStorageSync('userInfo', res)
+      // 获取 App 实例
+      wx.switchTab({
+        url: '/pages/home/index'
+      })
+      wx.hideLoading();
+    }).catch(err => {
       wx.showToast({
-        title: '账号错误，请重试',
+        title: err || '账号密码错误，请重试',
         icon: 'none'
       })
       wx.hideLoading();
-      return
-    }
-    if (password !== '!123456789'){
-      wx.showToast({
-        title: '密码错误，请重试',
-        icon: 'none'
-      })
-      wx.hideLoading();
-      return
-    }
-    wx.setStorageSync('userInfo', {
-      loginType: 'boss',
-      isLogin: true,
-      ...wxInfo,
-      username: 'admin',
-      password: '!123456789'
-    })
-    wx.redirectTo({
-      url: '/pages/boss/home/index'
     })
   },
   goToPrivacy() {

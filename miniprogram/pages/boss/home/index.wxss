@@ -8,35 +8,6 @@ page {
   background-color: rgb(246, 246, 246);
   padding-bottom: 40rpx;
 }
-.custom-navigation-bar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 130rpx; /* 根据实际情况调整高度 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.navigation-bar-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom, #ff7e5f, #feb47b);
-}
-
-.navigation-bar-content {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-}
 navigator {
   width: 130rpx;
   height: 150rpx;
@@ -46,16 +17,9 @@ navigator {
   align-items: center;
 }
 
-.navigation-bar-title {
-  color: white;
-  font-size: 32rpx;
-  font-weight: 400;
-  margin-top: 20rpx;
-}
-
 .income-container {
   position: relative;
-  top: 150rpx;
+  top: 0rpx;
   width: 630rpx;
   height: 160rpx;
   padding: 30rpx;
@@ -130,7 +94,7 @@ navigator {
 
 .application-container {
   position: relative;
-  top: 150rpx;
+  top: 0rpx;
   width: 630rpx;
   /* height: 340rpx; */
   padding: 30rpx;

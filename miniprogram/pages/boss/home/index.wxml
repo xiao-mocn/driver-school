@@ -1,9 +1,3 @@
-<view class="custom-navigation-bar">
-  <view class="navigation-bar-background"></view>
-  <view class="navigation-bar-content">
-    <text class="navigation-bar-title">首页</text>
-  </view>
-</view>
 <view class="income-container">
   <view class="income-item">
     <view class="title-bg">
