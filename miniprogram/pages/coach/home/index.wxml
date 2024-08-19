@@ -20,14 +20,14 @@
     <view class="order-item">
       <view class="text">
         <text class="text-title">今日订单(个)</text>
-        <text class="text-num">{{userInfo.todayOrdNum || 0}}</text>
+        <text class="text-num">{{userInfo.monthOrdNum || 0}}</text>
       </view>
       <image src="{{ images.coach.order_1 }}" />
     </view>
     <view class="order-item">
       <view class="text">
-        <text class="text-title">本月订单(个)</text>
-        <text class="text-num">{{userInfo.monthOdrNum || 0}}</text>
+        <text class="text-title">总订单数(个)</text>
+        <text class="text-num">{{userInfo.totalOrdNum || 0}}</text>
       </view>
       <image src="{{ images.coach.order_2 }}" />
     </view>
@@ -60,7 +60,7 @@
           </view>
           <view class="detail">
             <text>预约时间：</text>
-            <text>{{ item.selectedDate + ' ' + item.selectedTimePeriod }}</text>
+            <text>{{ item.orderTime + ' ' + item.orderTimePeriod }}</text>
           </view>
         </view>
         <button class="btn" type="primary" bindtap="onTap">立即确认</button>

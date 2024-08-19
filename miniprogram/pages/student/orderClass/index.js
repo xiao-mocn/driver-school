@@ -73,7 +73,7 @@ Page({
       let formattedDate = `${month}-${date}`; // 格式化日期
       if (i === 0) {
         this.setData({
-          selectedDate: `${dayOfWeek}:${year}:${formattedDate}`
+          selectedDate: `${year}-${formattedDate}`
         })
       }
       let selected = i === 0 ? true : false;
@@ -88,7 +88,7 @@ Page({
   },
   onDateSelect(e) {
     const item = e.currentTarget.dataset.date
-    const fullDate = `${item.weekday}:${item.year}:${item.date}`
+    const fullDate = `${item.year}-${item.date}`
     this.setData({
       selectedDate: fullDate,
       selectedTimePeriod: ''
@@ -112,7 +112,7 @@ Page({
   },
   setTimePeriodStatus() {
     const selectedTimePeriods = this.data.selectedDates.filter((i) => {
-      return `${i.weekday}:${i.year}:${i.date}` === this.data.selectedDate
+      return `${i.year}-${i.date}` === this.data.selectedDate
     })[0]?.timePeriods
     this.setData({
       timePeriods: this.data.timePeriods.map((i) => {
@@ -175,52 +175,17 @@ Page({
     wx.showLoading({
       title: '正在提交',
     });
-    const dateInfoArr = this.data.selectedDate.split(':')
-    const selectedDates = this.data.selectedDates
-    if (selectedDates.length > 0) {
-      const filterItem = selectedDates.filter((i) => {
-        return `${i.weekday}:${i.year}:${i.date}` === this.data.selectedDate
-      })[0]
-      if (filterItem) {
-        filterItem.timePeriods.push(this.data.selectedTimePeriod)
-      } else {
-        selectedDates.push({
-          year: dateInfoArr[1],
-          date: dateInfoArr[2],
-          weekday: dateInfoArr[0],
-          timePeriods: [this.data.selectedTimePeriod]
-        })
-      }
-    } else {
-      selectedDates.push({
-        year: dateInfoArr[1],
-        date: dateInfoArr[2],
-        weekday: dateInfoArr[0],
-        timePeriods: [this.data.selectedTimePeriod]
-      })
-    }
-    // 新增order信息
-    let coachInfo = {}
-    let status = 'created'
-    // 随便一个教练信息存在即可
-    if (this.data.coachInfo._id) {
-      coachInfo = {
-        ...this.data.coachInfo,
-        selectedDates,
-        studentCount: this.data.coachInfo.studentCount ? this.data.coachInfo.studentCount + 1 : 1,
-      }
-      status = 'running'
-    }
+    // 随便一个教练信息存在即可将订单状态改为running
+    let status = this.data.coachInfo._id ? 'running' : 'created'
     callCloudFunction('quickstartFunctions', {
       type: 'addRecord',
       collectionName: 'orders',
       data: {
-        coachInfo,
-        studentInfo: wx.getStorageSync('userInfo'),
-        selectedDates,
+        coachId: this.data.coachInfo._id,
+        studentId: wx.getStorageSync('userInfo')._id,
+        orderTime: this.data.selectedDate,
+        orderTimePeriod: this.data.selectedTimePeriod,
         status,
-        selectedTimePeriod: this.data.selectedTimePeriod,
-        selectedDate: this.data.selectedDate,
         prices: this.data.prices,
       }
     }).then((resp) => {

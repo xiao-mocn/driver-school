@@ -46,7 +46,6 @@ Component({
         type: 'selectRecord',
         collectionName: 'orders',
         data: {
-          ...this.data.formData
         }
       }).then((res) => {
         this.setData({

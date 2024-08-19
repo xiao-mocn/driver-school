@@ -10,19 +10,22 @@ Page({
       name: '',
       idCard: '',
       birthday: '2024-01-01',
-      gender: 'man',
+      gender: '男',
       starscore: 5,
       studentCount: 0,
       phone: '',
       school: '',
       classType: 'beginner',
       carType: 'C1',
+      carTypes: ['C1', 'C2', 'C3', 'C4'],
       studentCount: 0,
-      todayOrdNum: 0,
-      monthOdrNum: 0,
+      totalOrdNum: 0,
+      monthOrdNum: 0,
       incomeNum: 0,
       withdrawableIncome: 0
     },
+    genders: ['男', '女'],
+    carTypes: ['C1', 'C2', 'C3', 'C4', 'A1', 'A2', 'A3', 'B1', 'B2', 'D', 'E', 'F'],
     pageType: '',
     images,
   },
@@ -30,6 +33,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (option) {
+    const userInfo = wx.getStorageSync('userInfo')
+    if (!userInfo) {
+      wx.redirectTo({
+        url: '/pages/login/index',
+      });
+      return
+    }
     const { type } = option
     this.setData({
       pageType: type
@@ -47,6 +57,57 @@ Page({
         formData: data.data
       });
     });
+  },
+  onPickerChange(e) {
+    const fieldName = e.currentTarget.dataset.name;
+    const value = this.data[`${fieldName}s`][e.detail.value]
+    this.setData({
+      ['formData.' + fieldName]: value
+    });
+    let carTypes = []
+    if (fieldName === 'carType') {
+      switch (value) {
+        case 'C1':
+          carTypes = ['C1', 'C2', 'C3', 'C4']
+          break;
+        case 'C2':
+          carTypes = ['C2']
+          break;
+        case 'C3':
+          carTypes = ['C3']
+          break;
+        case 'C4':
+          carTypes = ['C4']
+          break;
+        case 'A1':
+          carTypes = ['C1', 'C2', 'C3', 'C4', 'A1', 'A3', 'B1', 'B2']
+          break;
+        case 'A2':
+          carTypes = ['C1', 'C2', 'C3', 'C4', 'A2', 'B1', 'B2']
+          break;
+        case 'A3':
+          carTypes = ['C1', 'C2', 'C3', 'C4', 'A3']
+          break;
+        case 'B1':
+          carTypes = ['C1', 'C2', 'C3', 'C4', 'B1']
+          break;
+        case 'B2':
+          carTypes = ['C1', 'C2', 'C3', 'C4', 'B2']
+          break;
+        case 'D':
+          carTypes = ['D']
+          break;
+        case 'E':
+          carTypes = ['E']
+          break;
+        case 'F':
+          carTypes = ['F']
+          break;
+      }
+      this.setData({
+        ['formData.carTypes']: carTypes
+      });
+    }
   },
   handleButtonClick() {
     const { name, idCard, phone, school } = this.data.formData
@@ -122,23 +183,23 @@ Page({
       collectionName: 'coaches',
       data: this.data.formData
     })
-    .then((resp) => {
-      wx.hideLoading();
-      wx.showToast({
-        title: '新增成功',
-        icon: 'success', // 提示图标，可选值：'success', 'loading', 'none'
-        duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
-        mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
+      .then((resp) => {
+        wx.hideLoading();
+        wx.showToast({
+          title: '新增成功',
+          icon: 'success', // 提示图标，可选值：'success', 'loading', 'none'
+          duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
+          mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
+        })
+        wx.navigateBack({
+          delta: 1 // 返回到上级页面
+        });
       })
-      wx.navigateBack({
-        delta: 1 // 返回到上级页面
-      });
-    })
-    .catch((err) => {
-      wx.showToast({
-        title: err || '提交失败',
+      .catch((err) => {
+        wx.showToast({
+          title: err || '提交失败',
+        })
       })
-    })
   },
   // 更新
   callFunctionUpdate() {
@@ -150,25 +211,25 @@ Page({
       collectionName: 'coaches',
       data: this.data.formData
     })
-    .then((resp) => {
-      console.log('resp ==', resp);
-      wx.hideLoading();
-      wx.showToast({
-        title: '更新成功',
-        icon: 'success', // 提示图标，可选值：'success', 'loading', 'none'
-        duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
-        mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
+      .then((resp) => {
+        console.log('resp ==', resp);
+        wx.hideLoading();
+        wx.showToast({
+          title: '更新成功',
+          icon: 'success', // 提示图标，可选值：'success', 'loading', 'none'
+          duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
+          mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
+        })
+        wx.navigateBack({
+          delta: 1 // 返回到上级页面
+        });
       })
-      wx.navigateBack({
-        delta: 1 // 返回到上级页面
-      });
-    })
-    .catch((err) => {
-      console.log('err ==', err);
-      wx.showToast({
-        title: err || '更新失败',
+      .catch((err) => {
+        console.log('err ==', err);
+        wx.showToast({
+          title: err || '更新失败',
+        })
       })
-    })
   },
   handleCancel() {
     wx.navigateBack({

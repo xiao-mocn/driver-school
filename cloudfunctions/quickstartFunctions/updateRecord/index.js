@@ -8,7 +8,6 @@ const db = cloud.database();
 // 修改数据库信息云函数入口函数
 exports.main = async (event, context) => {
   const collectionName = event.collectionName;
-  console.log('collectionName ==', collectionName)
   const data = event.data;
   const _id = data._id;
   delete data._id;

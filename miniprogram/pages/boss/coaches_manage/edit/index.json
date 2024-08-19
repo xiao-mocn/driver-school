@@ -1,7 +1,5 @@
 {
-  "usingComponents": {
-    "custom-radio": "../../../../components/radio/index"
-  },
+  "usingComponents": {},
   "navigationBarTitleText":"新增成员",
   "enablePullDownRefresh": true,
   "navigationBarBackgroundColor": "#528CF4"

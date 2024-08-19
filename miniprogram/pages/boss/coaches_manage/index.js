@@ -71,15 +71,16 @@ Page({
             name: '莫荣包',
             idCard: '452724199605032538',
             birthday: '2024-01-01',
-            gender: 'man',
+            gender: '男',
             phone: '15051836908',
             school: '上海驾校',
             classType: 'beginner',
             carType: 'C1',
+            carTypes: ['C1', 'C2', 'C3', 'C4'],
             starscore: 5,
             studentCount: 0,
-            todayOrdNum: 0,
-            monthOdrNum: 0,
+            totalOrdNum: 0,
+            monthOrdNum: 0,
             incomeNum: 0,
             withdrawableIncome: 0
           }
@@ -89,7 +90,6 @@ Page({
   },
   handelEdit(e) {
     const row = e.currentTarget.dataset.row;
-    console.log('row ===', row);
     wx.navigateTo({
       url: `/pages/boss/coaches_manage/edit/index?type=edit`,
       success: function (res) {

@@ -67,6 +67,14 @@ page {
   font-size: 30rpx;
   color: rgb(45, 44, 44);
 }
+.form .item .picker {
+  margin-left: 20rpx;
+  height: 40rpx;
+  flex: 1;
+  font-size: 30rpx;
+  padding: 0;
+  color: rgb(45, 44, 44);
+}
 .form .item input {
   margin-left: 20rpx;
   height: 40rpx;
