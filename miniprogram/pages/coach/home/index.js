@@ -1,5 +1,6 @@
 import { images } from "../../const/index"
 import callCloudFunction from '../../utils/cloudFunctionUtils'
+import { getCurrentDate } from '../../utils/index'
 //获取应用实例
 Component({
   /**
@@ -9,9 +10,7 @@ Component({
     activeName: 'OrderHall',
     images,
     userInfo: {},
-    totalList: [],
-    orderHallList: [],
-    pendingOrderList: [],
+    orderList: [],
     isRefreshing: false
   },
 
@@ -25,12 +24,9 @@ Component({
     initData() {
       const userInfo = wx.getStorageSync('userInfo')
       const monthlyOrderInfo = userInfo?.monthlyOrderInfo || {}
-      console.log('monthlyOrderInfo ==', monthlyOrderInfo)
-      const currentYear = new Date().getFullYear()
-      const currentMonth = new Date().getMonth() + 1 > 9 ? new Date().getMonth() + 1 : '0' + (new Date().getMonth() + 1)
       this.setData({
         userInfo: wx.getStorageSync('userInfo'),
-        monthOrdNum: monthlyOrderInfo[currentYear + '-' + currentMonth] || 0
+        monthOrdNum: monthlyOrderInfo[getCurrentDate('YYYY-MM')] || 0
       })
       this.getOrderList()
     },
@@ -48,16 +44,27 @@ Component({
         title: '加载中',
         icon: 'loading'
       })
-      callCloudFunction('quickstartFunctions', {
-        type: 'selectRecord',
-        collectionName: 'orders',
-        data: {
+      let params = {}
+      if (this.data.activeName === 'OrderHall') {
+        params = {
+          status: 'created',
+          orderTime: getCurrentDate('YYYY-MM-DD')
         }
+      } else {
+        params = {
+          status: 'running',
+          orderTime: getCurrentDate('YYYY-MM-DD'),
+          coachId: this.data.userInfo._id
+        }
+      }
+      callCloudFunction('quickstartFunctions', {
+        type: 'orderList',
+        collectionName: 'orders',
+        ...params
       }).then((res) => {
+        console.log('res ==', res)
         this.setData({
-          totalList: res,
-          orderHallList: res.filter(item => item.status === 'created'),
-          pendingOrderList: res.filter(item => item.status === 'running'),
+          orderList: res,
           isRefreshing: false
         })
         wx.hideLoading()
@@ -74,11 +81,66 @@ Component({
      */
     tabsChange: function (e) {
       const activeName = e.currentTarget.dataset.name
-      console.log('orderHallList ==', this.data.orderHallList)
-      console.log('pendingOrderList ==', this.data.pendingOrderList)
       this.setData({
         activeName
       })
+      this.getOrderList()
     },
+    onTap(e) {
+      const { info } = e.currentTarget.dataset
+      if (this.data.activeName === 'OrderHall') {
+        this.acceptOrder(info)
+      } else {
+        this.finishOrder(info)
+      }
+    },
+    acceptOrder(orderInfo) {
+      console.log('acceptOrder ==', orderInfo)
+      if (this.data.userInfo.carTypes.indexOf(orderInfo.studentInfo.carType) === -1) {
+        wx.showToast({
+          title: '预约车型不符，请重新预约',
+          icon: 'none'
+        })
+        return
+      }
+      wx.showModal({
+        title: '提示',
+        content: '确定接受该订单吗？',
+        success: (res) => {
+          if (res.confirm) {
+            wx.showToast({
+              title: '加载中',
+              icon: 'loading'
+            })
+            callCloudFunction('quickstartFunctions', {
+              type: 'updateOrder',
+              collectionName: 'orders',
+              data: {
+                ...orderInfo,
+                status: 'running',
+                coachId: this.data.userInfo._id
+              }
+            }).then((res) => {
+              wx.hideLoading()
+              wx.showToast({
+                title: '操作成功',
+                icon: 'success'
+              })
+              this.getOrderList()
+            }).catch((err) => {
+              wx.hideLoading()
+              wx.showToast({
+                title: err || '出现错误，请稍后重试',
+                icon: 'none'
+              })
+            })
+          }
+        }
+      })
+
+    },
+    finishOrder(orderInfo) {
+      console.log('finishOrder ==', orderInfo)
+    }
   }
 })

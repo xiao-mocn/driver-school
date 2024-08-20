@@ -25,6 +25,21 @@ export const getUserProfile = function () {
   })
 }
 
+export const getCurrentDate = (format) => {
+  // 根据forrmat格式返回当前日期
+  const date = new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
+  const day = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
+  // 默认格式
+  if (!format) {
+    return `${year}-${month}-${day}`;
+  }
+  return format.replace(/YYYY/g, year)
+              .replace(/MM/g, month)
+              .replace(/DD/g, day)
+}
+
 export const checkLoginAndNavigate = (url) => {
   const userInfo = wx.getStorageSync('userInfo')
   if (userInfo) {

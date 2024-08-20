@@ -14,7 +14,7 @@ page {
 .swiper-container swiper {
   width: 710rpx;
   height: 300rpx;
-  margin-top: 10rpx;
+  margin-top: 20rpx;
 }
 
 .swiper-container swiper image {

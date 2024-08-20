@@ -124,6 +124,7 @@ Component({
     handleAppointment (e) {
       const coachInfo = e.currentTarget.dataset.info
       const userInfo = wx.getStorageSync('userInfo')
+      console.log('coachInfo ====', coachInfo)
       if (coachInfo.carTypes.indexOf(userInfo.carType) === -1) {
         wx.showToast({
           title: '预约车型不符，请重新预约',

@@ -12,6 +12,9 @@ exports.main = async (event, context) => {
   const _id = data._id;
   delete data._id;
   try {
+    if (collectionName === 'orders') {
+      
+    }
     // 遍历修改数据库信息
     await db.collection(collectionName).where({
       _id: _id

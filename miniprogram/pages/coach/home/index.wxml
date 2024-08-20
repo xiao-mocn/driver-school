@@ -45,7 +45,7 @@
   </view>
   <!-- 订单列表 -->
   <view class="order-list">
-    <block wx:for="{{ activeName === 'OrderHall' ? orderHallList : pendingOrderList }}" wx:key="_id">
+    <block wx:for="{{ orderList }}" wx:key="_id">
       <view class="order-list-item">
         <view class="user-info">
           <image class="avatar" src="{{ item.studentInfo.avatarUrl || images.icons.defaultAvatar }}" ></image>
@@ -63,7 +63,11 @@
             <text>{{ item.orderTime + ' ' + item.orderTimePeriod }}</text>
           </view>
         </view>
-        <button class="btn" type="primary" bindtap="onTap">立即确认</button>
+        <button
+          class="btn"
+          type="primary"
+          data-info="{{ item }}"
+          bindtap="onTap">{{ activeName === 'OrderHall' ? '确认接单' : '完成服务' }}</button>
       </view>
     </block>
     

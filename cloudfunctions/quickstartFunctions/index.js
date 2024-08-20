@@ -8,6 +8,7 @@ const genMpQrcode = require('./genMpQrcode/index');
 const deleteRecord = require('./deleteRecord/index');
 const login = require('./login/index');
 const editPassWord = require('./editPassWord/index');
+const orderList = require('./order/index');
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -32,6 +33,8 @@ exports.main = async (event, context) => {
       return await login.main(event, context);
     case 'editPassWord':
       return await editPassWord.main(event, context);
+    case 'orderList':
+      return await orderList.main(event, context);
   }
 };
 
