@@ -47,9 +47,10 @@ Page({
       data.name = this.data.searchQuery
     }
     callCloudFunction('quickstartFunctions', {
-      type: 'selectRecord',
-      collectionName: 'students',
-      data: data
+      type: 'manager', // 调用管理模块
+      modelType: 'student', // 调用教练下的接口
+      functionType: 'queryList', // 查询列表
+      ...data
     }).then(res => {
       console.log('res ===', res)
       this.setData({

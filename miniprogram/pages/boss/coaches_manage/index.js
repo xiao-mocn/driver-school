@@ -47,9 +47,10 @@ Page({
       data.name = this.data.searchQuery
     }
     callCloudFunction('quickstartFunctions', {
-      type: 'selectRecord',
-      collectionName: 'coaches',
-      data: data
+      type: 'manager', // 调用管理模块
+      modelType: 'coach', // 调用教练下的接口
+      functionType: 'queryList', // 查询列表
+      ...data
     }).then(res => {
       this.setData({
         list: res,

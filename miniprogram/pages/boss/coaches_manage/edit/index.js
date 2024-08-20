@@ -179,11 +179,11 @@ Page({
       title: '正在提交',
     });
     callCloudFunction('quickstartFunctions', {
-      type: 'addRecord',
-      collectionName: 'coaches',
+      type: 'manager', // 调用管理模块
+      modelType: 'coach', // 调用教练下的接口
+      functionType: 'add', // 查询列表
       data: this.data.formData
-    })
-      .then((resp) => {
+    }).then((resp) => {
         wx.hideLoading();
         wx.showToast({
           title: '新增成功',
@@ -207,8 +207,9 @@ Page({
       title: '正在提交',
     });
     callCloudFunction('quickstartFunctions', {
-      type: 'updateRecord',
-      collectionName: 'coaches',
+      type: 'manager', // 调用管理模块
+      modelType: 'coach', // 调用教练下的接口
+      functionType: 'update', // 查询列表
       data: this.data.formData
     })
       .then((resp) => {

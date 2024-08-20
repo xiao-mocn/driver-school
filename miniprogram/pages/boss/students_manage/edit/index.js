@@ -114,8 +114,9 @@ Page({
       title: '正在提交',
     });
     callCloudFunction('quickstartFunctions', {
-      type: 'addRecord',
-      collectionName: 'students',
+      type: 'manager', // 调用管理模块
+      modelType: 'student', // 调用教练下的接口
+      functionType: 'add', // 查询列表
       data: this.data.formData
     })
     .then((resp) => {
@@ -143,8 +144,9 @@ Page({
       title: '正在提交',
     });
     callCloudFunction('quickstartFunctions', {
-      type: 'updateRecord',
-      collectionName: 'students',
+      type: 'manager', // 调用管理模块
+      modelType: 'student', // 调用教练下的接口
+      functionType: 'update', // 查询列表
       data: this.data.formData
     }).then((resp) => {
       wx.showToast({
