@@ -1,3 +1,3 @@
-<coach-user id="coachUser" wx:if="{{ loginType === 'coach' }}"></coach-user>
-<student-user id="studentUser" wx:if="{{ loginType === 'student' }}"></student-user>
-<boss-user id="bossUser" wx:if="{{ loginType === 'boss' }}"></boss-user>
+<coach-user id="coachUser" wx:if="{{ registerType === 'coach' }}"></coach-user>
+<student-user id="studentUser" wx:if="{{ registerType === 'student' }}"></student-user>
+<boss-user id="bossUser" wx:if="{{ registerType === 'boss' }}"></boss-user>

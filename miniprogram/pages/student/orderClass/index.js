@@ -166,20 +166,20 @@ Page({
       content: '确定要预约吗？',
       success: (res) => {
         if (res.confirm) {
-          this.callFunctionUpdate()
+          this.callFunctionAdd()
         }
       }
     })
   },
-  callFunctionUpdate() {
+  callFunctionAdd() {
     wx.showLoading({
       title: '正在提交',
     });
     // 随便一个教练信息存在即可将订单状态改为running
     let status = this.data.coachInfo._id ? 'running' : 'created'
     callCloudFunction('quickstartFunctions', {
-      type: 'addRecord',
-      collectionName: 'orders',
+      type: 'order',
+      moduleType: 'add',
       data: {
         coachId: this.data.coachInfo._id,
         studentId: wx.getStorageSync('userInfo')._id,

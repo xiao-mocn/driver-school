@@ -7,7 +7,7 @@
       <image class="wave wave-bg" src="{{images.login.wave}}" mode="aspectFill"></image>
     </view>
     <view class="bd">
-      <text class="serve-title">登录模式:{{ loginType === 'student' ? '学生' : (loginType === 'coach' ? '教练' : '管理员') }}</text>
+      <text class="serve-title">登录模式:{{ registerType === 'student' ? '学生' : (registerType === 'coach' ? '教练' : '管理员') }}</text>
       <view class="models">
         <text data-type="student" bindtap="handleChangeEntry">学生入口</text>
         <text data-type="coach" bindtap="handleChangeEntry">教练入口</text>

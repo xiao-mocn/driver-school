@@ -3,7 +3,7 @@ import { images } from "../const/index"
 import callCloudFunction from '../utils/cloudFunctionUtils'
 Page({
   data: {
-    loginType: 'student',
+    registerType: 'student',
     angle: 0,
     loginForm: {
       username: '',
@@ -24,14 +24,14 @@ Page({
   handleChangeEntry(e) {
     const type = e.currentTarget.dataset.type
     this.setData({
-      loginType: type
+      registerType: type
     })
   },
   submitLogin:async function (e) {
     const wxInfo = await getUserProfile()
     const username = e.detail.value.username;
     const password = e.detail.value.password;
-    const type = this.data.loginType;
+    const type = this.data.registerType;
     console.log(username, password, type)
     if (username == '' || password == '') {
       wx.showToast({
@@ -68,10 +68,9 @@ Page({
       username,
       password,
       wxInfo,
-      loginType: this.data.loginType
+      registerType: this.data.registerType
     }).then(res => {
-      res.loginType = 'student'
-      res.isLogin = true
+      res.registerType = 'student'
       delete res.password
       wx.setStorageSync('userInfo', res)
       wx.switchTab({
@@ -94,8 +93,7 @@ Page({
       password,
       wxInfo,
     }).then(res => {
-      res.loginType = 'coach'
-      res.isLogin = true
+      res.registerType = 'coach'
       delete res.password
       wx.setStorageSync('userInfo', res)
       // 获取 App 实例
@@ -119,8 +117,7 @@ Page({
       password,
       wxInfo,
     }).then(res => {
-      res.loginType = 'boss'
-      res.isLogin = true
+      res.registerType = 'boss'
       delete res.password
       wx.setStorageSync('userInfo', res)
       // 获取 App 实例

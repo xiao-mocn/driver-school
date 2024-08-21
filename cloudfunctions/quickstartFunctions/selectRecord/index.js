@@ -1,27 +1,23 @@
 const cloud = require('wx-server-sdk');
-
 cloud.init({
   env: cloud.DYNAMIC_CURRENT_ENV
 });
 const db = cloud.database();
 
-// 查询数据库集合云函数入口函数
 exports.main = async (event, context) => {
   try {
     const collectionName = event.collectionName;
-    const data = event.data;
-    const limit = event.limit || 999; // 默认限制返回10条数据，如果没有传入limit参数
-    const checkResult = await db.collection(collectionName).where({
-      ...data
-    }).limit(limit).get();
-    if (checkResult.data.length > 0) {
+    const docId = event._id;
+    const res = await db.collection(collectionName).doc(docId).get();
+    if (res.data) {
       return {
         success: true,
-        data: checkResult.data
+        data: res.data
       };
     } else {
       return {
-        
+        success: true,
+        data: {}
       };
     }
   } catch (e) {
@@ -29,7 +25,6 @@ exports.main = async (event, context) => {
     return {
       success: false,
       errMsg: e.errMsg
-    }
+    };
   }
-  
 };

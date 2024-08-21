@@ -76,7 +76,7 @@ Page({
     callCloudFunction('quickstartFunctions', {
       type: 'editPassWord',
       userId: this.data.userInfo._id,
-      collectionName: this.data.userInfo.loginType === 'student' ? 'students' : 'coaches',
+      collectionName: this.data.userInfo.registerType === 'student' ? 'students' : 'coaches',
       oldPassword: this.data.formData.oldPassword,
       newPassword: this.data.formData.newPassword
     }).then(res => {

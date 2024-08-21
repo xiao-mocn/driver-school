@@ -5,7 +5,7 @@ Page({
    */
   data: {
     userInfo: {},
-    loginType: 'student',
+    registerType: '',
   },
   /**
    * 生命周期函数--监听页面显示
@@ -14,15 +14,15 @@ Page({
     const userInfo = wx.getStorageSync('userInfo') || {}
     this.setData({
       userInfo,
-      loginType: userInfo.loginType
+      registerType: userInfo.registerType || 'student'
     })
     this.initComponentData()
   },
   initComponentData() {
-    const loginType = this.data.loginType
-    const componentName = loginType === 'student' ? 'studentUser' : loginType === 'coach' ? 'coachUser' : 'bossUser'
+    const registerType = this.data.registerType
+    const componentName = registerType === 'student' ? 'studentUser' : registerType === 'coach' ? 'coachUser' : 'bossUser'
     const component = this.selectComponent(`#${componentName}`)
-    console.log('user ====', loginType, component)
+    console.log('user ====', registerType, component)
     if (component) {
       component.initData()
     }

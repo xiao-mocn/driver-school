@@ -7,7 +7,7 @@ const db = cloud.database();
 
 // 修改数据库信息云函数入口函数
 exports.main = async (event, context) => {
-  const { collectionName, username, password, wxInfo, loginType } = event;
+  const { collectionName, username, password, wxInfo, registerType } = event;
   try {
     // 遍历修改数据库信息
     const resp = await db.collection(collectionName).where({
@@ -38,7 +38,7 @@ exports.main = async (event, context) => {
       data: {
         ...info,
         password,
-        loginType,
+        registerType,
         avatarUrl: wxInfo.avatarUrl,
         nickName: wxInfo.nickName,
         province: wxInfo.province,
@@ -52,7 +52,7 @@ exports.main = async (event, context) => {
         ...info,
         _id,
         password,
-        loginType,
+        registerType,
         avatarUrl: wxInfo.avatarUrl,
         nickName: wxInfo.nickName,
         province: wxInfo.province,

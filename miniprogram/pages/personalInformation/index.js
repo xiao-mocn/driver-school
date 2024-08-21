@@ -7,7 +7,7 @@ Page({
    */
   data: {
     formData: {},
-    loginType: '',
+    registerType: '',
     genders: ['男', '女']
   },
   /**
@@ -23,7 +23,7 @@ Page({
     }
     this.setData({
       formData: userInfo,
-      loginType: userInfo.loginType || 'student'
+      registerType: userInfo.registerType || 'student'
     })
   },
   fieldChange(e) {

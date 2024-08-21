@@ -17,17 +17,16 @@ Component({
   lifetimes: {
     attached: function(options) {
       console.log('页面加载')
+      // const userInfo = 
+      // this.setData({
+      //   userInfo
+      // })
       this.initData()
     },
   },
   methods: {
     initData() {
-      const userInfo = wx.getStorageSync('userInfo')
-      const monthlyOrderInfo = userInfo?.monthlyOrderInfo || {}
-      this.setData({
-        userInfo: wx.getStorageSync('userInfo'),
-        monthOrdNum: monthlyOrderInfo[getCurrentDate('YYYY-MM')] || 0
-      })
+      this.getNewCoachInfo()
       this.getOrderList()
     },
     /**
@@ -37,7 +36,28 @@ Component({
       this.setData({
         isRefreshing: true
       })
-      this.getOrderList()
+      this.initData()
+    },
+    getNewCoachInfo() {
+      const userInfo = wx.getStorageSync('userInfo')
+      console.log('userInfo ===', userInfo)
+      callCloudFunction('quickstartFunctions', {
+        type: 'selectRecord',
+        collectionName: 'coaches',
+        _id: wx.getStorageSync('userInfo')._id
+      }).then((res) => {
+        wx.setStorageSync('userInfo', res)
+        const monthlyOrderInfo = res?.monthlyOrderInfo || {}
+        this.setData({
+          userInfo: res,
+          monthOrdNum: monthlyOrderInfo[getCurrentDate('YYYY-MM')] || 0
+        })
+      }).catch((err) => {
+        wx.showToast({
+          title: '获取最新信息失败',
+          icon: 'none'
+        })
+      })
     },
     getOrderList() {
       wx.showToast({
@@ -58,8 +78,8 @@ Component({
         }
       }
       callCloudFunction('quickstartFunctions', {
-        type: 'orderList',
-        collectionName: 'orders',
+        type: 'order',
+        moduleType: 'queryList',
         ...params
       }).then((res) => {
         console.log('res ==', res)
@@ -108,13 +128,12 @@ Component({
         content: '确定接受该订单吗？',
         success: (res) => {
           if (res.confirm) {
-            wx.showToast({
-              title: '加载中',
-              icon: 'loading'
-            })
+            wx.showLoading({
+              title: '',
+            });
             callCloudFunction('quickstartFunctions', {
-              type: 'updateOrder',
-              collectionName: 'orders',
+              type: 'order',
+              moduleType: 'update',
               data: {
                 ...orderInfo,
                 status: 'running',
@@ -123,10 +142,10 @@ Component({
             }).then((res) => {
               wx.hideLoading()
               wx.showToast({
-                title: '操作成功',
+                title: '接单成功',
                 icon: 'success'
               })
-              this.getOrderList()
+              this.initData()
             }).catch((err) => {
               wx.hideLoading()
               wx.showToast({

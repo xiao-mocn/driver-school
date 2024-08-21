@@ -53,7 +53,7 @@
           <text class="phone">{{ item.studentInfo.phone }}</text>
         </view>
         <text class="sub">{{ item.studentInfo.address || '' }}</text>
-        <view class="order-info">w
+        <view class="order-info">
           <view class="detail">
             <text>预约车型：</text>
             <text>{{ item.studentInfo.carType }}</text>
