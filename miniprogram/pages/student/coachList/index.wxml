@@ -12,7 +12,7 @@
   <view class="coach-list">
     <view class="coach-item" wx:for="{{ coachList }}" wx:key="id">
       <view class="coach-base">
-        <image src="{{item.avatarUrl || images.icons.defaultAvatar}}" class="avatar"></image>
+        <image src="{{item.avatar || item.avatarUrl || images.icons.defaultAvatar}}" class="avatar"></image>
         <view class="coach-info">
           <view class="coach-title">
             <text>{{item.name}}</text>

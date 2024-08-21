@@ -26,9 +26,10 @@ Page({
       data.name = this.data.searchQuery
     }
     callCloudFunction('quickstartFunctions', {
-      type: 'selectRecord',
-      collectionName: 'coaches',
-      data: data
+      type: 'manager', // 调用管理模块
+      moduleType: 'coach', // 调用教练下的接口
+      functionType: 'queryList', // 查询列表
+      ...data
     }).then(res => {
       console.log('res ===', res)
       this.setData({
@@ -46,7 +47,7 @@ Page({
     this.setData({
       searchQuery: value
     })
-    this.getList()
+    this.getCoachList()
   },
   onInput(e) {
   },
