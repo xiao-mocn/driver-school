@@ -73,7 +73,6 @@ Component({
       } else {
         params = {
           status: 'running',
-          orderTime: getCurrentDate('YYYY-MM-DD'),
           coachId: this.data.userInfo._id
         }
       }
@@ -160,6 +159,28 @@ Component({
     },
     finishOrder(orderInfo) {
       console.log('finishOrder ==', orderInfo)
+      callCloudFunction('quickstartFunctions', {
+        type: 'order',
+        moduleType: 'update',
+        data: {
+          ...orderInfo,
+          status: 'complete',
+          coachId: this.data.userInfo._id
+        }
+      }).then((res) => {
+        wx.hideLoading()
+        wx.showToast({
+          title: '接单成功',
+          icon: 'success'
+        })
+        this.initData()
+      }).catch((err) => {
+        wx.hideLoading()
+        wx.showToast({
+          title: err || '出现错误，请稍后重试',
+          icon: 'none'
+        })
+      })
     }
   }
 })

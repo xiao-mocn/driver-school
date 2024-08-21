@@ -7,7 +7,30 @@ const db = cloud.database();
 // 获取openId云函数入口函数
 exports.main = async (event, context) => {
   const { data } = event;
+  const _id = data._id
+  delete data._id
   try {
+    if (data.status === 'complete') {
+      await db.collection('coaches').doc(data.coachId).update({
+        data: {
+          incomeNum: db.command.inc(data.price * 0.8),
+          withdrawableIncome: db.command.inc(data.price * 0.8),
+        },
+      });
+      await db.collection('orders').where({
+        _id: _id
+      }).update({
+        data: {
+          ...data
+        }
+      })
+      return {
+        success: true,
+        data: {
+          _id: _id
+        }
+      }
+    }
     const coacheResp = await db.collection('coaches').where({
       _id: data.coachId,
     }).get();
@@ -47,8 +70,7 @@ exports.main = async (event, context) => {
         totalOrdNum: db.command.inc(1),
       },
     })
-    const _id = data._id
-    delete data._id
+    
     await db.collection('orders').where({
       _id: _id
     }).update({
@@ -58,6 +80,9 @@ exports.main = async (event, context) => {
     })
     return {
       success: true,
+      data: {
+        _id: _id
+      }
     }
   } catch (error) {
     console.error(error);
