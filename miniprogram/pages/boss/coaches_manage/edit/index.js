@@ -180,8 +180,8 @@ Page({
     });
     callCloudFunction('quickstartFunctions', {
       type: 'manager', // 调用管理模块
-      modelType: 'coach', // 调用教练下的接口
-      functionType: 'add', // 查询列表
+      moduleType: 'coach', // 调用教练下的接口
+      functionType: 'add',
       data: this.data.formData
     }).then((resp) => {
         wx.hideLoading();
@@ -208,8 +208,8 @@ Page({
     });
     callCloudFunction('quickstartFunctions', {
       type: 'manager', // 调用管理模块
-      modelType: 'coach', // 调用教练下的接口
-      functionType: 'update', // 查询列表
+      moduleType: 'coach', // 调用教练下的接口
+      functionType: 'update',
       data: this.data.formData
     })
       .then((resp) => {

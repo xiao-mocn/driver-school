@@ -339,8 +339,13 @@ page .wx-video-bar{
   border: 2rpx solid #d6d6d6;
 }
 .bd .privacy text {
-  font-size: 30rpx;
+  font-size: 28rpx;
   color: #a6a5a5;
   line-height: 40rpx;
   margin-left: 10rpx;
+}
+.bd .privacy .register {
+  position: absolute;
+  right: 0;
+  color: #6583f8;
 }

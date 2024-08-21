@@ -8,7 +8,7 @@
     refresher-triggered="{{isRefreshing}}"
   >
   <view class="user-top">
-    <image src="{{ userInfo.avatarUrl || images.icons.defaultAvatar }}" ></image>
+    <image src="{{userInfo.avatar || userInfo.avatarUrl || images.icons.defaultAvatar }}" ></image>
     <view class="info">
       <text class="name">{{ userInfo.name || '未登录' }}</text>
       <text class="phone">{{userInfo.phone}}</text>
@@ -53,7 +53,7 @@
           <text class="phone">{{ item.studentInfo.phone }}</text>
         </view>
         <text class="sub">{{ item.studentInfo.address || '' }}</text>
-        <view class="order-info">
+        <view class="order-info">w
           <view class="detail">
             <text>预约车型：</text>
             <text>{{ item.studentInfo.carType }}</text>

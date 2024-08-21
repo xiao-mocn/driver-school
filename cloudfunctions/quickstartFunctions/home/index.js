@@ -3,7 +3,7 @@ const studentHome = require('./student/index')
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  switch (event.loginType) {
+  switch (event.moduleType) {
     case 'coach':
       return await coachHome.main(event, context);
     case 'student':

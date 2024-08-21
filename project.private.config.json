@@ -7,6 +7,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "registerPage",
+          "pathName": "pages/registerPage/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "editPassWord",
           "pathName": "pages/editPassWord/index",
           "query": "",
@@ -124,11 +131,6 @@
           "query": "",
           "launchMode": "default",
           "scene": null
-        },
-        {
-          "name": "首页-快速开始",
-          "pathName": "pages/index/index",
-          "query": ""
         }
       ]
     }

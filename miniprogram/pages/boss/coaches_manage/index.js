@@ -28,7 +28,6 @@ Page({
     this.getList()
   },
   onConfirm(e) {
-    console.log('e ===', e)
     const value = e.detail.value
     this.setData({
       searchQuery: value
@@ -48,7 +47,7 @@ Page({
     }
     callCloudFunction('quickstartFunctions', {
       type: 'manager', // 调用管理模块
-      modelType: 'coach', // 调用教练下的接口
+      moduleType: 'coach', // 调用教练下的接口
       functionType: 'queryList', // 查询列表
       ...data
     }).then(res => {
@@ -63,41 +62,49 @@ Page({
     })
   },
   handelAdd() {
-    wx.navigateTo({
-      url: `/pages/boss/coaches_manage/edit/index?type=add`,
-      success: function (res) {
-        // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('acceptDataFromOpenerPage', { 
-          data: {
-            name: '莫荣包',
-            idCard: '452724199605032538',
-            birthday: '2024-01-01',
-            gender: '男',
-            phone: '15051836908',
-            school: '上海驾校',
-            classType: 'beginner',
-            carType: 'C1',
-            carTypes: ['C1', 'C2', 'C3', 'C4'],
-            starscore: 5,
-            studentCount: 0,
-            totalOrdNum: 0,
-            monthOrdNum: 0,
-            incomeNum: 0,
-            withdrawableIncome: 0
-          }
-        })
-      }
+    wx.showToast({
+      title: '暂不支持新增',
+      icon: 'none'
     })
+    // wx.navigateTo({
+    //   url: `/pages/boss/coaches_manage/edit/index?type=add`,
+    //   success: function (res) {
+    //     // 通过eventChannel向被打开页面传送数据
+    //     res.eventChannel.emit('acceptDataFromOpenerPage', { 
+    //       data: {
+    //         name: '莫荣包',
+    //         idCard: '452724199605032538',
+    //         birthday: '2024-01-01',
+    //         gender: '男',
+    //         phone: '15051836908',
+    //         school: '上海驾校',
+    //         classType: 'beginner',
+    //         carType: 'C1',
+    //         carTypes: ['C1', 'C2', 'C3', 'C4'],
+    //         starscore: 5,
+    //         studentCount: 0,
+    //         totalOrdNum: 0,
+    //         monthOrdNum: 0,
+    //         incomeNum: 0,
+    //         withdrawableIncome: 0
+    //       }
+    //     })
+    //   }
+    // })
   },
   handelEdit(e) {
-    const row = e.currentTarget.dataset.row;
-    wx.navigateTo({
-      url: `/pages/boss/coaches_manage/edit/index?type=edit`,
-      success: function (res) {
-        // 通过eventChannel向被打开页面传送数据
-        res.eventChannel.emit('acceptDataFromOpenerPage', { data: row })
-      }
+    wx.showToast({
+      title: '暂不支持修改',
+      icon: 'none'
     })
+    // const row = e.currentTarget.dataset.row;
+    // wx.navigateTo({
+    //   url: `/pages/boss/coaches_manage/edit/index?type=edit`,
+    //   success: function (res) {
+    //     // 通过eventChannel向被打开页面传送数据
+    //     res.eventChannel.emit('acceptDataFromOpenerPage', { data: row })
+    //   }
+    // })
   },
   handelDelete(e) {
     const row = e.currentTarget.dataset.row;

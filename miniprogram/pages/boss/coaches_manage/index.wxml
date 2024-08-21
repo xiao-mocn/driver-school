@@ -16,7 +16,7 @@
 >
   <block wx:for="{{list}}" wx:key="id">
     <view class="list-item">
-      <image src="{{ item.avatarUrl || images.icons.defaultAvatar }}" />
+      <image src="{{ item.avatar || item.avatarUrl || images.icons.defaultAvatar }}" />
       <view class="info">
         <text class="baseInfo">{{item.name + '  ' +item.phone }}</text>
         <text class="idCard">身份证：{{item.idCard}}</text>

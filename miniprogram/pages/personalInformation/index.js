@@ -1,5 +1,6 @@
 //获取应用实例
 import callCloudFunction from '../utils/cloudFunctionUtils'
+import { uploadFileToCloud } from '../utils/index'
 Page({
   /**
    * 页面的初始数据
@@ -25,39 +26,51 @@ Page({
       loginType: userInfo.loginType || 'student'
     })
   },
-  handleRadioChange(e) {
-    wx.showToast({
-      title: '暂不支持修改性别',
-      icon: 'none'
-    })
-  },
-  inputChange(e) {
+  fieldChange(e) {
     const fieldName = e.currentTarget.dataset.name;
     this.setData({
       ['formData.' + fieldName]: e.detail.value
     });
   },
-  bindDateChange(e) {
-    const fieldName = e.currentTarget.dataset.name;
-    this.setData({
-      ['formData.' + fieldName]: e.detail.value
+  uploadImage() {
+    wx.chooseMessageFile({
+      count: 1,
+      type: 'all',
+      success: (res) => {
+        const tempFilePath = res.tempFiles[0].path;
+        const fileName = res.tempFiles[0].name;
+        console.log(tempFilePath, fileName);
+        // 使用封装的上传函数
+        uploadFileToCloud(tempFilePath, fileName)
+          .then(fileID => {
+            console.log('File ID:', fileID);
+            this.setData({
+              ['formData.avatar']: fileID
+            })
+            wx.showToast({
+              title: '上传成功',
+              icon: 'none'
+            });
+          })
+          .catch(err => {
+            console.error('Upload failed:', err);
+            wx.showToast({
+              title: '上传失败',
+              icon: 'none'
+            });
+          });
+      },
+      fail: (err) => {
+        console.error('File selection failed:', err);
+      }
     });
   },
   handleButtonClick() {
     const { name, idCard, phone } = this.data.formData
     const phoneReg = /^1[3-9]\d{9}$/
     if (!name) {
-      wx.showModal({
-        title: '请输入名字',
-        icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
-        duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
-        mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
-      })
-      return
-    }
-    if (!idCard) {
-      wx.showModal({
-        title: '请输入身份证',
+      wx.showToast({
+        title: '请输入账号名',
         icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
         mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
@@ -65,7 +78,7 @@ Page({
       return
     }
     if (!phone) {
-      wx.showModal({
+      wx.showToast({
         title: '请输入手机号码',
         icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
@@ -74,8 +87,8 @@ Page({
       return
     }
     if (!phoneReg.test(phone)) {
-      wx.showModal({
-        title: '手机号码格式不正确',
+      wx.showToast({
+        title: '手机号不正确',
         icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
         mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
@@ -85,29 +98,38 @@ Page({
     this.callFunctionUpdate()
   },
   callFunctionUpdate() {
-    const loginType = this.data.loginType
-    const collectionName = loginType === 'student' ? 'students' : 'coaches'
+    let params = {}
+    if (this.data.formData.registerType === 'student') {
+      params = {
+        type: 'manager', // 调用管理模块
+        moduleType: 'student', // 调用学员下的接口
+        functionType: 'update',
+        data: this.data.formData
+      }
+    } else {
+      params = {
+        type: 'manager', // 调用管理模块
+        moduleType: 'coach', // 调用教练下的接口
+        functionType: 'update',
+        data: this.data.formData
+      }
+    }
     wx.showLoading({
       title: '正在提交',
     });
     callCloudFunction('quickstartFunctions', {
-      type: 'updateRecord',
-      collectionName,
-      data: {
-        ...this.data.formData
-      }
-    }).then((res) => {
-      console.log(res)
+      ...params
+    }).then((resp) => {
+      console.log('resp ==', resp);
       wx.hideLoading();
-      wx.setStorageSync('userInfo', res)
+      wx.setStorageSync('userInfo', this.data.formData)
       wx.navigateBack({
         delta: 1
       })
     }).catch((err) => {
-      wx.hideLoading();
+      console.log('err ==', err);
       wx.showToast({
-        title: '提交失败',
-        icon: 'none'
+        title: err || '更新失败',
       })
     })
   }

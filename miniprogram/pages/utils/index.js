@@ -40,6 +40,23 @@ export const getCurrentDate = (format) => {
               .replace(/DD/g, day)
 }
 
+// utils/upload.js
+export const uploadFileToCloud = (filePath, fileName) => {
+  return new Promise((resolve, reject) => {
+    wx.cloud.uploadFile({
+      cloudPath: `uploads/userAvatar/${fileName}`, // 云存储路径
+      filePath, // 本地文件路径
+      success: res => {
+        console.log('File uploaded:', res.fileID);
+        resolve(res.fileID);
+      },
+      fail: err => {
+        console.error('File upload failed:', err);
+        reject(err);
+      }
+    });
+  });
+};
 export const checkLoginAndNavigate = (url) => {
   const userInfo = wx.getStorageSync('userInfo')
   if (userInfo) {

@@ -141,6 +141,11 @@ Page({
       url: '/pages/privacy/index'
     })
   },
+  goToRegister() {
+    wx.navigateTo({
+      url: '/pages/registerPage/index'
+    })
+  },
   handleCheck() {
     this.setData({
       checked: !this.data.checked

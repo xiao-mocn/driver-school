@@ -20,8 +20,7 @@ Component({
   },
   methods: {
     initData() {
-      this.getCoachList()
-      this.getBanners()
+      this.getHomeInfo()
     },
     /**
      * 页面相关事件处理函数--监听用户下拉动作
@@ -30,8 +29,7 @@ Component({
       this.setData({
         isRefreshing: true
       })
-      this.getCoachList()
-      this.getBanners()
+      this.getHomeInfo()
     },
     handleTabsItemChange: function (e) {
       const changeIndex = e.detail.index
@@ -46,34 +44,19 @@ Component({
       })
       this.setData({ tabs, tabsType })
     },
-    getCoachList() {
+    getHomeInfo() {
       wx.showLoading({
         title: '',
       });
       callCloudFunction('quickstartFunctions', {
-        type: 'selectRecord',
-        collectionName: 'coaches',
-        limit: 5,
+        type: 'home',
+        moduleType: 'student',
+        limit: 5
       }).then(res => {
         console.log('res ====', res)
         this.setData({
-          coachList: res,
-          isRefreshing: false
-        })
-        wx.hideLoading();
-      })
-    },
-    getBanners() {
-      wx.showLoading({
-        title: '',
-      });
-      callCloudFunction('quickstartFunctions', {
-        type: 'selectRecord',
-        collectionName: 'banners',
-        limit: 3,
-      }).then(res => {
-        this.setData({
-          carouselImages: res,
+          coachList: res.coachList || [],
+          carouselImages: res.bannerList || [],
           isRefreshing: false
         })
         wx.hideLoading();

@@ -27,6 +27,7 @@
           <view wx:else class="icon-box" bind:tap="handleCheck"></view>
           <text bind:tap="handleCheck">我已阅读并同意</text>
           <text style="color:#6583f8" bindtap="goToPrivacy">隐私政策</text>
+          <text class="register" bindtap="goToRegister">去注册账号>>></text>
         </view>
         <button formType="submit" class="confirm-btn">登录</button>
       </form>

@@ -10,7 +10,14 @@ page {
 .base-info {
   position: relative;
   width: 630rpx;
-  height: calc(100vh - 300rpx);
+  padding: 30rpx;
+  background: #FFF;
+  border-radius: 30rpx;
+  margin-top: 30rpx;
+}
+.school-info {
+  position: relative;
+  width: 630rpx;
   padding: 30rpx;
   background: #FFF;
   border-radius: 30rpx;
@@ -53,7 +60,7 @@ page {
   align-items: center;
   width: 630rpx;
   min-height: 40rpx;
-  padding: 30rpx 0;
+  padding: 16rpx 0;
 }
 .form .item .icon {
   font-size: 32rpx;
@@ -64,6 +71,7 @@ page {
   position: relative;
   margin-left: 10rpx;
   font-size: 32rpx;
+  width: 150rpx;
   color: rgb(45, 44, 44);
 }
 .form .item input {

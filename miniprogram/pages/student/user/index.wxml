@@ -1,6 +1,6 @@
 <!--个人信息-->
 <view class="user-top">
-  <image src="{{userInfo.avatarUrl || images.icons.defaultAvatar}}" ></image>
+  <image src="{{userInfo.avatar || userInfo.avatarUrl || images.icons.defaultAvatar}}" ></image>
   <view class="info">
     <tewxt class="name">{{ userInfo.name || '未登录' }}</tewxt>
     <text class="phone">{{ userInfo.phone }}</text>
