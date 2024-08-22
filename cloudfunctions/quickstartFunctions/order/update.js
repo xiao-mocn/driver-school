@@ -11,10 +11,12 @@ exports.main = async (event, context) => {
   delete data._id
   try {
     if (data.status === 'complete') {
-      await db.collection('coaches').doc(data.coachId).update({
+      await db.collection('coaches').where({
+        _id: data.coachId
+      }).update({
         data: {
-          incomeNum: db.command.inc(data.price * 0.8),
-          withdrawableIncome: db.command.inc(data.price * 0.8),
+          incomeNum: db.command.inc(data.prices * 0.8),
+          withdrawableIncome: db.command.inc(data.prices * 0.8),
         },
       });
       await db.collection('orders').where({

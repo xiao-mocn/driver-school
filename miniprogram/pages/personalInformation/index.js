@@ -33,9 +33,10 @@ Page({
     });
   },
   uploadImage() {
-    wx.chooseMessageFile({
+    wx.chooseImage({
       count: 1,
-      type: 'all',
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机
       success: (res) => {
         const tempFilePath = res.tempFiles[0].path;
         const fileName = res.tempFiles[0].name;

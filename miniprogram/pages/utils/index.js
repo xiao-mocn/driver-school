@@ -31,13 +31,19 @@ export const getCurrentDate = (format) => {
   const year = date.getFullYear();
   const month = date.getMonth() + 1 > 9 ? date.getMonth() + 1 : '0' + (date.getMonth() + 1);
   const day = date.getDate() > 9 ? date.getDate() : '0' + date.getDate();
+  const hours = date.getHours() > 9 ? date.getHours() : '0' + date.getHours();
+  const minutes = date.getMinutes() > 9 ? date.getMinutes() : '0' + date.getMinutes();
+  const seconds = date.getSeconds() > 9 ? date.getSeconds() : '0' + date.getSeconds();
   // 默认格式
   if (!format) {
-    return `${year}-${month}-${day}`;
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
   }
   return format.replace(/YYYY/g, year)
               .replace(/MM/g, month)
               .replace(/DD/g, day)
+              .replace(/hh/g, hours)
+              .replace(/mm/g, minutes)
+              .replace(/ss/g, seconds);
 }
 
 // utils/upload.js

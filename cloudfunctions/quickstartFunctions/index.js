@@ -5,6 +5,7 @@ const order = require('./order/index');
 const deleteRecord = require('./deleteRecord/index');
 const editPassWord = require('./editPassWord/index');
 const selectRecord = require('./selectRecord/index');
+const defaultQueryList = require('./defaultQueryList/index');
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -24,6 +25,8 @@ exports.main = async (event, context) => {
       return await order.main(event, context);
     case 'selectRecord':
       return await selectRecord.main(event, context);
+    case 'defaultQueryList':
+      return await defaultQueryList.main(event, context);
   }
 };
 

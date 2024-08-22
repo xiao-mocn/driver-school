@@ -1,0 +1,55 @@
+
+<view class="search-container">
+  <image src="{{ images.icons.search }}" />
+  <input
+    type="text"
+    value="{{ searchForm.name }}"
+    confirm-type="search"
+    placeholder="搜索姓名"
+    bindconfirm="onConfirm"
+    bindinput="onInput" />
+  <view class="add-btn"> 
+    <picker
+      class="picker"
+      mode="date"
+      value="{{searchForm.orderTime}}"
+      data-name="orderTime"
+      start="1900-09-01"
+      end="2999-09-01"
+      bindchange="bindDateChange">
+      <view class="picker">{{ searchForm.orderTime }}</view>
+    </picker>
+  </view>
+</view>
+<scroll-view
+  scroll-y
+  class="scroll-view"
+  bindrefresherrefresh="onPullDownRefresh"
+  refresher-enabled="{{true}}"
+  refresher-triggered="{{isRefreshing}}"
+>
+  <block wx:for="{{orderList}}" wx:key="id">
+    <view class="list-item">
+      <image
+        wx:if="{{ userInfo.registerType === 'student' }}"
+        src="{{ item.coachInfo.avatar || item.coachInfo.avatarUrl || images.icons.defaultAvatar }}" />
+      <image
+        wx:else
+        src="{{ item.studentInfo.avatar || item.studentInfo.avatarUrl || images.icons.defaultAvatar }}" />
+      <view class="info">
+        <text wx:if="{{ userInfo.registerType === 'student' }}">{{(item.coachInfo.name || '未指定') + '   ' + (item.coachInfo.phone || '') }}</text>
+        <text wx:else>{{item.studentInfo.name + '   ' +item.studentInfo.phone }}</text>
+        <text class="marginTop">{{item.orderTime + ' ' + item.orderTimePeriod}}</text>
+        <view class="marginTop">
+          <text style="font-size:24rpx;" class="prices">￥ </text>
+          <text class="prices">{{item.prices}}</text>
+        </view>
+      </view>
+      <view class="options btn-area">
+        <view wx:if="{{ item.status === 'created' }}" class="created" type="primary">等待接单</view>
+        <view wx:if="{{ item.status === 'running' }}" class="running" type="primary">等待服务</view>
+        <view wx:if="{{ item.status === 'complete' }}" class="complete" type="warn">订单完成</view>
+      </view>
+    </view>
+  </block>
+</scroll-view>

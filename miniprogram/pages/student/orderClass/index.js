@@ -182,7 +182,10 @@ Page({
       moduleType: 'add',
       data: {
         coachId: this.data.coachInfo._id,
+        coachName: this.data.coachInfo.name,
+        coachInfo: this.data.coachInfo,
         studentId: wx.getStorageSync('userInfo')._id,
+        studentName: wx.getStorageSync('userInfo').name,
         studentInfo: wx.getStorageSync('userInfo'),
         orderTime: this.data.selectedDate,
         orderTimePeriod: this.data.selectedTimePeriod,

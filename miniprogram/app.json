@@ -11,6 +11,7 @@
     "pages/privacy/index",
     "pages/registerPage/index",
     "pages/editPassWord/index",
+    "pages/orderList/index",
     "pages/personalInformation/index",
     "pages/boss/coaches_manage/index",
     "pages/boss/coaches_manage/edit/index",

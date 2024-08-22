@@ -5,7 +5,7 @@ Component({
    * 页面的初始数据
    */
   data: {
-    userInfo: {},
+    userInfo: null,
     images,
   },
   lifetimes: {
@@ -16,7 +16,7 @@ Component({
   methods: {
     initData() {
       this.setData({
-        userInfo: wx.getStorageSync('userInfo') || {}
+        userInfo: wx.getStorageSync('userInfo')
       })
     },
     onLogin: function () {

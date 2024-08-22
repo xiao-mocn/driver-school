@@ -6,7 +6,7 @@ cloud.init({
 const db = cloud.database();
 // 获取openId云函数入口函数
 exports.main = async (event, context) => {
-  const { orderTime, coachId, status} = event;
+  const { orderTime, coachId, status, data} = event;
   const params = {
     status
   }
@@ -27,7 +27,8 @@ exports.main = async (event, context) => {
     console.log('Query parameters:', params); // 输出调试信息
     const result = await db.collection('orders')
       .where({
-        ...params
+        ...params,
+        ...data
       })
       .get();
     console.log('Query result:', result); // 输出调试信息

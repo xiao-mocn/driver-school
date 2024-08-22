@@ -28,7 +28,7 @@
       </view>
       <image src="{{ images.icons.next }}" />
     </navigator>
-    <navigator class="row-item">
+    <navigator class="row-item" url="/pages/orderList/index">
       <view class="row-info">
         <image src="{{ images.icons.order }}" />
         <text>我的订单</text>
@@ -42,13 +42,13 @@
       </view>
       <image src="{{ images.icons.next }}" />
     </navigator>
-    <navigator class="row-item">
+    <!-- <navigator class="row-item">
       <view class="row-info">
         <image src="{{ images.icons.star }}" />
         <text>我的评价</text>
       </view>
       <image src="{{ images.icons.next }}" />
-    </navigator>
+    </navigator> -->
     <navigator class="row-item" url="/pages/editPassWord/index">
       <view class="row-info">
         <image src="{{ images.icons.password }}" />
@@ -58,6 +58,6 @@
     </navigator>
   </view>
   <view class="bottom-btn" bindtap="onLogin">
-    <text>{{ userInfo.isLogin ? '立即退出' : '立即登录' }}</text>
+    <text>{{ userInfo ? '立即退出' : '立即登录' }}</text>
   </view>
 </view>

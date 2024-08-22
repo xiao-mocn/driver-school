@@ -17,10 +17,6 @@ Component({
   lifetimes: {
     attached: function(options) {
       console.log('页面加载')
-      // const userInfo = 
-      // this.setData({
-      //   userInfo
-      // })
       this.initData()
     },
   },
@@ -40,11 +36,10 @@ Component({
     },
     getNewCoachInfo() {
       const userInfo = wx.getStorageSync('userInfo')
-      console.log('userInfo ===', userInfo)
       callCloudFunction('quickstartFunctions', {
         type: 'selectRecord',
         collectionName: 'coaches',
-        _id: wx.getStorageSync('userInfo')._id
+        _id: userInfo._id
       }).then((res) => {
         wx.setStorageSync('userInfo', res)
         const monthlyOrderInfo = res?.monthlyOrderInfo || {}
@@ -136,7 +131,9 @@ Component({
               data: {
                 ...orderInfo,
                 status: 'running',
-                coachId: this.data.userInfo._id
+                coachId: this.data.userInfo._id,
+                coachName: this.data.userInfo.name,
+                coachInfo: this.data.userInfo,
               }
             }).then((res) => {
               wx.hideLoading()
@@ -159,27 +156,44 @@ Component({
     },
     finishOrder(orderInfo) {
       console.log('finishOrder ==', orderInfo)
-      callCloudFunction('quickstartFunctions', {
-        type: 'order',
-        moduleType: 'update',
-        data: {
-          ...orderInfo,
-          status: 'complete',
-          coachId: this.data.userInfo._id
-        }
-      }).then((res) => {
-        wx.hideLoading()
+      const currentTime = new Date(getCurrentDate('YYYY/MM/DD hh:mm:ss')).getTime()
+      const orderTimeFormat = `${orderInfo.orderTime.replace(/\-/g, '/')} ${orderInfo.orderTimePeriod.split('-')[1]}:00`
+      const orderTime = new Date(orderTimeFormat).getTime()
+      if (currentTime <= orderTime) {
         wx.showToast({
-          title: '接单成功',
-          icon: 'success'
-        })
-        this.initData()
-      }).catch((err) => {
-        wx.hideLoading()
-        wx.showToast({
-          title: err || '出现错误，请稍后重试',
+          title: '请等待超过预约时间',
           icon: 'none'
         })
+        return
+      }
+      wx.showModal({
+        title: '提示',
+        content: '确定完成该订单吗？',
+        success: (res) => {
+          if (res.confirm) {
+            callCloudFunction('quickstartFunctions', {
+              type: 'order',
+              moduleType: 'update',
+              data: {
+                ...orderInfo,
+                status: 'complete'
+              }
+            }).then((res) => {
+              wx.hideLoading()
+              wx.showToast({
+                title: '接单成功',
+                icon: 'success'
+              })
+              this.initData()
+            }).catch((err) => {
+              wx.hideLoading()
+              wx.showToast({
+                title: err || '出现错误，请稍后重试',
+                icon: 'none'
+              })
+            })
+          }
+        }
       })
     }
   }
