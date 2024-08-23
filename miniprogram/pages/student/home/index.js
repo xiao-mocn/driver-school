@@ -10,7 +10,7 @@ Component({
     ],
     images,
     isRefreshing: false,
-    noticeArr: [{title: '欢迎来到通告信息', id: 1, des: '欢迎来到通告信息详情' }, {title: '标题2', id: 2, des: '标题2详情' }],
+    announcementList: [],
     coachList: []
   },
   lifetimes: {
@@ -57,6 +57,7 @@ Component({
         this.setData({
           coachList: res.coachList || [],
           carouselImages: res.bannerList || [],
+          announcementList: res.announcementList || [],
           isRefreshing: false
         })
         wx.hideLoading();
@@ -72,8 +73,8 @@ Component({
             data: {
               title: item.title,
               list: [{
-                des: item.des,
-                id: item.id
+                des: item.content,
+                id: item._id
               }]
             }
           })

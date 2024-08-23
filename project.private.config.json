@@ -7,6 +7,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "announcements_manage",
+          "pathName": "pages/boss/announcements_manage/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "orderList",
           "pathName": "pages/orderList/index",
           "query": "",
@@ -107,13 +114,6 @@
         {
           "name": "coach_manage",
           "pathName": "pages/boss/coaches_manage/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "boss-home",
-          "pathName": "pages/boss/home/index",
           "query": "",
           "launchMode": "default",
           "scene": null

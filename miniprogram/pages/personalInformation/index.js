@@ -39,10 +39,8 @@ Page({
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机
       success: (res) => {
         const tempFilePath = res.tempFiles[0].path;
-        const fileName = res.tempFiles[0].name;
-        console.log(tempFilePath, fileName);
-        // 使用封装的上传函数
-        uploadFileToCloud(tempFilePath, fileName)
+        const timestamp = new Date().getTime();
+        uploadFileToCloud(tempFilePath, `${timestamp}.png`, this.data.formData.avatar)
           .then(fileID => {
             console.log('File ID:', fileID);
             this.setData({
@@ -67,7 +65,7 @@ Page({
     });
   },
   handleButtonClick() {
-    const { name, idCard, phone } = this.data.formData
+    const { name, phone } = this.data.formData
     const phoneReg = /^1[3-9]\d{9}$/
     if (!name) {
       wx.showToast({

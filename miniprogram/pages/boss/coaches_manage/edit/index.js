@@ -1,66 +1,52 @@
 //获取应用实例
-import { images } from "../../../const/index";
 import callCloudFunction from '../../../utils/cloudFunctionUtils'
+import { uploadFileToCloud } from '../../../utils/index'
 Page({
   /**
    * 页面的初始数据
    */
   data: {
     formData: {
-      name: '',
-      idCard: '',
-      birthday: '2024-01-01',
-      gender: '男',
-      starscore: 5,
-      studentCount: 0,
-      phone: '',
-      school: '',
-      classType: 'beginner',
+      name: '莫荣包',
+      password: '123',
+      idCard: '452724199605032538',
+      phone: '15051836908',
+      gender: 'man',
+      genderLabel: '男',
+      birthday: '2000-01-01',
+      registerType: 'student',
+      registerTypeLabel: '学员',
+      avatar: '',
       carType: 'C1',
       carTypes: ['C1', 'C2', 'C3', 'C4'],
-      studentCount: 0,
-      totalOrdNum: 0,
-      monthOrdNum: 0,
-      incomeNum: 0,
-      withdrawableIncome: 0
+      schoolName: '上海驾校'
     },
-    genders: ['男', '女'],
+    genders: [{label: '男', value: 'man'}, {label: '女', value: 'woman'}],
+    registerTypes: [{label: '学员', value: 'student'}, {label: '教练', value: 'coach'}],
     carTypes: ['C1', 'C2', 'C3', 'C4', 'A1', 'A2', 'A3', 'B1', 'B2', 'D', 'E', 'F'],
-    pageType: '',
-    images,
   },
   /**
-   * 生命周期函数--监听页面加载
+   * 生命周期函数--监听页面显示
    */
-  onLoad: function (option) {
-    const userInfo = wx.getStorageSync('userInfo')
-    if (!userInfo) {
-      wx.redirectTo({
-        url: '/pages/login/index',
-      });
-      return
-    }
-    const { type } = option
+  fieldChange(e) {
+    const fieldName = e.currentTarget.dataset.name;
     this.setData({
-      pageType: type
-    })
-    wx.setNavigationBarTitle({
-      title: type === 'add' ? '新增' : '编辑'
+      ['formData.' + fieldName]: e.detail.value
     });
-    this.getCoachInfo()
   },
-  getCoachInfo: function () {
-    const eventChannel = this.getOpenerEventChannel();
-    eventChannel.on('acceptDataFromOpenerPage', (data) => {
-      console.log('data ==', data);
-      this.setData({
-        formData: data.data
-      });
-    });
+  pickerChange(e) {
+    console.log(e)
+    const value = e.detail.value
+    const fieldName = e.currentTarget.dataset.name;
+    const range = e.currentTarget.dataset.range
+    this.setData({
+      ['formData.' + fieldName + 'Label']: this.data[range][value].label,
+      ['formData.' + fieldName]: this.data[range][value].value
+    })
   },
   onPickerChange(e) {
     const fieldName = e.currentTarget.dataset.name;
-    const value = this.data[`${fieldName}s`][e.detail.value]
+    const value = this.data.carTypes[e.detail.value]
     this.setData({
       ['formData.' + fieldName]: value
     });
@@ -109,21 +95,63 @@ Page({
       });
     }
   },
+  uploadImage() {
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机
+      success: (res) => {
+        console.log('res ====', res)
+        const tempFilePath = res.tempFiles[0].path;
+        const timestamp = new Date().getTime();
+        // 使用封装的上传函数
+        uploadFileToCloud(tempFilePath, `${ timestamp }.png`,  this.data.formData.avatar, )
+          .then(fileID => {
+            console.log('File ID:', fileID);
+            this.setData({
+              ['formData.avatar']: `${fileID}`
+            })
+            wx.showToast({
+              title: '上传成功',
+              icon: 'none'
+            });
+          })
+          .catch(err => {
+            console.error('Upload failed:', err);
+            wx.showToast({
+              title: '上传失败',
+              icon: 'none'
+            });
+          });
+      },
+      fail: (err) => {
+        console.error('File selection failed:', err);
+      }
+    });
+  },
   handleButtonClick() {
-    const { name, idCard, phone, school } = this.data.formData
     const idCardReg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
     const phoneReg = /^1[3-9]\d{9}$/
-    if (!name) {
-      wx.showModal({
-        title: '请输入名字',
+    if (!this.data.formData.name) {
+      wx.showToast({
+        title: '请输入账号名',
         icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
         mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
       })
       return
     }
-    if (!idCard) {
-      wx.showModal({
+    if (!this.data.formData.password) {
+      wx.showToast({
+        title: '请输入账号密码',
+        icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
+        duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
+        mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
+      })
+      return
+    }
+    if (!this.data.formData.idCard) {
+      wx.showToast({
         title: '请输入身份证',
         icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
@@ -131,8 +159,17 @@ Page({
       })
       return
     }
-    if (!phone) {
-      wx.showModal({
+    if (!idCardReg.test(this.data.formData.idCard)) {
+      wx.showToast({
+        title: '身份证不正确',
+        icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
+        duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
+        mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
+      })
+      return
+    }
+    if (!this.data.formData.phone) {
+      wx.showToast({
         title: '请输入手机号码',
         icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
@@ -140,8 +177,17 @@ Page({
       })
       return
     }
-    if (!school) {
-      wx.showModal({
+    if (!phoneReg.test(this.data.formData.phone)) {
+      wx.showToast({
+        title: '手机号不正确',
+        icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
+        duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
+        mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
+      })
+      return
+    }
+    if (!this.data.formData.schoolName) {
+      wx.showToast({
         title: '请输入驾校名称',
         icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
@@ -149,110 +195,55 @@ Page({
       })
       return
     }
-    if (!idCardReg.test(idCard)) {
-      wx.showModal({
-        title: '身份证格式不正确',
-        icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
-        duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
-        mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
-      })
-      return
-    }
-    if (!phoneReg.test(phone)) {
-      wx.showModal({
-        title: '手机号码格式不正确',
-        icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
-        duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
-        mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
-      })
-      return
-    }
-    if (this.data.pageType === 'edit') {
-      this.callFunctionUpdate()
-    } else {
-      this.callFunctionAdd()
-    }
+    this.callFunctionAdd()
   },
-  // 新增
   callFunctionAdd() {
+    let params = {}
+    if (this.data.formData.registerType === 'student') {
+      params = {
+        type: 'manager', // 调用管理模块
+        moduleType: 'student', // 调用学员下的接口
+        functionType: 'add',
+        data: {
+          ...this.data.formData,
+          finishClass: 0,
+          totalClass: 0,
+        }
+      }
+    } else {
+      params = {
+        type: 'manager', // 调用管理模块
+        moduleType: 'coach', // 调用教练下的接口
+        functionType: 'add',
+        data: {
+          ...this.data.formData,
+          monthlyOrderInfo: {},
+          selectedDates: [],
+          starscore: 5,
+          studentCount: 0,
+          totalOrdNum: 0,
+          incomeNum: 0,
+          withdrawableIncome: 0
+        }
+      }
+    }
     wx.showLoading({
       title: '正在提交',
     });
     callCloudFunction('quickstartFunctions', {
-      type: 'manager', // 调用管理模块
-      moduleType: 'coach', // 调用教练下的接口
-      functionType: 'add',
-      data: this.data.formData
-    }).then((resp) => {
-        wx.hideLoading();
-        wx.showToast({
-          title: '新增成功',
-          icon: 'success', // 提示图标，可选值：'success', 'loading', 'none'
-          duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
-          mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
-        })
-        wx.navigateBack({
-          delta: 1 // 返回到上级页面
-        });
+      ...params
+    }).then((res) => {
+      console.log('res ===', res)
+      wx.hideLoading();
+      wx.navigateBack({
+        delta: 1
       })
-      .catch((err) => {
-        wx.showToast({
-          title: err || '提交失败',
-        })
+    }).catch((err) => {
+      wx.hideLoading();
+      wx.showToast({
+        title: err || '提交失败',
+        icon: 'none'
       })
-  },
-  // 更新
-  callFunctionUpdate() {
-    wx.showLoading({
-      title: '正在提交',
-    });
-    callCloudFunction('quickstartFunctions', {
-      type: 'manager', // 调用管理模块
-      moduleType: 'coach', // 调用教练下的接口
-      functionType: 'update',
-      data: this.data.formData
     })
-      .then((resp) => {
-        console.log('resp ==', resp);
-        wx.hideLoading();
-        wx.showToast({
-          title: '更新成功',
-          icon: 'success', // 提示图标，可选值：'success', 'loading', 'none'
-          duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
-          mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
-        })
-        wx.navigateBack({
-          delta: 1 // 返回到上级页面
-        });
-      })
-      .catch((err) => {
-        console.log('err ==', err);
-        wx.showToast({
-          title: err || '更新失败',
-        })
-      })
-  },
-  handleCancel() {
-    wx.navigateBack({
-      delta: 1  // 返回到上级页面
-    });
-  },
-  handleRadioChange(e) {
-    const fieldName = e.currentTarget.dataset.name;
-    this.setData({
-      ['formData.' + fieldName]: e.detail.value
-    });
-  },
-  inputChange(e) {
-    const fieldName = e.currentTarget.dataset.name;
-    this.setData({
-      ['formData.' + fieldName]: e.detail.value
-    });
-  },
-  bindDateChange(e) {
-    const fieldName = e.currentTarget.dataset.name;
-    this.setData({
-      ['formData.' + fieldName]: e.detail.value
-    });
   }
 })

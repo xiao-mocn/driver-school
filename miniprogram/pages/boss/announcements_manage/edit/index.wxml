@@ -1,0 +1,34 @@
+<view class="base-info">
+  <view class="title">
+    <view class="icon" ></view>
+    <text>基本信息</text>
+  </view>
+  <view class="form">
+    <view class="item">
+      <text class="icon">*</text>
+      <text class="label">标题: </text>
+      <input
+        value="{{formData.title}}"
+        data-name="title"
+        bindinput="fieldChange"
+        base-input="true"
+        placeholder-class="placeholder"
+        placeholder="请输入标题(必填)" />
+    </view>
+    <view class="item">
+      <text class="icon">*</text>
+      <text class="label">内容: </text>
+      <textarea
+        placeholder="请输入内容"
+        auto-height
+        data-name="content"
+        maxlength="600"
+        bindinput="fieldChange"
+        value="{{formData.content}}"
+      ></textarea>
+    </view>
+  </view>
+</view>
+<view class="bottom-btn" bindtap="handleButtonClick">
+  <text>立即提交</text>
+</view>

@@ -20,6 +20,9 @@ exports.main = async (event, context) => {
     if (data.studentName) {
       whereCondition.studentName = db.RegExp({ regexp: '.*' + data.studentName + '.*', options: 'i' })
     }
+    if (data.title) {
+      whereCondition.title = db.RegExp({ regexp: '.*' + data.title + '.*', options: 'i' })
+    }
     const limit = data.limit || 999; // 默认限制返回10条数据，如果没有传入limit参数
     const queryResp = await db.collection(collectionName).where({
       ...data,

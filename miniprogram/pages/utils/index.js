@@ -47,8 +47,11 @@ export const getCurrentDate = (format) => {
 }
 
 // utils/upload.js
-export const uploadFileToCloud = (filePath, fileName) => {
-  return new Promise((resolve, reject) => {
+export const uploadFileToCloud = (filePath, fileName, oldFileID) => {
+  return new Promise(async (resolve, reject) => {
+    if (oldFileID) {
+      await deleteFileToCloud([oldFileID])
+    }
     wx.cloud.uploadFile({
       cloudPath: `uploads/userAvatar/${fileName}`, // 云存储路径
       filePath, // 本地文件路径
@@ -62,6 +65,21 @@ export const uploadFileToCloud = (filePath, fileName) => {
       }
     });
   });
+};
+export const deleteFileToCloud = (fileList) => {
+  return new Promise((resolve, reject) => {
+    wx.cloud.deleteFile({
+      fileList,
+      success: res => {
+        resolve(res.fileList);
+        console.log('File deleted successfully:', res.fileList);
+      },
+      fail: err => {
+        reject(err)
+        console.error('Failed to delete file:', err);
+      }
+    })
+  })
 };
 export const checkLoginAndNavigate = (url) => {
   const userInfo = wx.getStorageSync('userInfo')

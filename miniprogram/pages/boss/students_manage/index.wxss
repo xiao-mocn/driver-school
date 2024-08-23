@@ -17,7 +17,7 @@ page {
   height: 100rpx;
   display: flex;
   align-items: center;
-  background-color: #528CF4;
+  background-color: #feb47b;
 }
 .search-container image{
   position: absolute;

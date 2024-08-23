@@ -10,12 +10,14 @@ exports.main = async (event, context) => {
   try {
     const limit = event.limit || 999; // 默认限制返回10条数据，如果没有传入limit参数
     const coachesResp = await db.collection('coaches').limit(limit).get();
-    const  bannerResp = await db.collection('banners').get();
+    const bannerResp = await db.collection('banners').get();
+    const announcementResp = await db.collection('announcements').limit(3).get();
     return {
       success: true,
       data: {
         coachList: coachesResp.data || [],
-        bannerList: bannerResp.data || []
+        bannerList: bannerResp.data || [],
+        announcementList: announcementResp.data || []
       }
     }
   } catch (e) {

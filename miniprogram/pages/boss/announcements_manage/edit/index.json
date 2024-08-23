@@ -1,6 +1,6 @@
 {
   "usingComponents": {
   },
-  "navigationBarTitleText":"教练列表",
+  "navigationBarTitleText":"通知信息",
   "navigationBarBackgroundColor": "#feb47b"
 }

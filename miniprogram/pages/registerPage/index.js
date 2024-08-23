@@ -101,15 +101,15 @@ Page({
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机
       success: (res) => {
+        console.log('res ====', res)
         const tempFilePath = res.tempFiles[0].path;
-        const fileName = res.tempFiles[0].name;
-        console.log(tempFilePath, fileName);
+        const timestamp = new Date().getTime();
         // 使用封装的上传函数
-        uploadFileToCloud(tempFilePath, fileName)
+        uploadFileToCloud(tempFilePath, `${ timestamp }.png`,  this.data.formData.avatar, )
           .then(fileID => {
             console.log('File ID:', fileID);
             this.setData({
-              ['formData.avatar']: fileID
+              ['formData.avatar']: `${fileID}`
             })
             wx.showToast({
               title: '上传成功',

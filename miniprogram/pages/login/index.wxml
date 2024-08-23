@@ -16,7 +16,7 @@
       <form bindsubmit="submitLogin">
         <view class="input-group">
           <label class="input-label">用户名：</label>
-          <input name="username" type="idcard" placeholder="请输入用户名" />
+          <input name="username" type="{{ registerType === 'boss' ? 'text' : 'idcard' }}" placeholder="请输入用户名" />
         </view>
         <view class="input-group">
           <label class="input-label">密码：</label>

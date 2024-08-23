@@ -16,7 +16,9 @@
     "pages/boss/coaches_manage/index",
     "pages/boss/coaches_manage/edit/index",
     "pages/boss/students_manage/index",
-    "pages/boss/students_manage/edit/index"
+    "pages/boss/students_manage/edit/index",
+    "pages/boss/announcements_manage/index",
+    "pages/boss/announcements_manage/edit/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

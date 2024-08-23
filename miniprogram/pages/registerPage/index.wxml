@@ -94,7 +94,12 @@
       <text class="icon"></text>
       <text class="label">个人头像: </text>
       <view class="upload-image">
-        <image wx:if="{{ formData.avatar }}" class="image" src="{{ formData.avatar }}" mode="aspectFill" bindtap="uploadImage"></image>
+        <image
+          wx:if="{{ formData.avatar }}"
+          class="image"
+          src="{{ formData.avatar }}"
+          mode="aspectFill"
+          bindtap="uploadImage"></image>
         <view wx:else class="upload-image-mask" bindtap="uploadImage">
           <text class="iconfont icon-upload">选择图片</text>
         </view>
