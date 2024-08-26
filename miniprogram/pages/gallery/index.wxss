@@ -9,14 +9,13 @@ page {
 }
 
 .item {
-  padding-top: 30rpx;
+  padding-top: 10rpx;
   margin-bottom: 20rpx;
   width: 690rpx;
 }
 
 .image {
   width: 100%;
-  height: 200rpx;
   border-radius: 10rpx;
 }
 

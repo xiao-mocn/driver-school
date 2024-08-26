@@ -1,5 +1,6 @@
 //获取应用实例
 import { images } from "../../const/index"
+import { getCurrentDate } from '../../utils/index'
 import callCloudFunction from '../../utils/cloudFunctionUtils'
 Page({
   /**
@@ -14,10 +15,21 @@ Page({
     selectedTimePeriod: '',
     dateOptions:[],
     timePeriods: [
-      {name: '上午', selected: false, isFree: true, period: '07:00-9:00'},
-      {name: '上午', selected: false, isFree: true, period: '9:30-11:30'},
-      {name: '下午', selected: false, isFree: true, period: '13:30-15:30'},
-      {name: '下午', selected: false, isFree: true, period: '16:00-18:00'}
+      {name: '上午', selected: false, isFree: true, period: '07:00-8:00'},
+      {name: '上午', selected: false, isFree: true, period: '8:30-9:30'},
+      {name: '上午', selected: false, isFree: true, period: '10:00-11:00'},
+      {name: '上午', selected: false, isFree: true, period: '11:30-12:30'},
+      {name: '下午', selected: false, isFree: true, period: '13:00-14:00'},
+      {name: '下午', selected: false, isFree: true, period: '14:30-15:30'},
+      {name: '下午', selected: false, isFree: true, period: '16:00-17:00'},
+      {name: '下午', selected: false, isFree: true, period: '17:30-18:30'}
+    ],
+    trainTypeLabel: '科目二',
+    trainType: 'subject2',
+    trainTypes: [
+      { label: '自由练习', value: 'free' },
+      { label: '科目二', value: 'subject2' },
+      { label: '科目三', value: 'subject3' }
     ]
   },
   /**
@@ -39,25 +51,30 @@ Page({
   },
   getCoachInfo: function () {
     const eventChannel = this.getOpenerEventChannel();
-    eventChannel.on('acceptDataFromOpenerPage', (data) => {
-      this.setData({
-        coachInfo: data.data,
-        selectedDates: data.data.selectedDates || []
-      })
-      this.setTimePeriodStatus()
-    });
+    if (eventChannel) {
+      eventChannel.on('acceptDataFromOpenerPage', (data) => {
+        this.setData({
+          coachInfo: data.data,
+          selectedDates: data.data.selectedDates || []
+        })
+        this.setTimePeriodStatus()
+      });
+    }
   },
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
+  onPickerChange(e) {
+    console.log(e.detail.value)
+    const value = this.data.trainTypes[e.detail.value].value
+    const label = this.data.trainTypes[e.detail.value].label
+    this.setData({
+      trainType:  value,
+      trainTypeLabel:  label
+    });
   },
   getCurrentDate() {
     let dates = []; // 用于存储日期和星期的数组
     const currentDate = new Date(); // 获取当前日期
     const weekdays = ["星期天", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"] // 星期数组
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 7; i++) {
       let futureDate = new Date(currentDate); // 创建一个新的日期对象，以免修改原始日期
       futureDate.setDate(currentDate.getDate() + i); // 设置未来的日期
       let dayOfWeek = weekdays[futureDate.getDay()]; // 获取星期几
@@ -152,7 +169,9 @@ Page({
       delta: 1  // 返回到上级页面
     });
   },
-  handleButtonClick() {
+  handleButtonClick(e) {
+    const formId = e.detail.formId;
+    console.log('formId ===', e)
     console.log(JSON.parse(JSON.stringify(this.data)))
     if (!this.data.selectedTimePeriod) {
       wx.showToast({
@@ -166,7 +185,7 @@ Page({
       content: '确定要预约吗？',
       success: (res) => {
         if (res.confirm) {
-          this.callFunctionAdd()
+          // this.callFunctionAdd()
         }
       }
     })
@@ -190,6 +209,9 @@ Page({
         orderTime: this.data.selectedDate,
         orderTimePeriod: this.data.selectedTimePeriod,
         status,
+        createdAt: getCurrentDate('YYYY-MM-DD hh:mm:ss'),
+        trainTypeLabel: this.data.trainTypeLabel,
+        trainType: this.data.trainType,
         prices: this.data.prices,
       }
     }).then((resp) => {

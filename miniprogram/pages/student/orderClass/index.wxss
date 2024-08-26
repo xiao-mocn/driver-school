@@ -129,14 +129,14 @@ page {
 }
 .selectDate-container .selectDate-options {
   width: 630rpx;
-  margin-top: 30rpx;
   display: flex;
-  justify-content: space-between;
+  flex-wrap: wrap;
 }
 .selectDate-container .selectDate-options .option {
   position: relative;
   width: 100rpx;
   height: 100rpx;
+  margin-top: 30rpx;
   padding: 10rpx;
   display: flex;
   flex-direction: column;
@@ -180,7 +180,7 @@ page {
   margin-top: 30rpx;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   margin-top: 30rpx;
 }
 .selectDate-container .timePeriods .timePeriod {
@@ -201,6 +201,38 @@ page {
 .selectDate-container .timePeriods .timePeriod .reducible {
   color: #fe9602;
 }
+.train-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 630rpx;
+  min-height: 40rpx;
+  padding: 16rpx 0;
+}
+.train-container .icon {
+  font-size: 32rpx;
+  color: crimson;
+  position: relative;
+}
+.train-container .label {
+  position: relative;
+  margin-left: 10rpx;
+  font-size: 32rpx;
+  width: 150rpx;
+  color: rgb(45, 44, 44);
+}
+.train-container input {
+  margin-left: 20rpx;
+  height: 40rpx;
+  flex: 1;
+  font-size: 32rpx;
+  color: rgb(45, 44, 44);
+}
+.train-container .picker {
+  margin-left: 40rpx;
+  color: #4c4c4c;
+}
+
 
 .pay-container {
   position: relative;

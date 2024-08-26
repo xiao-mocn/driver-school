@@ -7,10 +7,10 @@ Component({
    */
   data: {
     admissionsCenterArr: [
-      { id: 1, name: '学员报名', icon: images.boss.add_students, path: '/pages/boss/students_manage/edit/index'},
+      { id: 1, name: '学员报名', icon: images.boss.add_students, path: '/pages/boss/students_manage/index'},
       { id: 2, name: '活动管理', icon: images.boss.active_manage },
       { id: 3, name: '招生素材', icon: images.boss.material },
-      { id: 4, name: '公告管理', icon: images.boss.announcement },
+      { id: 4, name: '公告管理', icon: images.boss.announcement, path: '/pages/boss/announcements_manage/index' },
     ],
     applicationArr: [
       { id: 1, name: '团队管理', icon: images.boss.team, path: '/pages/boss/coaches_manage/index' },

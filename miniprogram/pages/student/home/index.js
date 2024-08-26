@@ -1,10 +1,10 @@
-import { images } from "../../const/index"
+import { images, companyInfo } from "../../const/index"
 import callCloudFunction from "../../utils/cloudFunctionUtils"
 Component({
   data: {
     carouselImages: [],
     iconArr:[
-      { id: 1, iconName: '公司信息', iconUrl: images.student.company, type: 'company', pageAddress: '/pages/gallery/index', dec: '公司详情' },
+      { id: 1, iconName: '驾校信息', iconUrl: images.student.company, type: 'company', pageAddress: '/pages/gallery/index', dec: '驾校详情' },
       { id: 2, iconName: '预约课时', iconUrl: images.student.appointment, pageAddress: '/pages/student/orderClass/index', dec: '课时详情' },
       { id: 3, iconName: '返现活动', iconUrl: images.student.activity, pageAddress: '', dec: '更多优惠' }
     ],
@@ -90,11 +90,12 @@ Component({
             // 通过eventChannel向被打开页面传送数据
             res.eventChannel.emit('acceptDataFromOpenerPage', { 
               data: {
-                title: '公司介绍',
-                list: [{
-                  des: `欢迎来到我们的驾校，我们是一家致力于为学员提供专业、高效和安全的驾驶培训服务的公司。我们拥有一支经验丰富、技术精湛的教练团队，他们采用先进的教学方法，结合实战经验，让学员在最短的时间内掌握驾驶技能。我们注重理论与实践相结合的教学模式，让学员在轻松愉快的氛围中学习驾驶。除了驾驶技能培训外，我们还提供心理辅导和安全意识教育，帮助学员树立正确的驾驶观念和态度。选择我们，你将能够快速拿到驾照，并成为一名合格的驾驶员。欢迎加入我们，让我们陪你走过难忘的驾考之旅！`,
-                  id: item.id
-                }]
+                // title: '驾校介绍',
+                // list: [{
+                //   des: `欢迎来到我们的驾校，我们是一家致力于为学员提供专业、高效和安全的驾驶培训服务的公司。我们拥有一支经验丰富、技术精湛的教练团队，他们采用先进的教学方法，结合实战经验，让学员在最短的时间内掌握驾驶技能。我们注重理论与实践相结合的教学模式，让学员在轻松愉快的氛围中学习驾驶。除了驾驶技能培训外，我们还提供心理辅导和安全意识教育，帮助学员树立正确的驾驶观念和态度。选择我们，你将能够快速拿到驾照，并成为一名合格的驾驶员。欢迎加入我们，让我们陪你走过难忘的驾考之旅！`,
+                //   id: item.id
+                // }]
+                ...companyInfo
               }
             })
           }
