@@ -169,9 +169,7 @@ Page({
       delta: 1  // 返回到上级页面
     });
   },
-  handleButtonClick(e) {
-    const formId = e.detail.formId;
-    console.log('formId ===', e)
+  handleButtonClick() {
     console.log(JSON.parse(JSON.stringify(this.data)))
     if (!this.data.selectedTimePeriod) {
       wx.showToast({
@@ -185,7 +183,7 @@ Page({
       content: '确定要预约吗？',
       success: (res) => {
         if (res.confirm) {
-          // this.callFunctionAdd()
+          this.callFunctionAdd()
         }
       }
     })

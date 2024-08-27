@@ -19,8 +19,10 @@ Page({
       avatar: '',
       carType: 'C1',
       carTypes: ['C1', 'C2', 'C3', 'C4'],
-      schoolName: '上海驾校'
+      schoolName: '安职喜来场',
+      description: '',
     },
+    schools: ['安职喜来场', '华城工业场', '里建华城场', '南师大红岭冠武场'],
     genders: [{label: '男', value: 'man'}, {label: '女', value: 'woman'}],
     registerTypes: [{label: '学员', value: 'student'}, {label: '教练', value: 'coach'}],
     carTypes: ['C1', 'C2', 'C3', 'C4', 'A1', 'A2', 'A3', 'B1', 'B2', 'D', 'E', 'F'],
@@ -39,6 +41,12 @@ Page({
     const value = e.detail.value
     const fieldName = e.currentTarget.dataset.name;
     const range = e.currentTarget.dataset.range
+    if (fieldName === 'schoolName') {
+      this.setData({
+        ['formData.schoolName']: this.data.schools[value]
+      });
+      return
+    }
     this.setData({
       ['formData.' + fieldName + 'Label']: this.data[range][value].label,
       ['formData.' + fieldName]: this.data[range][value].value

@@ -18,12 +18,12 @@
         <text class="number">{{prices}}</text>
       </view>
     </view>
-    <view class="coach-dec" wx:if="{{false}}">
-      <text >我拥有丰富的驾驶经验和专业的培训技巧，致力于帮助每一位新手司机快速掌握驾驶技能，确保您的行车安全。我的教学方法注重理论与实践相结合，不仅会在车内为您详细讲解驾驶技巧和注意事项，还会在车外指导您进行实际操作，确保您能够真正掌握驾驶要领</text>
+    <view class="coach-dec" wx:if="{{coachInfo.description}}">
+      <text >{{ coachInfo.description }}</text>
     </view>
     <view class="coach-school">
       <image src="{{images.icons.address}}" />
-      <text style="margin-left: 20rpx;">{{coachInfo.school || '未指定'}}</text>
+      <text style="margin-left: 20rpx;">{{coachInfo.schoolName || '未指定'}}</text>
     </view>
   </view>
   <view class="selectDate-container">
@@ -83,7 +83,7 @@
     <view class="btn cancel" bindtap="handleCancel">
       <text>返回</text>
     </view>
-    <button class="btn" form-type="submit" bindtap="handleButtonClick">
+    <button class="btn" bindtap="handleButtonClick">
       <text>提交</text>
     </button>
   </view>

@@ -71,10 +71,17 @@ page {
   position: relative;
   margin-left: 10rpx;
   font-size: 32rpx;
-  width: 150rpx;
+  width: 170rpx;
   color: rgb(45, 44, 44);
 }
 .form .item input {
+  margin-left: 20rpx;
+  height: 40rpx;
+  flex: 1;
+  font-size: 32rpx;
+  color: rgb(45, 44, 44);
+}
+.form .item textarea {
   margin-left: 20rpx;
   height: 40rpx;
   flex: 1;

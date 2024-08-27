@@ -45,16 +45,10 @@ Page({
     this.initData()
   },
   initData() {
-    const whereCondition = {} // 初始化筛选条件
-    if (this.data.userInfo.registerType === 'student') {
-      whereCondition.studentId = this.data.userInfo._id
-      whereCondition.orderTime = this.data.searchForm.orderTime
-      whereCondition.coachName = this.data.searchForm.name || undefined
-    } else {
-      whereCondition.coachId = this.data.userInfo._id
-      whereCondition.orderTime = this.data.searchForm.orderTime
-      whereCondition.studentName = this.data.searchForm.name || undefined
-    }
+    const whereCondition = {
+      studentId: this.data.userInfo._id,
+      coachName: this.data.searchForm.name
+    } // 初始化筛选条件
     callCloudFunction('quickstartFunctions', {
       type: 'defaultQueryList',
       collectionName: 'orders',
@@ -74,7 +68,7 @@ Page({
   onDelete(e) {
     wx.showModal({
       title: '提示',
-      content: '确定删除该订单吗(不可恢复)？',
+      content: '确定删除该订单吗(不可恢复)?',
       success: (res) => {
         callCloudFunction('quickstartFunctions', {
           type: 'deleteRecord',

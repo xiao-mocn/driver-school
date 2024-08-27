@@ -73,6 +73,13 @@ page {
   font-size: 32rpx;
   color: rgb(45, 44, 44);
 }
+.form .item textarea {
+  margin-left: 20rpx;
+  height: 40rpx;
+  flex: 1;
+  font-size: 32rpx;
+  color: rgb(45, 44, 44);
+}
 .form .item .disabled {
   color: rgb(106, 105, 105);
 }

@@ -153,6 +153,20 @@ page {
   font-weight: 400;
   margin-left: 34rpx;
 }
+.order-list-item .school-info {
+  width: 100%;
+  height: 40rpx;
+  display: flex;
+  align-items: center;
+  line-height: 60rpx;
+}
+.order-list-item .school-info text {
+  color: rgb(91, 91, 91);
+  font-size: 30rpx;
+  font-weight: 500;
+  margin-left: 80rpx;
+  margin-top: 20rpx;
+}
 .order-list-item .sub {
   color: rgb(172, 172, 172);
   font-size: 28rpx;
@@ -160,7 +174,6 @@ page {
   margin-left: 64rpx;
 }
 .order-list-item .order-info {
-  margin-top: 30rpx;
   padding: 20rpx;
   display: flex;
   flex-direction: column;

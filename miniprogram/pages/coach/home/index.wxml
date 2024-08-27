@@ -52,6 +52,9 @@
           <text class="name">{{ item.studentInfo.name }}</text>
           <text class="phone">{{ item.studentInfo.phone }}</text>
         </view>
+        <view class="school-info">
+          <text >预约科目：{{item.trainTypeLabel}}</text>
+        </view>
         <text class="sub">{{ item.studentInfo.address || '' }}</text>
         <view class="order-info">
           <view class="detail">

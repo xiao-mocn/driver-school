@@ -19,6 +19,12 @@ exports.main = async (event, context) => {
           withdrawableIncome: db.command.inc(data.prices * 0.8),
         },
       });
+      // boss 收入更新
+      await db.collection('boss').doc('458dc8cc66c2a75f005129d80dba6b9a').update({
+        data: {
+          incomeNum: db.command.inc(data.prices * 0.2),
+        },
+      });
       await db.collection('orders').where({
         _id: _id
       }).update({
