@@ -5,7 +5,7 @@
     type="text"
     value="{{ searchForm.name }}"
     confirm-type="search"
-    placeholder="搜索姓名"
+    placeholder="搜索教练姓名"
     bindconfirm="onConfirm"
     bindinput="onInput" />
 </view>
@@ -29,7 +29,7 @@
             <text class="prices">{{ item.prices }}</text>
           </view>
         </view>
-        <view class="options btn-area" wx:if="{{ !item.evaluationInfo }}">
+        <view class="options btn-area" wx:if="{{ !item.isEvaluation }}">
           <view
             class="evaluation"
             type="warn"
@@ -38,28 +38,28 @@
           >立即评价</view>
         </view>
       </view>
-      <view class="evaluation-container" wx:if="{{ item.evaluationInfo }}">
+      <view class="evaluation-container" wx:if="{{ item.isEvaluation }}">
         <view class="evaluation-item">
           <text class="label">总体评价：</text>
           <block wx:for="{{[1, 2, 3, 4, 5]}}" wx:key="starIndex" wx:for-index="starIndex">
-            <view class="star" data-field="totalRating" data-star-index="{{starIndex}}" data-order-index="{{orderIndex}}" bindtap="rate">
-              {{0 < item.evaluationInfo.totalRating ? '★' : '☆'}}
+            <view class="star" data-field="totalRating" data-star-index="{{ starIndex }}" bindtap="rate">
+              {{starIndex < evaluationInfo.totalRating ? '★' : '☆'}}
             </view>
           </block>
         </view>
         <view class="evaluation-item">
           <text class="label">场地评价：</text>
           <block wx:for="{{[1, 2, 3, 4, 5]}}" wx:key="starIndex" wx:for-index="starIndex">
-            <view class="star" data-field="venueRating" data-star-index="{{starIndex}}" data-order-index="{{orderIndex}}" bindtap="rate">
-              {{0 < item.evaluationInfo.venueRating ? '★' : '☆'}}
+            <view class="star" data-field="venueRating" data-star-index="{{ starIndex }}" bindtap="rate">
+              {{starIndex < evaluationInfo.venueRating ? '★' : '☆'}}
             </view>
           </block>
         </view>
         <view class="evaluation-item">
           <text class="label">教练评价：</text>
           <block wx:for="{{[1, 2, 3, 4, 5]}}" wx:key="starIndex" wx:for-index="starIndex">
-            <view class="star" data-field="coachRating" data-star-index="{{starIndex}}" data-order-index="{{orderIndex}}" bindtap="rate">
-              {{0 < item.evaluationInfo.coachRating ? '★' : '☆'}}
+            <view class="star" data-field="coachRating" data-star-index="{{ starIndex }}" bindtap="rate">
+              {{starIndex < evaluationInfo.coachRating ? '★' : '☆'}}
             </view>
           </block>
         </view>

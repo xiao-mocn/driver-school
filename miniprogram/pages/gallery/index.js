@@ -27,37 +27,22 @@ Page({
   },
 
   /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-
+  previewImage: function (e) {
+    console.log('e ===', e)
+    const imageUrl = e.currentTarget.dataset.imageurl
+    // 在小程序中实现图片预览
+    wx.previewImage({
+      current: '当前显示图片的链接', // 当前显示图片的链接，可不填或为空字符串
+      urls: [imageUrl], // 需要预览的图片链接列表
+      zoom: true, // 开启缩放功能
+      success: function(res) {
+        console.log('预览成功', res);
+      },
+      fail: function(res) {
+        console.error('预览失败', res);
+      }
+    });
   },
 })

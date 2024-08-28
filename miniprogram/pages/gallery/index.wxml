@@ -4,7 +4,13 @@
     <view class="item">
       <view class="title" wx:if="{{item.title}}" >{{item.title}}</view>
       <view class="description" wx:if="{{item.des}}" >{{item.des}}</view>
-      <image class="image" wx:if="{{item.imageUrl}}" src="{{item.imageUrl}}" mode="aspectFill"></image>
+      <image
+        class="image"
+        wx:if="{{item.imageUrl}}"
+        src="{{item.imageUrl}}"
+        mode="aspectFill"
+        data-imageUrl="{{item.imageUrl}}"
+        bindtap="previewImage"></image>
     </view>
   </block>
 </view>

@@ -20,7 +20,7 @@ Page({
       totalRating: 0,
       venueRating: 0,
       coachRating: 0
-    }
+    },
   },
   /**
    * 生命周期函数--监听页面显示
@@ -63,7 +63,7 @@ Page({
     }).then((res) => {
       console.log('res ===', res)
       this.setData({
-        orderList: res,
+         orderList: res,
         isRefreshing: false
       })
     }).catch((err) => {
@@ -76,12 +76,8 @@ Page({
     // 更新指定索引的元素
     updatedOrderList[index] = {
       ...updatedOrderList[index],
-      evaluationTime: getCurrentDate('yyyy-MM-dd hh:mm:ss'),
-      evaluationInfo: {
-        totalRating: 2,
-        venueRating: 3,
-        coachRating: 4
-      }
+      evaluationTime: getCurrentDate('YYYY-MM-dd hh:mm:ss'),
+      isEvaluation: true,
     };
     // 更新数据
     this.setData({
@@ -90,22 +86,12 @@ Page({
 
   },
   rate(e) {
-    const { field, starIndex, orderIndex } = e.currentTarget.dataset; // 获取字段名、星级索引和订单索引
-    console.log('field ===', field)
-    console.log('starIndex ===', starIndex)
-    console.log('orderIndex ===', orderIndex)
-    // 创建 orderList 的副本
-    const updatedOrderList = [...this.data.orderList];
 
-    // 更新指定订单的指定评分
-    updatedOrderList[orderIndex].evaluationInfo[field] = starIndex + 1;
-
+    const { field, starIndex } = e.currentTarget.dataset; // 获取字段名、星级索引和订单索引
     // 更新数据
     this.setData({
-      orderList: updatedOrderList
+      ['evaluationInfo.' + field]: starIndex + 1
     });
-    // 调试输出
-    console.log('Updated orderList:', updatedOrderList);
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作

@@ -42,7 +42,7 @@
       </view>
       <image src=" {{ images.icons.next }}" />
     </navigator> -->
-    <navigator class="row-item">
+    <navigator class="row-item" url="/pages/evaluationPage/index">
       <view class="row-info">
         <image src=" {{ images.icons.star }}" />
         <text>我的评价</text>
