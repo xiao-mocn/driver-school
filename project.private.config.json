@@ -7,6 +7,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "evaluationPage",
+          "pathName": "pages/evaluationPage/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "announcements_manage",
           "pathName": "pages/boss/announcements_manage/index",
           "query": "",
@@ -114,13 +121,6 @@
         {
           "name": "coach_manage",
           "pathName": "pages/boss/coaches_manage/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "coach-user",
-          "pathName": "pages/coach/user/index",
           "query": "",
           "launchMode": "default",
           "scene": null

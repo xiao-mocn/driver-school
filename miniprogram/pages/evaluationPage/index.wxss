@@ -23,11 +23,11 @@ page {
   position: absolute;
   width: 30rpx;
   height: 30rpx;
-  left: 460rpx;
+  left: 640rpx;
   opacity: 0.6;
 }
 .search-container input{
-  width: 400rpx;
+  width: 600rpx;
   height: 30rpx;
   margin-left: 30rpx;
   padding: 10rpx 30rpx;
@@ -70,23 +70,27 @@ page {
 .list-item {
   position: relative;
   width: 660rpx;
-  height: 150rpx;
   background: #FFF;
   border-radius: 20rpx;
   padding: 30rpx 0 30rpx 30rpx;
-  margin: 0 30rpx 30rpx 30rpx;
+  margin: 0 30rpx 0rpx 30rpx;
+  
+}
+.list-item .order-info {
+  width: 100%;
+  height: 100%;
   display: flex;
   align-items: center;
 }
 .list-item image{
-  width: 120rpx;
-  height: 120rpx;
-  border-radius: 120rpx;
+  width: 150rpx;
+  height: 150rpx;
+  border-radius: 150rpx;
 }
 
 .list-item .info{
   margin-left: 40rpx;
-  height: 120rpx;
+  min-height: 120rpx;
   display: flex;
   flex-direction: column;
   justify-content: center
@@ -149,7 +153,7 @@ page {
   background: #76e77a;
   color: #fff;
 }
-.list-item .options .delete {
+.list-item .options .evaluation {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -159,6 +163,49 @@ page {
   font-size: 26rpx !important;
   line-height: 30rpx !important;
   border-radius: 10rpx 0 0 10rpx;
-  background: #e64340;
+  background: #feb47b;
   color: #fff;
+}
+.evaluation-container {
+  position: relative;
+  width: 660rpx;
+  min-height: 40rpx;
+  display: flex;
+  flex-direction: column;
+  font-size: 40rpx;
+}
+.evaluation-item {
+  display: flex;
+  align-items: center;
+  margin-top: 20rpx;
+  margin-left: 10rpx;
+}
+.evaluation-item .label{
+  font-size: 30rpx;
+  color: #373737;
+}
+.evaluation-item .evaluation-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+  line-height: 40rpx;
+  text-align: center;
+  width: 150rpx;
+  height: 50rpx;
+  margin-right: 30rpx;
+  border-radius: 10rpx;
+  background: #feb47b;
+  color: #fff;
+}
+.evaluation-item .evaluation-btn:active {
+  background: #f8ceaf;
+}
+.flex-end{
+  justify-content: flex-end;
+}
+.star {
+  color: #ffcc00;
+  margin: 0 6rpx;
+  cursor: pointer;
 }

@@ -13,6 +13,7 @@
     "pages/editPassWord/index",
     "pages/orderList/index",
     "pages/personalInformation/index",
+    "pages/evaluationPage/index",
     "pages/boss/coaches_manage/index",
     "pages/boss/coaches_manage/edit/index",
     "pages/boss/students_manage/index",

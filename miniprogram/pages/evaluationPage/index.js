@@ -11,11 +11,16 @@ Page({
     userInfo: null,
     searchForm: {
       name: '',
-      orderTime: ''
     },
     images,
     isRefreshing: false,
-    orderList: []
+    orderList: [],
+    rating: 0,
+    evaluationInfo: {
+      totalRating: 0,
+      venueRating: 0,
+      coachRating: 0
+    }
   },
   /**
    * 生命周期函数--监听页面显示
@@ -25,7 +30,6 @@ Page({
       userInfo: wx.getStorageSync('userInfo'),
       searchForm: {
         name: '',
-        orderTime: getCurrentDate('YYYY-MM-DD')
       }
     })
     this.initData()
@@ -46,8 +50,9 @@ Page({
   },
   initData() {
     const whereCondition = {
-      studentId: this.data.userInfo._id,
-      coachName: this.data.searchForm.name
+      studentId: this.data.userInfo._id || undefined,
+      coachName: this.data.searchForm.name || undefined,
+      status: 'complete'
     } // 初始化筛选条件
     callCloudFunction('quickstartFunctions', {
       type: 'defaultQueryList',
@@ -65,26 +70,42 @@ Page({
       console.log('err ===', err)
     })
   },
-  onDelete(e) {
-    wx.showModal({
-      title: '提示',
-      content: '确定删除该订单吗(不可恢复)?',
-      success: (res) => {
-        callCloudFunction('quickstartFunctions', {
-          type: 'deleteRecord',
-          collectionName: 'orders',
-          _id: e.currentTarget.dataset.id
-        }).then((res) => {
-          wx.showToast({
-            title: '删除成功'
-          })
-          this.initData()
-        }).catch((err) => {
-          console.log('err ===', err)
-        })
+  onEvaluate(e) {
+    const index = e.currentTarget.dataset.index; // 获取要更新的元素索引
+    const updatedOrderList = [...this.data.orderList]; // 创建数组的副本
+    // 更新指定索引的元素
+    updatedOrderList[index] = {
+      ...updatedOrderList[index],
+      evaluationTime: getCurrentDate('yyyy-MM-dd hh:mm:ss'),
+      evaluationInfo: {
+        totalRating: 2,
+        venueRating: 3,
+        coachRating: 4
       }
-    })
-    
+    };
+    // 更新数据
+    this.setData({
+      orderList: updatedOrderList
+    });
+
+  },
+  rate(e) {
+    const { field, starIndex, orderIndex } = e.currentTarget.dataset; // 获取字段名、星级索引和订单索引
+    console.log('field ===', field)
+    console.log('starIndex ===', starIndex)
+    console.log('orderIndex ===', orderIndex)
+    // 创建 orderList 的副本
+    const updatedOrderList = [...this.data.orderList];
+
+    // 更新指定订单的指定评分
+    updatedOrderList[orderIndex].evaluationInfo[field] = starIndex + 1;
+
+    // 更新数据
+    this.setData({
+      orderList: updatedOrderList
+    });
+    // 调试输出
+    console.log('Updated orderList:', updatedOrderList);
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -95,4 +116,11 @@ Page({
     })
     this.initData()
   },
+  evaluteSubmit(e) {
+    const info = e.currentTarget.dataset.info
+    console.log('info ===', info)
+
+    // callCloudFunction('quickstartFunctions', {
+    // })
+  }
 })
