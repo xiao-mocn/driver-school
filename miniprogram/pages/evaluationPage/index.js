@@ -15,7 +15,6 @@ Page({
     images,
     isRefreshing: false,
     orderList: [],
-    rating: 0,
     evaluationInfo: {
       totalRating: 0,
       venueRating: 0,
@@ -77,7 +76,7 @@ Page({
     updatedOrderList[index] = {
       ...updatedOrderList[index],
       evaluationTime: getCurrentDate('YYYY-MM-dd hh:mm:ss'),
-      isEvaluation: true,
+      isEvaluationed: true,
     };
     // 更新数据
     this.setData({
@@ -86,7 +85,6 @@ Page({
 
   },
   rate(e) {
-
     const { field, starIndex } = e.currentTarget.dataset; // 获取字段名、星级索引和订单索引
     // 更新数据
     this.setData({
@@ -105,8 +103,29 @@ Page({
   evaluteSubmit(e) {
     const info = e.currentTarget.dataset.info
     console.log('info ===', info)
-
-    // callCloudFunction('quickstartFunctions', {
-    // })
+    wx.showLoading({
+      title: '',
+    });
+    callCloudFunction('quickstartFunctions', {
+      type: 'order',
+      moduleType: 'update',
+      data: {
+        ...info,
+        ...this.data.evaluationInfo
+      }
+    }).then((res) => {
+      wx.hideLoading()
+      wx.showToast({
+        title: '接单成功',
+        icon: 'success'
+      })
+      this.initData()
+    }).catch((err) => {
+      wx.hideLoading()
+      wx.showToast({
+        title: err || '出现错误，请稍后重试',
+        icon: 'none'
+      })
+    })
   }
 })

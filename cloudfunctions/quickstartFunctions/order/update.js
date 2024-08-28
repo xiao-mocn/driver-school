@@ -11,12 +11,18 @@ exports.main = async (event, context) => {
   delete data._id
   try {
     if (data.status === 'complete') {
-      await db.collection('coaches').where({
-        _id: data.coachId
-      }).update({
+      let starscore = 0
+      if (data.isEvaluationed) {
+        const coach = await db.collection('coaches').doc(data.coachId).get();
+        const originalStarscore = coach.data.starscore;
+        const newStarscore = ((data.totalRating + data.venueRating + data.coachRating) / 3)
+        starscore = (originalStarscore + newStarscore) / 2
+      }
+      await db.collection('coaches').doc(data.coachId).update({
         data: {
           incomeNum: db.command.inc(data.prices * 0.8),
           withdrawableIncome: db.command.inc(data.prices * 0.8),
+          starscore,
         },
       });
       // boss 收入更新

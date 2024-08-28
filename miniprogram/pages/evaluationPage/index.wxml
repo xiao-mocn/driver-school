@@ -29,7 +29,7 @@
             <text class="prices">{{ item.prices }}</text>
           </view>
         </view>
-        <view class="options btn-area" wx:if="{{ !item.isEvaluation }}">
+        <view class="options btn-area" wx:if="{{ !item.isEvaluationed }}">
           <view
             class="evaluation"
             type="warn"
@@ -38,7 +38,7 @@
           >立即评价</view>
         </view>
       </view>
-      <view class="evaluation-container" wx:if="{{ item.isEvaluation }}">
+      <view class="evaluation-container" wx:if="{{ item.isEvaluationed }}">
         <view class="evaluation-item">
           <text class="label">总体评价：</text>
           <block wx:for="{{[1, 2, 3, 4, 5]}}" wx:key="starIndex" wx:for-index="starIndex">
@@ -63,7 +63,7 @@
             </view>
           </block>
         </view>
-        <view class="evaluation-item flex-end">
+        <view class="evaluation-item flex-end" wx:if="{{ !(item.totalRating || item.venueRating || item.coachRating) }}">
           <view class="evaluation-btn" data-info="{{ item }}" bindtap="evaluteSubmit">立即提交</view>
         </view>
       </view>
