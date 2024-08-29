@@ -16,55 +16,78 @@
   refresher-enabled="{{true}}"
   refresher-triggered="{{isRefreshing}}"
 >
-  <block wx:for="{{orderList}}" wx:key="id" wx:for-index="orderIndex">
+  <block wx:for="{{orderList}}" wx:key="id" wx:for-index="orderIndex" wx:for-item="orderItem">
     <view class="list-item">
       <view class="order-info">
-        <image src="{{ item.coachInfo.avatar || item.coachInfo.avatarUrl || images.icons.defaultAvatar }}" />
+        <image src="{{ orderItem.coachInfo.avatar || orderItem.coachInfo.avatarUrl || images.icons.defaultAvatar }}" />
         <view class="info">
-          <text>{{ (item.coachInfo.name || '未指定') + '   ' + (item.coachInfo.phone || '') }}</text>
-          <text class="marginTop">{{ item.orderTime + ' ' + item.orderTimePeriod }}</text>
-          <text class="marginTop">预约科目：{{ item.trainTypeLabel }}</text>
+          <text>{{ (orderItem.coachInfo.name || '未指定') + '   ' + (orderItem.coachInfo.phone || '') }}</text>
+          <text class="marginTop">{{ orderItem.orderTime + ' ' + orderItem.orderTimePeriod }}</text>
+          <text class="marginTop">预约科目：{{ orderItem.trainTypeLabel }}</text>
           <view class="marginTop">
             <text style="font-size:24rpx;" class="prices">￥ </text>
-            <text class="prices">{{ item.prices }}</text>
+            <text class="prices">{{ orderItem.prices }}</text>
           </view>
         </view>
-        <view class="options btn-area" wx:if="{{ !item.isEvaluationed }}">
+        <view class="options btn-area">
           <view
+            wx:if="{{ !orderItem.isEvaluationed }}"
             class="evaluation"
             type="warn"
             data-index="{{ orderIndex }}"
             bindtap="onEvaluate"
           >立即评价</view>
+          <view
+            wx:if="{{ orderItem.isEvaluationed && !orderItem.isShowEvaluation }}"
+            class="evaluation"
+            type="warn"
+            data-index="{{ orderIndex }}"
+            bindtap="onShowEvaluation"
+          >查看评价</view>
         </view>
       </view>
-      <view class="evaluation-container" wx:if="{{ item.isEvaluationed }}">
+      <view class="evaluation-container" wx:if="{{ orderItem.isShowEvaluation }}">
         <view class="evaluation-item">
           <text class="label">总体评价：</text>
           <block wx:for="{{[1, 2, 3, 4, 5]}}" wx:key="starIndex" wx:for-index="starIndex">
-            <view class="star" data-field="totalRating" data-star-index="{{ starIndex }}" bindtap="rate">
-              {{starIndex < evaluationInfo.totalRating ? '★' : '☆'}}
+            <view
+              class="star"
+              data-field="totalRating"
+              data-star-index="{{ starIndex }}"
+              data-order-index="{{ orderIndex }}"
+              bindtap="rate">
+              {{starIndex < orderItem.totalRating ? '★' : '☆'}}
             </view>
           </block>
         </view>
         <view class="evaluation-item">
           <text class="label">场地评价：</text>
           <block wx:for="{{[1, 2, 3, 4, 5]}}" wx:key="starIndex" wx:for-index="starIndex">
-            <view class="star" data-field="venueRating" data-star-index="{{ starIndex }}" bindtap="rate">
-              {{starIndex < evaluationInfo.venueRating ? '★' : '☆'}}
+            <view
+              class="star"
+              data-field="venueRating"
+              data-star-index="{{ starIndex }}"
+              data-order-index="{{ orderIndex }}"
+              bindtap="rate">
+              {{starIndex < orderItem.venueRating ? '★' : '☆'}}
             </view>
           </block>
         </view>
         <view class="evaluation-item">
           <text class="label">教练评价：</text>
           <block wx:for="{{[1, 2, 3, 4, 5]}}" wx:key="starIndex" wx:for-index="starIndex">
-            <view class="star" data-field="coachRating" data-star-index="{{ starIndex }}" bindtap="rate">
-              {{starIndex < evaluationInfo.coachRating ? '★' : '☆'}}
+            <view
+              class="star"
+              data-field="coachRating"
+              data-star-index="{{ starIndex }}"
+              data-order-index="{{ orderIndex }}"
+              bindtap="rate">
+              {{starIndex < orderItem.coachRating ? '★' : '☆'}}
             </view>
           </block>
         </view>
-        <view class="evaluation-item flex-end" wx:if="{{ !(item.totalRating || item.venueRating || item.coachRating) }}">
-          <view class="evaluation-btn" data-info="{{ item }}" bindtap="evaluteSubmit">立即提交</view>
+        <view class="evaluation-item flex-end" wx:if="{{ !orderItem.isEvaluationed }}">
+          <view class="evaluation-btn" data-info="{{ orderItem }}" bindtap="evaluteSubmit">立即提交</view>
         </view>
       </view>
     </view>

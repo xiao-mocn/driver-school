@@ -16,21 +16,46 @@ exports.main = async (event, context) => {
         const coach = await db.collection('coaches').doc(data.coachId).get();
         const originalStarscore = coach.data.starscore;
         const newStarscore = ((data.totalRating + data.venueRating + data.coachRating) / 3)
-        starscore = (originalStarscore + newStarscore) / 2
+        starscore = Math.floor((originalStarscore + newStarscore) / 2 * 10) / 10
+        console.log('starscore ===', starscore, originalStarscore, newStarscore)
+        await db.collection('coaches').doc(data.coachId).update({
+          data: {
+            starscore,
+          },
+        });
+      } else {
+        await db.collection('coaches').doc(data.coachId).update({
+          data: {
+            incomeNum: db.command.inc(data.prices * 0.8),
+            withdrawableIncome: db.command.inc(data.prices * 0.8),
+          },
+        });
+        // 更新学生数据
+        if (data.trainType === 'subject3') {
+          await db.collection('students').doc(data.studentId).update({
+            data: {
+              subject3Num: db.command.inc(1),
+              incomeNum: db.command.inc(data.prices * 0.8),
+              withdrawableIncome: db.command.inc(data.prices * 0.8),
+            },
+          });
+        } else {
+          await db.collection('students').doc(data.studentId).update({
+            data: {
+              subject2Num: db.command.inc(1),
+              incomeNum: db.command.inc(data.prices * 0.8),
+              withdrawableIncome: db.command.inc(data.prices * 0.8),
+            },
+          });
+        }
+        // boss 收入更新
+        await db.collection('boss').doc('458dc8cc66c2a75f005129d80dba6b9a').update({
+          data: {
+            incomeNum: db.command.inc(data.prices * 0.2),
+          },
+        });
       }
-      await db.collection('coaches').doc(data.coachId).update({
-        data: {
-          incomeNum: db.command.inc(data.prices * 0.8),
-          withdrawableIncome: db.command.inc(data.prices * 0.8),
-          starscore,
-        },
-      });
-      // boss 收入更新
-      await db.collection('boss').doc('458dc8cc66c2a75f005129d80dba6b9a').update({
-        data: {
-          incomeNum: db.command.inc(data.prices * 0.2),
-        },
-      });
+      
       await db.collection('orders').where({
         _id: _id
       }).update({

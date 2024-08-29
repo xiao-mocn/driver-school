@@ -16,14 +16,34 @@
 >
   <block wx:for="{{list}}" wx:key="id">
     <view class="list-item">
-      <image src="{{ item.avatar || item.avatarUrl || images.icons.defaultAvatar }}" />
-      <view class="info">
-        <text class="baseInfo">{{item.name + '  ' +item.phone }}</text>
-        <text class="idCard">身份证：{{item.idCard}}</text>
+      <view class="base-info">
+        <image src="{{ item.avatar || item.avatarUrl || images.icons.defaultAvatar }}" />
+        <view class="info">
+          <text class="baseInfo">{{item.name + '  ' +item.phone }}</text>
+          <text class="idCard">身份证：{{item.idCard}}</text>
+        </view>
+        <view class="options btn-area">
+          <view class="edit" type="primary" data-row="{{ item }}" bindtap="handelEdit">查看</view>
+          <view class="delete" type="warn" data-row="{{ item }}" bindtap="handelDelete">删除</view>
+        </view>
       </view>
-      <view class="options btn-area">
-        <view class="edit" type="primary" data-row="{{ item }}" bindtap="handelEdit">编辑</view>
-        <view class="delete" type="warn" data-row="{{ item }}" bindtap="handelDelete">删除</view>
+      <view class="sub-info">
+        <view class="sub-text">
+          <text>服务次数</text>
+          <text class="num">{{item.studentCount}}</text>
+        </view>
+        <view class="sub-text">
+          <text>总收入</text>
+          <text class="num">{{item.incomeNum}}</text>
+        </view>
+        <view class="sub-text">
+          <text>所属训练场</text>
+          <text class="num">{{item.schoolName}}</text>
+        </view>
+        <view class="sub-text">
+          <text>所属车型</text>
+          <text class="num">{{item.carType}}</text>
+        </view>
       </view>
     </view>
   </block>

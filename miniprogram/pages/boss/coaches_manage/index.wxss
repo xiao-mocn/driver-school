@@ -70,13 +70,50 @@ page {
 .list-item {
   position: relative;
   width: 660rpx;
-  height: 150rpx;
   background: #FFF;
   border-radius: 20rpx;
   padding: 30rpx 0 30rpx 30rpx;
   margin: 0 30rpx 30rpx 30rpx;
   display: flex;
   align-items: center;
+  flex-direction: column;
+}
+.list-item .base-info{
+  position: relative;
+  width: 660rpx;
+  height: 150rpx;
+  background: #FFF;
+  display: flex;
+  align-items: center;
+}
+.list-item .sub-info{
+  position: relative;
+  width: 590rpx;
+  height: 80rpx;
+  background: #f1f1f1;
+  padding: 20rpx 20rpx;
+  margin: 10rpx 30rpx 0rpx 0rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.list-item .sub-info .sub-text{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 26rpx;
+  line-height: 30rpx;
+  color: #797979;
+  max-width: 210rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: center;
+}
+.list-item .sub-info .sub-text .num{
+  color: #679cff;
 }
 .list-item image{
   width: 120rpx;

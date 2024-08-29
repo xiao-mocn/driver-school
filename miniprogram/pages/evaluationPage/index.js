@@ -62,7 +62,7 @@ Page({
     }).then((res) => {
       console.log('res ===', res)
       this.setData({
-         orderList: res,
+        orderList: res,
         isRefreshing: false
       })
     }).catch((err) => {
@@ -75,20 +75,37 @@ Page({
     // 更新指定索引的元素
     updatedOrderList[index] = {
       ...updatedOrderList[index],
-      evaluationTime: getCurrentDate('YYYY-MM-dd hh:mm:ss'),
-      isEvaluationed: true,
+      totalRating: 0,
+      venueRating: 0,
+      coachRating: 0,
+      isShowEvaluation: true,
+      isEvaluationed: false,
+      evaluationTime: getCurrentDate('YYYY-MM-dd hh:mm:ss')
     };
     // 更新数据
     this.setData({
       orderList: updatedOrderList
     });
-
+  },
+  onShowEvaluation(e) {
+    const index = e.currentTarget.dataset.index; // 获取要更新的元素索引
+    const updatedOrderList = [...this.data.orderList]; // 创建数组的副本
+    updatedOrderList[index] = {
+      ...updatedOrderList[index],
+      isShowEvaluation: !updatedOrderList[index].isShowEvaluation,
+    };
+    this.setData({
+      orderList: updatedOrderList
+    });
   },
   rate(e) {
-    const { field, starIndex } = e.currentTarget.dataset; // 获取字段名、星级索引和订单索引
+    const { field, starIndex, orderIndex } = e.currentTarget.dataset; // 获取字段名、星级索引和订单索引
+    if (this.data.orderList[orderIndex].isEvaluationed) return
+    const updatedOrderList = [...this.data.orderList];
+    updatedOrderList[orderIndex][field] = starIndex + 1
     // 更新数据
     this.setData({
-      ['evaluationInfo.' + field]: starIndex + 1
+      orderList: updatedOrderList
     });
   },
   /**
@@ -111,12 +128,13 @@ Page({
       moduleType: 'update',
       data: {
         ...info,
-        ...this.data.evaluationInfo
+        isEvaluationed: true,
+        isShowEvaluation: false
       }
     }).then((res) => {
       wx.hideLoading()
       wx.showToast({
-        title: '接单成功',
+        title: '评价成功',
         icon: 'success'
       })
       this.initData()

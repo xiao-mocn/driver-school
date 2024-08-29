@@ -94,7 +94,7 @@ Page({
   },
   handelEdit(e) {
     wx.showToast({
-      title: '暂不支持修改',
+      title: '暂不支持查看',
       icon: 'none'
     })
     // const row = e.currentTarget.dataset.row;

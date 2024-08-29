@@ -87,7 +87,7 @@ export const companyInfo = {
     imageUrl: 'cloud://dev-6g37wdljde0bfd89.6465-dev-6g37wdljde0bfd89-1328795267/company_Images/anzhixilai/eight.jpg'
   }, {
     id: 10,
-    title: '华城工业场',
+    title: '华诚工业场',
     imageUrl: 'cloud://dev-6g37wdljde0bfd89.6465-dev-6g37wdljde0bfd89-1328795267/company_Images/huachenggongye/one.jpg'
   }, {
     id: 11,

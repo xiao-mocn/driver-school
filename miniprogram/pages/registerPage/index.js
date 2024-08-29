@@ -216,6 +216,8 @@ Page({
           ...this.data.formData,
           finishClass: 0,
           totalClass: 0,
+          subject2Num: 0, // 训练科二次数
+          subject3Num: 0
         }
       }
     } else {

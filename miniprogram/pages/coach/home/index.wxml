@@ -48,7 +48,7 @@
     <block wx:for="{{ orderList }}" wx:key="_id">
       <view class="order-list-item">
         <view class="user-info">
-          <image class="avatar" src="{{ item.studentInfo.avatarUrl || images.icons.defaultAvatar }}" ></image>
+          <image class="avatar" src="{{ item.studentInfo.avatar || item.studentInfo.avatarUrl || images.icons.defaultAvatar }}" ></image>
           <text class="name">{{ item.studentInfo.name }}</text>
           <text class="phone">{{ item.studentInfo.phone }}</text>
         </view>
