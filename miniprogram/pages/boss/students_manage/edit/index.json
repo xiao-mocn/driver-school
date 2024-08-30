@@ -1,8 +1,6 @@
 {
   "usingComponents": {
-    "custom-radio": "../../../../components/radio/index"
   },
-  "navigationBarTitleText":"新增成员",
-  "enablePullDownRefresh": true,
+  "navigationBarTitleText":"学员详情",
   "navigationBarBackgroundColor": "#feb47b"
 }

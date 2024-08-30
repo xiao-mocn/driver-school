@@ -89,20 +89,22 @@ page {
 .list-item .sub-info{
   position: relative;
   width: 590rpx;
-  height: 80rpx;
   background: #f1f1f1;
-  padding: 20rpx 20rpx;
+  padding: 0rpx 20rpx 20rpx 20rpx;
   margin: 10rpx 30rpx 0rpx 0rpx;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
-.list-item .sub-info .sub-text{
-  height: 100%;
+.list-item .sub-info .sub-text {
+  width: 180rpx;
+  height: 80rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  margin-top: 20rpx;
   font-size: 26rpx;
   line-height: 30rpx;
   color: #797979;

@@ -149,6 +149,30 @@
         <view class="picker">{{ formData.carType }}</view>
       </picker>
     </view>
+    <!-- <view class="item" wx:if="{{formData.registerType === 'coach'}}">
+      <text class="icon">*</text>
+      <text class="label">科目二价格: </text>
+      <input
+        value="{{formData.subject2Price}}"
+        data-name="subject2Price"
+        type="number"
+        bindinput="fieldChange"
+        base-input="true"
+        placeholder-class="placeholder"
+        placeholder="请输入科目三价格" />
+    </view>
+    <view class="item" wx:if="{{formData.registerType === 'coach'}}">
+      <text class="icon">*</text>
+      <text class="label">科目三价格: </text>
+      <input
+        value="{{formData.subject3Price}}"
+        data-name="subject3Price"
+        type="number"
+        bindinput="fieldChange"
+        base-input="true"
+        placeholder-class="placeholder"
+        placeholder="请输入科目三价格" />
+    </view> -->
     <view class="item" wx:if="{{formData.registerType === 'student'}}">
       <text class="icon">*</text>
       <text class="label">报考类型: </text>

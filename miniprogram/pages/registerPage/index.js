@@ -7,10 +7,10 @@ Page({
    */
   data: {
     formData: {
-      name: '莫荣包',
-      password: '123',
-      idCard: '452724199605032538',
-      phone: '15051836908',
+      name: '',
+      password: '',
+      idCard: '',
+      phone: '',
       gender: 'man',
       genderLabel: '男',
       birthday: '2000-01-01',

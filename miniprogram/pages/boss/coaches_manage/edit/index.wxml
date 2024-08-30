@@ -52,6 +52,18 @@
     </view>
     <view class="item">
       <text class="icon">*</text>
+      <text class="label"> 个人描述: </text>
+      <textarea
+        placeholder="请输入个人描述"
+        auto-height
+        data-name="description"
+        maxlength="400"
+        bindinput="fieldChange"
+        value="{{formData.description}}"
+      ></textarea>
+    </view>
+    <view class="item">
+      <text class="icon">*</text>
       <text class="label">性别: </text>
       <picker
         mode="selector"
@@ -85,6 +97,7 @@
         data-name="registerType"
         data-range="registerTypes"
         range-key="label"
+        disabled="{{true}}"
         range="{{registerTypes}}"
         bindchange="pickerChange">
         <view class="picker">{{ formData.registerTypeLabel }}</view>
@@ -115,30 +128,43 @@
   <view class="form">
     <view class="item">
       <text class="icon">*</text>
-      <text class="label">所属驾校: </text>
+      <text class="label">科目二价格: </text>
       <input
-        value="{{ formData.schoolName }}"
-        data-name="schoolName"
+        value="{{formData.subject2Price}}"
+        data-name="subject2Price"
+        type="number"
         bindinput="fieldChange"
         base-input="true"
         placeholder-class="placeholder"
-        placeholder="请输入所属驾校(必填)" />
+        placeholder="请输入科目三价格" />
     </view>
-    <view class="item" wx:if="{{formData.registerType === 'coach'}}">
+    <view class="item">
       <text class="icon">*</text>
-      <text class="label">教学类型: </text>
+      <text class="label">科目三价格: </text>
+      <input
+        value="{{formData.subject3Price}}"
+        data-name="subject3Price"
+        type="number"
+        bindinput="fieldChange"
+        base-input="true"
+        placeholder-class="placeholder"
+        placeholder="请输入科目三价格" />
+    </view>
+    <view class="item">
+      <text class="icon">*</text>
+      <text class="label">所属训练场: </text>
       <picker
-        class="picker"
         mode="selector"
-        range="{{carTypes}}"
-        data-name="carType"
-        bindchange="onPickerChange">
-        <view class="picker">{{ formData.carType }}</view>
+        data-name="schoolName"
+        data-range="schools"
+        range="{{schools}}"
+        bindchange="pickerChange">
+        <view class="picker">{{ formData.schoolName }}</view>
       </picker>
     </view>
-    <view class="item" wx:if="{{formData.registerType === 'student'}}">
+    <view class="item">
       <text class="icon">*</text>
-      <text class="label">报考类型: </text>
+      <text class="label">教学类型: </text>
       <picker
         class="picker"
         mode="selector"

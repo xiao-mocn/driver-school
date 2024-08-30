@@ -29,16 +29,12 @@
       </view>
       <view class="sub-info">
         <view class="sub-text">
-          <text>科二次数</text>
+          <text>科二训练次数</text>
           <text class="num">{{item.subject2Num}}</text>
         </view>
         <view class="sub-text">
-          <text>科三次数</text>
+          <text>科三训练次数</text>
           <text class="num">{{item.subject3Num}}</text>
-        </view>
-        <view class="sub-text">
-          <text>所属训练场</text>
-          <text class="num">{{item.schoolName}}</text>
         </view>
         <view class="sub-text">
           <text>所属车型</text>

@@ -9,7 +9,7 @@
 </view>
 <!-- 常用功能 -->
 <view class="user-content">
-  <view class="income-container">
+  <!-- <view class="income-container">
     <view class="left flex-center">
       <text class="title">总收入</text>
       <text class="income">{{ userInfo.finishClass || 0 }}</text>
@@ -19,7 +19,7 @@
       <text class="title">本月收入</text>
       <text class="income">{{ userInfo.totalClass || 0 }}</text>
     </view>
-  </view>
+  </view> -->
   <view class="application-conntainer">
     <navigator class="row-item" url="/pages/editPassWord/index">
       <view class="row-info">
@@ -30,6 +30,6 @@
     </navigator>
   </view>
   <view class="bottom-btn" bindtap="onLogin">
-    <text>{{ userInfo.isLogin ? '立即退出' : '立即登录' }}</text>
+    <text>{{ userInfo ? '立即退出' : '立即登录' }}</text>
   </view>
 </view>

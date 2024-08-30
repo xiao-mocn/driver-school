@@ -1,4 +1,3 @@
-
 <view class="base-info">
   <view class="title">
     <view class="icon" ></view>
@@ -7,14 +6,25 @@
   <view class="form">
     <view class="item">
       <text class="icon">*</text>
-      <text class="label">学员姓名: </text>
+      <text class="label">账号名: </text>
       <input
         value="{{formData.name}}"
         data-name="name"
-        bindinput="inputChange"
+        bindinput="fieldChange"
         base-input="true"
         placeholder-class="placeholder"
-        placeholder="请输入姓名(必填)" />
+        placeholder="请输入账号名(必填)" />
+    </view>
+    <view class="item">
+      <text class="icon">*</text>
+      <text class="label">账号密码: </text>
+      <input
+        value="{{formData.password}}"
+        data-name="password"
+        bindinput="fieldChange"
+        base-input="true"
+        placeholder-class="placeholder"
+        placeholder="请输入密码" />
     </view>
     <view class="item">
       <text class="icon">*</text>
@@ -23,10 +33,47 @@
         value="{{formData.idCard}}"
         data-name="idCard"
         type="idcard"
-        bindinput="inputChange"
+        bindinput="fieldChange"
         base-input="true"
         placeholder-class="placeholder"
         placeholder="请输入身份证号" />
+    </view>
+    <view class="item">
+      <text class="icon">*</text>
+      <text class="label">手机号码: </text>
+      <input
+        value="{{formData.phone}}"
+        data-name="phone"
+        type="number"
+        bindinput="fieldChange"
+        base-input="true"
+        placeholder-class="placeholder"
+        placeholder="请输入手机号码" />
+    </view>
+    <view class="item">
+      <text class="icon">*</text>
+      <text class="label"> 个人描述: </text>
+      <textarea
+        placeholder="请输入个人描述"
+        auto-height
+        data-name="description"
+        maxlength="400"
+        bindinput="fieldChange"
+        value="{{formData.description}}"
+      ></textarea>
+    </view>
+    <view class="item">
+      <text class="icon">*</text>
+      <text class="label">性别: </text>
+      <picker
+        mode="selector"
+        data-name="gender"
+        data-range="genders"
+        range-key="label"
+        range="{{genders}}"
+        bindchange="pickerChange">
+        <view class="picker">{{ formData.genderLabel }}</view>
+      </picker>
     </view>
     <view class="item">
       <text class="icon">*</text>
@@ -37,32 +84,39 @@
         data-name="birthday"
         start="1900-09-01"
         end="2999-09-01"
-        bindchange="bindDateChange">
+        bindchange="fieldChange">
         <view class="picker">{{ formData.birthday }}</view>
       </picker>
     </view>
+    
     <view class="item">
       <text class="icon">*</text>
-      <text class="label">学员性别: </text>
+      <text class="label">注册类型: </text>
       <picker
         mode="selector"
-        data-name="gender"
-        range="{{genders}}"
-        bindchange="onPickerChange">
-        <view class="picker">{{ formData.gender }}</view>
+        data-name="registerType"
+        data-range="registerTypes"
+        range-key="label"
+        disabled="{{true}}"
+        range="{{registerTypes}}"
+        bindchange="pickerChange">
+        <view class="picker">{{ formData.registerTypeLabel }}</view>
       </picker>
     </view>
-    <view class="item">
-      <text class="icon">*</text>
-      <text class="label">手机号码: </text>
-      <input
-        value="{{formData.phone}}"
-        data-name="phone"
-        type="number"
-        bindinput="inputChange"
-        base-input="true"
-        placeholder-class="placeholder"
-        placeholder="请输入手机号码" />
+    <view class="item" style="align-items: self-start;">
+      <text class="icon"></text>
+      <text class="label">个人头像: </text>
+      <view class="upload-image">
+        <image
+          wx:if="{{ formData.avatar }}"
+          class="image"
+          src="{{ formData.avatar }}"
+          mode="aspectFill"
+          bindtap="uploadImage"></image>
+        <view wx:else class="upload-image-mask" bindtap="uploadImage">
+          <text class="iconfont icon-upload">选择图片</text>
+        </view>
+      </view>
     </view>
   </view>
 </view>
@@ -72,38 +126,6 @@
     <text>驾校信息</text>
   </view>
   <view class="form">
-    <view class="item">
-      <text class="icon">*</text>
-      <text class="label">报考驾校: </text>
-      <input
-        value="{{formData.school}}"
-        data-name="school"
-        bindinput="inputChange"
-        base-input="true"
-        placeholder-class="placeholder"
-        placeholder="请输入所属驾校(必填)" />
-    </view>
-    <view class="item">
-      <text class="icon">*</text>
-      <text class="label">报班类型: </text>
-      <view class="radios">
-        <custom-radio
-          data-name="classType"
-          name="初学"
-          checked="{{ formData.classType === 'beginner' }}"
-          value="beginner"
-          bindchange="handleRadioChange"
-        />
-        <custom-radio
-          data-name="classType"
-          name="增驾"
-          style="margin-left: 30rpx"
-          checked="{{ formData.classType === 'additional_driving' }}"
-          value="additional_driving"
-          bindchange="handleRadioChange"
-        />
-      </view>
-    </view>
     <view class="item">
       <text class="icon">*</text>
       <text class="label">报考类型: </text>
@@ -118,11 +140,6 @@
     </view>
   </view>
 </view>
-<view class="bottom-btn">
-  <view class="btn cancel" bindtap="handleCancel">
-    <text>返回</text>
-  </view>
-  <view class="btn" bindtap="handleButtonClick">
-    <text>提交</text>
-  </view>
+<view class="bottom-btn" bindtap="handleButtonClick">
+  <text>立即提交</text>
 </view>

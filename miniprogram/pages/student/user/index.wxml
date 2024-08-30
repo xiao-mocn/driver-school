@@ -11,13 +11,13 @@
 <view class="user-content">
   <view class="income-container">
     <view class="left flex-center">
-      <text class="title">已学课时</text>
-      <text class="income">{{ userInfo.finishClass || 0 }}</text>
+      <text class="title">科二已练课时</text>
+      <text class="income">{{ userInfo.subject2Num || 0 }}</text>
     </view>
     <image src=" {{ images.student.slash_icon }}" class="star"></image>
     <view class="right flex-center">
-      <text class="title">剩余课时</text>
-      <text class="income">{{ userInfo.totalClass || 0 }}</text>
+      <text class="title">科三已练课时</text>
+      <text class="income">{{ userInfo.subject3Num || 0 }}</text>
     </view>
   </view>
   <view class="application-conntainer">
@@ -35,13 +35,6 @@
       </view>
       <image src=" {{ images.icons.next }}" />
     </navigator>
-    <!-- <navigator class="row-item">
-      <view class="row-info">
-        <image src=" {{ images.icons.wallet }}" />
-        <text>我的钱包</text>
-      </view>
-      <image src=" {{ images.icons.next }}" />
-    </navigator> -->
     <navigator class="row-item" url="/pages/evaluationPage/index">
       <view class="row-info">
         <image src=" {{ images.icons.star }}" />

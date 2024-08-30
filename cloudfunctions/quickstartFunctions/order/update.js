@@ -34,17 +34,13 @@ exports.main = async (event, context) => {
         if (data.trainType === 'subject3') {
           await db.collection('students').doc(data.studentId).update({
             data: {
-              subject3Num: db.command.inc(1),
-              incomeNum: db.command.inc(data.prices * 0.8),
-              withdrawableIncome: db.command.inc(data.prices * 0.8),
+              subject3Num: db.command.inc(1)
             },
           });
         } else {
           await db.collection('students').doc(data.studentId).update({
             data: {
-              subject2Num: db.command.inc(1),
-              incomeNum: db.command.inc(data.prices * 0.8),
-              withdrawableIncome: db.command.inc(data.prices * 0.8),
+              subject2Num: db.command.inc(1)
             },
           });
         }

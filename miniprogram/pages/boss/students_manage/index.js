@@ -64,46 +64,23 @@ Page({
     })
   },
   handelAdd() {
-    wx.showToast({
-      title: '暂不支持新增',
-      icon: 'none'
+    wx.navigateTo({
+      url: `/pages/boss/students_manage/edit/index`
     })
-    // wx.navigateTo({
-    //   url: `/pages/boss/students_manage/edit/index?type=add`,
-    //   success: function (res) {
-    //     // 通过eventChannel向被打开页面传送数据
-    //     res.eventChannel.emit('acceptDataFromOpenerPage', { 
-    //       data: {
-    //         name: '莫荣包',
-    //         idCard: '452724199605032538',
-    //         birthday: '2024-01-01',
-    //         gender: '男',
-    //         phone: '15051836908',
-    //         school: '上海驾校',
-    //         classType: 'beginner',
-    //         carType: 'C1',
-    //         selectedDates: [],
-    //         finishClass: 0,
-    //         totalClass: 0
-    //       }
-    //     })
-    //   }
-    // })
   },
   handelEdit(e) {
-    wx.showToast({
-      title: '暂不支持查看',
-      icon: 'none'
+    const row = e.currentTarget.dataset.row;
+    console.log('row ===', row);
+    wx.navigateTo({
+      url: `/pages/boss/students_manage/edit/index`,
+      success: function (res) {
+        // 通过eventChannel向被打开页面传送数据
+        res.eventChannel.emit('acceptDataFromOpenerPage', {
+          ...row,
+          pageType: 'edit'
+        })
+      }
     })
-    // const row = e.currentTarget.dataset.row;
-    // console.log('row ===', row);
-    // wx.navigateTo({
-    //   url: `/pages/boss/students_manage/edit/index?type=edit`,
-    //   success: function (res) {
-    //     // 通过eventChannel向被打开页面传送数据
-    //     res.eventChannel.emit('acceptDataFromOpenerPage', { data: row })
-    //   }
-    // })
   },
   handelDelete(e) {
     const row = e.currentTarget.dataset.row;

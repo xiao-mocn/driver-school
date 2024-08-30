@@ -45,7 +45,7 @@ page {
   position: relative;
   width: 690rpx;
   padding: 30rpx;
-  min-height: calc(100vh - 310rpx);
+  /* min-height: calc(100vh - 310rpx); */
   top: -40rpx;
   border-top-left-radius: 50rpx;
   border-top-right-radius: 50rpx;
@@ -96,7 +96,7 @@ page {
   flex-direction: column;
   width: 630rpx;
   padding: 30rpx;
-  height: 600rpx;
+  height: calc(100vh - 400rpx);
   margin-top: 20rpx;
   border-radius: 20rpx;
   background-color: #FFF;

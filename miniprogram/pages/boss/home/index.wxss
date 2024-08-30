@@ -84,7 +84,7 @@ navigator {
 .income-item .income-btn {
   position: relative;
   display: block;
-  top: 50rpx;
+  top: 70rpx;
   left: 30rpx;
   font-size: 24rpx;
   font-weight: 400;

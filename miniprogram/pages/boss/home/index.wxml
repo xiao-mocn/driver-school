@@ -5,7 +5,7 @@
     </view>
     <view class="right-bg"></view>
     <image src="{{images.boss.income}}" class="income-icon"></image>
-    <text class="income-text">￥0.00</text>
+    <text class="income-text">￥{{ userInfo.incomeNum }}</text>
     <text class="income-btn">查看详情</text>
   </view>
   <view class="income-item">
