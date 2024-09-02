@@ -1,7 +1,5 @@
 {
-  "usingComponents": {
-    "custom-radio": "../../components/radio/index"
-  },
+  "usingComponents": {},
   "navigationBarTitleText":"个人信息",
   "navigationBarBackgroundColor": "#feb47b"
 }
