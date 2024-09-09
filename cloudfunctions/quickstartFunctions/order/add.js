@@ -49,13 +49,13 @@ exports.main = async (event, context) => {
         },
       })
     }
-    await db.collection('orders').add({
+    const res = await db.collection('orders').add({
       // data 字段表示需新增的 JSON 数据
       data: { ...data }
     });
     return {
       success: true,
-      data: '新增成功'
+      data: res._id
     };
   } catch (e) {
     console.error(e);

@@ -183,15 +183,17 @@ Page({
       content: '确定要预约吗？',
       success: (res) => {
         if (res.confirm) {
+          wx.showLoading({
+            title: '正在提交',
+            mask: true
+          });
           this.callFunctionAdd()
         }
       }
     })
+    
   },
   callFunctionAdd() {
-    wx.showLoading({
-      title: '正在提交',
-    });
     // 随便一个教练信息存在即可将订单状态改为running
     let status = this.data.coachInfo._id ? 'running' : 'created'
     callCloudFunction('quickstartFunctions', {
@@ -207,27 +209,55 @@ Page({
         orderTime: this.data.selectedDate,
         orderTimePeriod: this.data.selectedTimePeriod,
         status,
+        payStatus: 'unpaid',
         createdAt: getCurrentDate('YYYY-MM-DD hh:mm:ss'),
         trainTypeLabel: this.data.trainTypeLabel,
         trainType: this.data.trainType,
         prices: this.data.prices,
       }
     }).then((resp) => {
-      wx.hideLoading();
-      wx.showToast({
-        title: '提交成功',
-        icon: 'success', // 提示图标，可选值：'success', 'loading', 'none'
-        duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
-        mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
-      })
-      wx.switchTab({
-        url: '/pages/home/index',
-      })
+      console.log('resp ====', resp)
+      this.callPayment(resp)
+      // wx.hideLoading();
+      // wx.showToast({
+      //   title: '提交成功',
+      //   icon: 'success', // 提示图标，可选值：'success', 'loading', 'none'
+      //   duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
+      //   mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
+      // })
+      // wx.switchTab({
+      //   url: '/pages/home/index',
+      // })
     }).catch((err) => {
       wx.showToast({
-        title: err || '提交失败',
+        title: err || '提交失败,请重试',
       })
     })
     
+  },
+  callPayment(order_id) {
+    callCloudFunction('wxpayFunctions', {
+      type: 'wxpay_order',
+      payNum: 1,
+      order_id: order_id
+    }).then((resp) => {
+      console.log('resp ====', resp)
+      wx.requestPayment({
+        ...resp,
+        package: resp.packageVal,
+        success (res) {
+          console.log('success', res)
+          wx.hideLoading();
+          wx.showToast({ title: '支付成功' });
+        },
+        fail (res) {
+          wx.hideLoading();
+          console.log('fail', res)
+          wx.showToast({ title: '支付失败', icon: 'none' });
+        }
+      });
+    }).catch(err => {
+      console.log(err)
+    })
   }
 })

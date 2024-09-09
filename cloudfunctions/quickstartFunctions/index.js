@@ -12,7 +12,6 @@ const defaultUpdate = require('./defaultUpdate/index');
 
 // 云函数入口函数
 exports.main = async (event, context) => {
-  // console.log('start ===== ', event);
   switch (event.type) {
     case 'login':
       return await login.main(event, context);
