@@ -12,6 +12,7 @@
     "pages/registerPage/index",
     "pages/editPassWord/index",
     "pages/orderList/index",
+    "pages/orderList/detail/index",
     "pages/personalInformation/index",
     "pages/evaluationPage/index",
     "pages/boss/coaches_manage/index",

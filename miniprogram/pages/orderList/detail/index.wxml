@@ -26,49 +26,6 @@
       <text style="margin-left: 20rpx;">{{coachInfo.schoolName || '未指定'}}</text>
     </view>
   </view>
-  <view class="selectDate-container">
-    <text class="title">预约时段</text>
-    <view class="selectDate-options">
-      <view
-        class="option {{item.selected ? 'active ' : ''}}"
-        style="{{ (index === 0 || index === 5) ? 'margin-left: 0;' : 'margin-left: 6rpx' }}"
-        wx:for="{{dateOptions}}"
-        wx:key="formattedDate"
-        data-date="{{item}}"
-        bindtap="onDateSelect">
-        <text>{{item.weekday}}</text>
-        <text>{{item.date}}</text>
-        <image wx:if="{{item.selected}}" src="{{ images.icons.checked}}" />
-      </view>
-    </view>
-    <view class="timePeriods">
-      <view
-        wx:for="{{timePeriods}}"
-        wx:key="period"
-        class="timePeriod {{ item.selected ? 'active' : ''}}"
-        style="{{ index % 3 === 0 ? 'margin-left: 0;' : 'margin-left: 12rpx' }}"
-        data-period="{{item.period}}"
-        bindtap="onPeriodSelect">
-        <text>{{item.name}}</text>
-        <text wx:if="{{!item.isFree}}">已满</text>
-        <text wx:if="{{item.isFree}}" class="reducible">可约</text>
-        <text>{{item.period}}</text>
-        <image wx:if="{{item.selected}}" src="{{ images.icons.checked }}" />
-      </view>
-    </view>
-    <view class="train-container">
-      <text class="icon">*</text>
-      <text class="label">训练类型: </text>
-      <picker
-        class="picker"
-        mode="selector"
-        range-key="label"
-        range="{{trainTypes}}"
-        bindchange="onPickerChange">
-        <view class="picker">{{ trainTypeLabel }}</view>
-      </picker>
-    </view>
-  </view>
   <view class="pay-container">
     <text class="title">支付手段</text>
     <view class="pay-list">
