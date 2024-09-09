@@ -218,16 +218,6 @@ Page({
     }).then((resp) => {
       console.log('resp ====', resp)
       this.callPayment(resp)
-      // wx.hideLoading();
-      // wx.showToast({
-      //   title: '提交成功',
-      //   icon: 'success', // 提示图标，可选值：'success', 'loading', 'none'
-      //   duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
-      //   mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
-      // })
-      // wx.switchTab({
-      //   url: '/pages/home/index',
-      // })
     }).catch((err) => {
       wx.showToast({
         title: err || '提交失败,请重试',
@@ -249,6 +239,14 @@ Page({
           console.log('success', res)
           wx.hideLoading();
           wx.showToast({ title: '支付成功' });
+          callCloudFunction('quickstartFunctions', {
+            type: 'defaultUpdate',
+            collectionName: 'orders',
+            _id: order_id,
+            data: {
+              payStatus: 'paid'
+            }
+          })
         },
         fail (res) {
           wx.hideLoading();
