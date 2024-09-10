@@ -7,6 +7,8 @@ Page({
    */
   data: {
     images,
+    orderInfo: {},
+    userInfo: {}
   },
   /**
    * 生命周期函数--监听页面加载
@@ -19,25 +21,9 @@ Page({
       })
       return
     }
-    this.getOrderInfo()
-  },
-  getOrderInfo: function () {
-    wx.showLoading({
-      title: '正在提交',
-      mask: true
-    });
-    callCloudFunction('quickstartFunctions', {
-      type: 'selectRecord',
-      collectionName: 'orders',
-      _id: 'af813b1066df058a00ad638a5dc5e9bc'
-    }).then((resp) => {
-      console.log('resp ====', resp)
-      wx.hideLoading()
-    }).catch((err) => {
-      wx.hideLoading()
-      wx.showToast({
-        title: err || '查询失败,请重试',
-      })
+    this.setData({
+      userInfo,
+      orderInfo: wx.getStorageSync('orderInfo')
     })
   },
   handleCancel() {
@@ -46,7 +32,73 @@ Page({
     });
   },
   handleButtonClick() {
+    wx.showLoading({
+      title: '正在提交',
+      mask: true
+    });
+    this.callFunctionAdd()
   },
   callFunctionAdd() {
+    // 随便一个教练信息存在即可将订单状态改为running
+    callCloudFunction('quickstartFunctions', {
+      type: 'order',
+      moduleType: 'add',
+      data: {
+        ...this.data.orderInfo,
+      }
+    }).then((resp) => {
+      console.log('resp ====', resp)
+      this.callPayment(resp)
+    }).catch((err) => {
+      wx.showToast({
+        title: err || '提交失败,请重试',
+      })
+    })
+    
+  },
+  callPayment(order_id) {
+    callCloudFunction('wxpayFunctions', {
+      type: 'wxpay_order',
+      payNum: 1,
+      order_id: order_id
+    }).then((resp) => {
+      console.log('resp ====', resp)
+      wx.requestPayment({
+        ...resp,
+        package: resp.packageVal,
+        success: (res) => {
+          console.log('success', res)
+          wx.hideLoading();
+          wx.showToast({ title: '支付成功' });
+          callCloudFunction('quickstartFunctions', {
+            type: 'defaultUpdate',
+            collectionName: 'orders',
+            _id: order_id,
+            data: {
+              payStatus: 'paid'
+            }
+          })
+          this.finallyCallBack()
+        },
+        fail: (res) => {
+          console.log('fail', res)
+          wx.hideLoading();
+          wx.showToast({ title: '支付失败', icon: 'none' });
+          this.finallyCallBack()
+        }
+      });
+    }).catch(err => {
+      console.log(err)
+    })
+  },
+  finallyCallBack() {
+    wx.removeStorage({
+      key: 'orderInfo'
+    })
+    setTimeout(() => {
+      wx.navigateBack({
+        delta: 2 // 返回到上级页面
+      });
+    }, 1000);
   }
 })

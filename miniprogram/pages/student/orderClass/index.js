@@ -183,79 +183,28 @@ Page({
       content: '确定要预约吗？',
       success: (res) => {
         if (res.confirm) {
-          wx.showLoading({
-            title: '正在提交',
-            mask: true
-          });
-          this.callFunctionAdd()
-        }
-      }
-    })
-    
-  },
-  callFunctionAdd() {
-    // 随便一个教练信息存在即可将订单状态改为running
-    let status = this.data.coachInfo._id ? 'running' : 'created'
-    callCloudFunction('quickstartFunctions', {
-      type: 'order',
-      moduleType: 'add',
-      data: {
-        coachId: this.data.coachInfo._id,
-        coachName: this.data.coachInfo.name,
-        coachInfo: this.data.coachInfo,
-        studentId: wx.getStorageSync('userInfo')._id,
-        studentName: wx.getStorageSync('userInfo').name,
-        studentInfo: wx.getStorageSync('userInfo'),
-        orderTime: this.data.selectedDate,
-        orderTimePeriod: this.data.selectedTimePeriod,
-        status,
-        payStatus: 'unpaid',
-        createdAt: getCurrentDate('YYYY-MM-DD hh:mm:ss'),
-        trainTypeLabel: this.data.trainTypeLabel,
-        trainType: this.data.trainType,
-        prices: this.data.prices,
-      }
-    }).then((resp) => {
-      console.log('resp ====', resp)
-      this.callPayment(resp)
-    }).catch((err) => {
-      wx.showToast({
-        title: err || '提交失败,请重试',
-      })
-    })
-    
-  },
-  callPayment(order_id) {
-    callCloudFunction('wxpayFunctions', {
-      type: 'wxpay_order',
-      payNum: 1,
-      order_id: order_id
-    }).then((resp) => {
-      console.log('resp ====', resp)
-      wx.requestPayment({
-        ...resp,
-        package: resp.packageVal,
-        success (res) {
-          console.log('success', res)
-          wx.hideLoading();
-          wx.showToast({ title: '支付成功' });
-          callCloudFunction('quickstartFunctions', {
-            type: 'defaultUpdate',
-            collectionName: 'orders',
-            _id: order_id,
-            data: {
-              payStatus: 'paid'
-            }
+          let status = this.data.coachInfo._id ? 'running' : 'created'
+          wx.setStorageSync('orderInfo', {
+            coachId: this.data.coachInfo._id,
+            coachName: this.data.coachInfo.name,
+            coachInfo: this.data.coachInfo,
+            studentId: wx.getStorageSync('userInfo')._id,
+            studentName: wx.getStorageSync('userInfo').name,
+            studentInfo: wx.getStorageSync('userInfo'),
+            orderTime: this.data.selectedDate,
+            orderTimePeriod: this.data.selectedTimePeriod,
+            status,
+            payStatus: 'unpaid',
+            createdAt: getCurrentDate('YYYY-MM-DD hh:mm:ss'),
+            trainTypeLabel: this.data.trainTypeLabel,
+            trainType: this.data.trainType,
+            prices: this.data.prices,
           })
-        },
-        fail (res) {
-          wx.hideLoading();
-          console.log('fail', res)
-          wx.showToast({ title: '支付失败', icon: 'none' });
+          wx.navigateTo({
+            url: '/pages/orderList/detail/index'
+          })
         }
-      });
-    }).catch(err => {
-      console.log(err)
+      }
     })
   }
 })

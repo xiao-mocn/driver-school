@@ -102,7 +102,7 @@ page {
   margin-top: 30rpx;
   display: flex;
   align-items: center;
-  font-size: 26rpx;
+  font-size: 30rpx;
   color: rgb(96, 96, 96);
   line-height: 30rpx;
 }
@@ -234,6 +234,49 @@ page {
 }
 
 
+.other-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 30rpx;
+  width: 630rpx;
+  border-radius: 20rpx;
+  margin-top: 20rpx;
+  background: #FFFFFF;
+}
+.other-list {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 630rpx;
+  margin-top: 30rpx;
+}
+.other-list .other-list-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 30rpx;
+}
+.other-list .other-list-item image {
+  width: 50rpx;
+  height: 50rpx;
+}
+.other-list .other-list-item .unpaid {
+  color: #fe9602;
+}
+.other-list .other-list-item .paid {
+  color: #00c45b;
+}
+.other-list .other-list-item .cancel {
+  color: #aeaeae;
+}
+.other-list .other-list-item text {
+  color: #1e1d1d;
+  font-size: 30rpx;
+  line-height: 30rpx;
+}
+
 .pay-container {
   position: relative;
   display: flex;
@@ -283,6 +326,7 @@ page {
   justify-content: space-between;
 }
 .bottom-btn .btn {
+  margin: 0;
   width: 300rpx;
   height: 80rpx;
   background-color: #fe9602;

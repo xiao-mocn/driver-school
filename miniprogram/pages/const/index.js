@@ -48,7 +48,9 @@ export const images = {
     star: 'https://6465-dev-6g37wdljde0bfd89-1328795267.tcb.qcloud.la/images/icons/star.png?sign=90827d7c28b6453d7af3f528f8746cf2&t=1723921519',
     user: 'https://6465-dev-6g37wdljde0bfd89-1328795267.tcb.qcloud.la/images/icons/user.png?sign=666422e131524e6f23ce258416629475&t=1723921529',
     wallet: 'https://6465-dev-6g37wdljde0bfd89-1328795267.tcb.qcloud.la/images/icons/wallet.png?sign=b5b1a385f4bf83407a17641ca2bbafb4&t=1723921541',
-    wxPay: 'https://6465-dev-6g37wdljde0bfd89-1328795267.tcb.qcloud.la/images/icons/wxPay.png?sign=052a905d63a9cde3f195e457887d9a60&t=1723921551'
+    wxPay: 'https://6465-dev-6g37wdljde0bfd89-1328795267.tcb.qcloud.la/images/icons/wxPay.png?sign=052a905d63a9cde3f195e457887d9a60&t=1723921551',
+    time: 'cloud://dev-6g37wdljde0bfd89.6465-dev-6g37wdljde0bfd89-1328795267/images/icons/time.png',
+    class: 'cloud://dev-6g37wdljde0bfd89.6465-dev-6g37wdljde0bfd89-1328795267/images/icons/class.png'
   },
   login: {
     wave: 'https://6465-dev-6g37wdljde0bfd89-1328795267.tcb.qcloud.la/images/login/wave.png?sign=76711a0e49428bab8a841a837804c0f5&t=1723921582',
