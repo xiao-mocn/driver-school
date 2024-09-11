@@ -12,7 +12,7 @@ exports.main = async (event, context) => {
             name: 'wxpay_refund_query',
             data: {
                 params: {
-                    out_refund_no: '2024040118006666', // 填入商户退款单号
+                    out_refund_no: event.outTradeNo, // 填入商户退款单号
                 },
             },
         },

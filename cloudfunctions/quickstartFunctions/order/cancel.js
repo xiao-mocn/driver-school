@@ -12,20 +12,21 @@ exports.main = async (event, context) => {
   try {
     if (data.coachId) {
       const coachInfo = await db.collection('coaches').doc(data.coachId).get();
-      // const selectedDates = coachInfo.selectedDates || []
-      // const monthlyOrderInfo = coachInfo.monthlyOrderInfo || {}
-      // if (selectedDates.includes(data.date)) {
-      //   // 删除日期
-      //   selectedDates.splice(selectedDates.indexOf(data.date), 1);
-      //   // 更新月订单信息
-      //   monthlyOrderInfo[data.date] = 0;
-      // }
-      // await db.collection('coaches').doc(data.coachId).update({
-      //   data: {
-      //     incomeNum: db.command.inc(-data.prices * 0.8),
-      //     withdrawableIncome: db.command.inc(-data.prices * 0.8),
-      //   },
-      // });
+      const selectedDates = coachInfo.selectedDates
+      const monthlyOrderInfo = coachInfo.monthlyOrderInfo || {}
+      const selectTimePeriods = selectedDates.filter((i) => data.orderTime === i.year + '-' + i.date)[0]
+      if (selectTimePeriods) {
+        // 删除时间段
+        selectTimePeriods.timePeriods.splice(selectTimePeriods.timePeriods.indexOf(data.orderTimePeriod), 1);
+      }
+      const dateSplits = data.orderTime.split('-');
+      monthlyOrderInfo[`_${dateSplits[0]}_${dateSplits[1]}`] -= 1
+      await db.collection('coaches').doc(data.coachId).update({
+        data: {
+          selectedDates,
+          monthlyOrderInfo
+        },
+      });
     }
     await db.collection('orders').where({
       _id: _id

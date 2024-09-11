@@ -71,26 +71,6 @@ Page({
       console.log('err ===', err)
     })
   },
-  onDelete(e) {
-    wx.showModal({
-      title: '提示',
-      content: '确定删除该订单吗(不可恢复)？',
-      success: (res) => {
-        callCloudFunction('quickstartFunctions', {
-          type: 'deleteRecord',
-          collectionName: 'orders',
-          _id: e.currentTarget.dataset.id
-        }).then((res) => {
-          wx.showToast({
-            title: '删除成功'
-          })
-          this.initData()
-        }).catch((err) => {
-          console.log('err ===', err)
-        })
-      }
-    })
-  },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
@@ -114,22 +94,30 @@ Page({
       title: '提示',
       content: '确定取消该订单吗？',
       success: (res) => {
+        // 退款操作
+        callCloudFunction('wxpayFunctions', {
+          type: 'wxpay_refund',
+          data: {
+            outTradeNo: item.outTradeNo,
+            refund: 1, // 退款金额
+            total: 1, // 原订单金额,
+            currency: 'CNY',
+          }
+        })
+        // 订单状态更新
         // callCloudFunction('quickstartFunctions', {
-        //   type: 'defaultUpdate',
-        //   collectionName: 'orders',
-        //   _id: item._id,
+        //   type: 'order',
+        //   moduleType: 'cancel',
         //   data: {
-        //     payStatus: 'cancel'
+        //     ...item,
+        //     payStatus: 'cancel',
         //   }
-        // }).then((res) => {
-        //   wx.showToast({
-        //     title: '取消成功'
-        //   })
+        // }).then((resp) => {
+        //   console.log('resp ====', resp)
         //   this.initData()
-        // }).catch((err)=> {
-        //   console.log('err ===', err)
+        // }).catch((err) => {
         //   wx.showToast({
-        //     title: '取消失败'
+        //     title: err || '取消失败,请重试',
         //   })
         // })
       }
