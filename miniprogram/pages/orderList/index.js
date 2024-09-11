@@ -90,7 +90,6 @@ Page({
         })
       }
     })
-    
   },
   /**
    * 页面相关事件处理函数--监听用户下拉动作
@@ -101,4 +100,39 @@ Page({
     })
     this.initData()
   },
+  handleDetail(e) {
+    const item = e.currentTarget.dataset.item
+    wx.setStorageSync('orderInfo', item)
+    wx.navigateTo({
+      url: '/pages/orderList/detail/index'
+    })
+  },
+  handleCancel(e) {
+    const item = e.currentTarget.dataset.item
+    console.log('item ===', item)
+    wx.showModal({
+      title: '提示',
+      content: '确定取消该订单吗？',
+      success: (res) => {
+        // callCloudFunction('quickstartFunctions', {
+        //   type: 'defaultUpdate',
+        //   collectionName: 'orders',
+        //   _id: item._id,
+        //   data: {
+        //     payStatus: 'cancel'
+        //   }
+        // }).then((res) => {
+        //   wx.showToast({
+        //     title: '取消成功'
+        //   })
+        //   this.initData()
+        // }).catch((err)=> {
+        //   console.log('err ===', err)
+        //   wx.showToast({
+        //     title: '取消失败'
+        //   })
+        // })
+      }
+    })
+  }
 })

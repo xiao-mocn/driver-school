@@ -56,6 +56,11 @@ page {
   font-size: 36rpx;
   color: #fe9602;
 }
+.coach-info .text-info .phone {
+  margin-left: 20rpx;
+  font-size: 30rpx;
+  color: #a09f9f;
+}
 .coach-info .text-info .text {
   margin-left: 10rpx;
   font-size: 26rpx;
@@ -256,7 +261,7 @@ page {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 30rpx;
+  margin: 20rpx 0rpx;
 }
 .other-list .other-list-item image {
   width: 50rpx;

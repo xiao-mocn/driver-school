@@ -8,6 +8,7 @@ const db = cloud.database();
 // 修改数据库信息云函数入口函数
 exports.main = async (event, context) => {
   const { collectionName, username, password, wxInfo, registerType } = event;
+  const wxContext = cloud.getWXContext();
   try {
     // 遍历修改数据库信息
     const resp = await db.collection(collectionName).where({
@@ -44,6 +45,7 @@ exports.main = async (event, context) => {
         province: wxInfo.province,
         city: wxInfo.city,
         country: wxInfo.country,
+        openId: wxContext.OPENID
       }
     })
     return {
@@ -58,6 +60,7 @@ exports.main = async (event, context) => {
         province: wxInfo.province,
         city: wxInfo.city,
         country: wxInfo.country,
+        openId: wxContext.OPENID
       }
     };
   } catch (e) {

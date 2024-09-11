@@ -14,7 +14,7 @@ exports.main = async (event, context) => {
       }).get();
       const selectedDates = coacheResp.data[0].selectedDates || []
       const monthlyOrderInfo = coacheResp.data[0].monthlyOrderInfo || {}
-      const currentMonth = `${data.orderTime.split('-')[0]}-${data.orderTime.split('-')[1]}`
+      const currentMonth = `_${data.orderTime.split('-')[0]}_${data.orderTime.split('-')[1]}`
       if (!monthlyOrderInfo[currentMonth]) {
         monthlyOrderInfo[currentMonth] = 1
       } else {

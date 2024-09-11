@@ -43,9 +43,10 @@ Component({
       }).then((res) => {
         wx.setStorageSync('userInfo', res)
         const monthlyOrderInfo = res?.monthlyOrderInfo || {}
+        const currentMonth = getCurrentDate('YYYY-MM').split('-').join('_')
         this.setData({
           userInfo: res,
-          monthOrdNum: monthlyOrderInfo[getCurrentDate('YYYY-MM')] || 0
+          monthOrdNum: monthlyOrderInfo[currentMonth] || 0
         })
       }).catch((err) => {
         wx.showToast({

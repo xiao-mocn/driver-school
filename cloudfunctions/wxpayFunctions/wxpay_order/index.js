@@ -13,13 +13,6 @@ exports.main = async (event, context) => {
     // 商户自行生成商户订单号，此处仅为代码示例
     const outTradeNo = Math.round(Math.random() * 10 ** 13) + Date.now();
 
-    // 商户存储订单号到数据库，便于后续与微信侧订单号关联。例如使用云开发云存储能力：
-    await db.collection('orders').doc(event.order_id).update({
-      data: {
-        outTradeNo
-      },
-    })
-
     const res = await cloud.callFunction({
       name: 'cloudbase_module',
       data: {
@@ -41,7 +34,10 @@ exports.main = async (event, context) => {
     });
     return {
       success: true,
-      data: res.result.data
+      data: {
+        ...res.result.data,
+        outTradeNo
+      }
     }
   } catch (e) {
     return {

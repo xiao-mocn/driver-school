@@ -43,8 +43,7 @@
         <view class="text-info">
           <view class="name">
             <text>{{ orderInfo.studentInfo.name || '未指定' }}</text>
-            <text class="score">{{ orderInfo.studentInfo.starscore || 0}}</text>
-            <text class="text">分</text>
+            <text class="phone">{{ orderInfo.studentInfo.phone}}</text>
           </view>
           <view class="sub">
             <text>服务次数: {{ orderInfo.studentInfo.studentCount || 0 }}</text>
@@ -56,18 +55,27 @@
           <text class="number">{{ orderInfo.prices }}</text>
         </view>
       </view>
-      <view class="coach-dec" wx:if="{{ orderInfo.studentInfo.description}}">
-        <text>{{ orderInfo.studentInfo.description }}</text>
+      <view class="coach-school">
+        <image src="{{images.icons.class}}" />
+        <text style="margin-left: 20rpx;">{{ orderInfo.trainTypeLabel || '未指定'}}</text>
+      </view>
+      <view class="coach-school">
+        <image src="{{images.icons.time}}" />
+        <text style="margin-left: 20rpx;">{{ orderInfo.orderTime + '   ' + orderInfo.orderTimePeriod || '未指定'}}</text>
       </view>
       <view class="coach-school">
         <image src="{{images.icons.address}}" />
-        <text style="margin-left: 20rpx;">{{ orderInfo.studentInfo.schoolName || '未指定'}}</text>
+        <text style="margin-left: 20rpx;">{{ orderInfo.coachInfo.schoolName || '未指定'}}</text>
       </view>
     </view>
   </block>
   <view class="other-container">
     <text class="title">其他</text>
     <view class="other-list">
+      <view class="other-list-item">
+        <text>订单号</text>
+        <text class="cancel">{{ orderInfo.outTradeNo || '暂无' }}</text>
+      </view>
       <view class="other-list-item">
         <text>支付状态</text>
         <text class="unpaid" wx:if="{{ orderInfo.payStatus === 'unpaid' }}">未支付</text>
@@ -78,13 +86,17 @@
         <text>创建时间</text>
         <text class="cancel">{{ orderInfo.createdAt }}</text>
       </view>
-      <view class="other-list-item">
-        <text>订单状态</text>
+      <view class="other-list-item" wx:if="{{ orderInfo.payStatus !== 'unpaid' }}">
+        <text>服务状态</text>
         <text class="cancel">{{ orderInfo.status === 'created' ? '待接单' : orderInfo.status === 'running' ? '服务中' : '已完成' }}</text>
+      </view>
+      <view class="other-list-item" wx:if="{{ orderInfo.payStatus === 'paid' }}">
+        <text>支付手段</text>
+        <text class="cancel">微信支付</text>
       </view>
     </view>
   </view>
-  <view class="pay-container">
+  <view class="pay-container" wx:if="{{ orderInfo.payStatus === 'unpaid' }}">
     <text class="title">支付手段</text>
     <view class="pay-list">
       <view class="pay-list-item">
@@ -94,7 +106,7 @@
       </view>
     </view>
   </view>
-  <view class="bottom-btn">
+  <view class="bottom-btn" wx:if="{{ orderInfo.payStatus === 'unpaid' }}">
     <view class="btn cancel" bindtap="handleCancel">
       <text>返回</text>
     </view>

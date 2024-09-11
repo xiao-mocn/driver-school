@@ -17,7 +17,6 @@ exports.main = async (event, context) => {
         const originalStarscore = coach.data.starscore;
         const newStarscore = ((data.totalRating + data.venueRating + data.coachRating) / 3)
         starscore = Math.floor((originalStarscore + newStarscore) / 2 * 10) / 10
-        console.log('starscore ===', starscore, originalStarscore, newStarscore)
         await db.collection('coaches').doc(data.coachId).update({
           data: {
             starscore,
@@ -71,7 +70,7 @@ exports.main = async (event, context) => {
     }).get();
     const selectedDates = coacheResp.data[0].selectedDates || []
     const monthlyOrderInfo = coacheResp.data[0].monthlyOrderInfo || {}
-    const currentMonth = `${data.orderTime.split('-')[0]}-${data.orderTime.split('-')[1]}`
+    const currentMonth = `_${data.orderTime.split('-')[0]}_${data.orderTime.split('-')[1]}`
     if (!monthlyOrderInfo[currentMonth]) {
       monthlyOrderInfo[currentMonth] = 1
     } else {

@@ -29,7 +29,7 @@
   refresher-triggered="{{isRefreshing}}"
 >
   <block wx:for="{{orderList}}" wx:key="id">
-    <view class="list-item">
+    <view class="list-item" bind:tap="handleDetail" data-item="{{item}}">
       <image
         wx:if="{{ userInfo.registerType === 'student' }}"
         src="{{ item.coachInfo.avatar || item.coachInfo.avatarUrl || images.icons.defaultAvatar }}" />
@@ -50,8 +50,16 @@
         </view>
       </view>
       <view class="options btn-area">
-        <view wx:if="{{ item.payStatus === 'unpaid' }}" class="unpaid" type="primary">未支付</view>
-        <view class="cancel" type="primary">取消订单</view>
+        <!-- <view wx:if="{{ item.payStatus === 'unpaid' }}" class="unpaid" type="primary">未支付</view> -->
+        <view wx:if="{{ item.payStatus === 'paid' && item.payStatus !== 'cancel' }}" class="complete" type="primary">已支付</view>
+        <view
+          wx:if="{{ item.payStatus !== 'cancel' }}"
+          class="cancel"
+          type="primary"
+          data-item="{{ item }}"
+          catchtap="handleCancel"
+          >取消订单</view>
+        <view wx:else class="cancel" type="primary">已取消</view>
       </view>
     </view>
   </block>

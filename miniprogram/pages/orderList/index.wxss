@@ -177,3 +177,16 @@ page {
   background: #e4e4e4;
   color: #555555;
 }
+.list-item .options .complete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120rpx;
+  height: 60rpx;
+  margin-bottom: 20rpx;
+  font-size: 26rpx !important;
+  line-height: 30rpx !important;
+  border-radius: 10rpx 0 0 10rpx;
+  background: #76e77a;
+  color: #fff;
+}

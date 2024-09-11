@@ -26,6 +26,11 @@ Page({
       orderInfo: wx.getStorageSync('orderInfo')
     })
   },
+  onUnload() {
+    wx.removeStorage({
+      key: 'orderInfo'
+    })
+  },
   handleCancel() {
     wx.navigateBack({
       delta: 1 // 返回到上级页面
@@ -36,55 +41,45 @@ Page({
       title: '正在提交',
       mask: true
     });
-    this.callFunctionAdd()
+    this.callPayment()
   },
-  callFunctionAdd() {
+  callFunctionAdd(outTradeNo) {
     // 随便一个教练信息存在即可将订单状态改为running
     callCloudFunction('quickstartFunctions', {
       type: 'order',
       moduleType: 'add',
       data: {
         ...this.data.orderInfo,
+        payStatus: 'paid',
+        outTradeNo,
       }
     }).then((resp) => {
       console.log('resp ====', resp)
-      this.callPayment(resp)
+      this.finallyCallBack()
     }).catch((err) => {
       wx.showToast({
-        title: err || '提交失败,请重试',
+        title: err || '订单生成失败,请重试',
       })
     })
-    
   },
-  callPayment(order_id) {
+  callPayment() {
     callCloudFunction('wxpayFunctions', {
       type: 'wxpay_order',
       payNum: 1,
-      order_id: order_id
     }).then((resp) => {
       console.log('resp ====', resp)
       wx.requestPayment({
         ...resp,
         package: resp.packageVal,
         success: (res) => {
-          console.log('success', res)
           wx.hideLoading();
           wx.showToast({ title: '支付成功' });
-          callCloudFunction('quickstartFunctions', {
-            type: 'defaultUpdate',
-            collectionName: 'orders',
-            _id: order_id,
-            data: {
-              payStatus: 'paid'
-            }
-          })
-          this.finallyCallBack()
+          this.callFunctionAdd(resp.outTradeNo)
         },
         fail: (res) => {
           console.log('fail', res)
           wx.hideLoading();
-          wx.showToast({ title: '支付失败', icon: 'none' });
-          this.finallyCallBack()
+          wx.showToast({ title: '支付失败, 请重试', icon: 'none' });
         }
       });
     }).catch(err => {
@@ -92,9 +87,6 @@ Page({
     })
   },
   finallyCallBack() {
-    wx.removeStorage({
-      key: 'orderInfo'
-    })
     setTimeout(() => {
       wx.navigateBack({
         delta: 2 // 返回到上级页面
