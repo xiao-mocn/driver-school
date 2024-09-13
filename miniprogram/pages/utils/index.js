@@ -24,6 +24,26 @@ export const getUserProfile = function () {
     });
   })
 }
+export const requestSubscribeMessage = function () {
+  return new Promise((resolve, reject) => {
+    wx.requestSubscribeMessage({
+      tmplIds: ['9gYLIXnaZszuCzgDVZ8etmDoLQly1OFdXhja8zhwWHg', 'Qus8uX0lGkzgNNRNV_nG8XwEBmE4ubAhBWm5ObS94kQ'], // 你的模板ID
+      success(res) {
+        resolve()
+      },
+      fail(err) {
+        console.log('用户拒绝授权', err);
+        wx.showToast({
+          title: '请订阅消息通知',
+          icon: 'none'
+        })
+        return reject()
+      }
+    });
+  })
+  
+}
+
 
 export const getCurrentDate = (format) => {
   // 根据forrmat格式返回当前日期

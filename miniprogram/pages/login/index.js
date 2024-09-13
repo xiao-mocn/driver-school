@@ -1,4 +1,4 @@
-import { getUserProfile } from '../utils/index'
+import { getUserProfile, requestSubscribeMessage } from '../utils/index'
 import { images } from "../const/index"
 import callCloudFunction from '../utils/cloudFunctionUtils'
 Page({
@@ -29,6 +29,7 @@ Page({
   },
   submitLogin:async function (e) {
     const wxInfo = await getUserProfile()
+    
     const username = e.detail.value.username;
     const password = e.detail.value.password;
     const type = this.data.registerType;
@@ -143,9 +144,17 @@ Page({
       url: '/pages/registerPage/index'
     })
   },
-  handleCheck() {
+  async handleCheck() {
     this.setData({
       checked: !this.data.checked
     })
+    if (this.data.checked) {
+      wx.showToast({
+        title: '请勾选用户隐私协议',
+        icon: 'none'
+      })
+      // 订阅消息
+      await requestSubscribeMessage()
+    }
   }
 })

@@ -11,14 +11,14 @@ exports.main = async (event, context) => {
   delete data._id;
   try {
     if (data.coachId) {
-      const coachInfo = await db.collection('coaches').doc(data.coachId).get();
-      const selectedDates = coachInfo.selectedDates
-      const monthlyOrderInfo = coachInfo.monthlyOrderInfo || {}
-      const selectTimePeriods = selectedDates.filter((i) => data.orderTime === i.year + '-' + i.date)[0]
-      if (selectTimePeriods) {
-        // 删除时间段
-        selectTimePeriods.timePeriods.splice(selectTimePeriods.timePeriods.indexOf(data.orderTimePeriod), 1);
-      }
+      const coachInfoRes = await db.collection('coaches').doc(data.coachId).get();
+      const selectedDates = coachInfoRes.data.selectedDates
+      const monthlyOrderInfo = coachInfoRes.data.monthlyOrderInfo
+      selectedDates.forEach((item) => {
+        if (data.orderTime === item.year + '-' + item.date) {
+          item.timePeriods.splice(item.timePeriods.indexOf(data.orderTimePeriod), 1)
+        }
+      })
       const dateSplits = data.orderTime.split('-');
       monthlyOrderInfo[`_${dateSplits[0]}_${dateSplits[1]}`] -= 1
       await db.collection('coaches').doc(data.coachId).update({

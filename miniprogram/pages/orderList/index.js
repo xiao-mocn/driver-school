@@ -94,33 +94,59 @@ Page({
       title: '提示',
       content: '确定取消该订单吗？',
       success: (res) => {
+        wx.showLoading({
+          title: '退款中...',
+          mask: true
+        })
         // 退款操作
         callCloudFunction('wxpayFunctions', {
           type: 'wxpay_refund',
           data: {
             outTradeNo: item.outTradeNo,
-            refund: 1, // 退款金额
-            total: 1, // 原订单金额,
-            currency: 'CNY',
+            amount: {
+              refund: 1, // 退款金额
+              total: 1, // 原订单金额,
+              currency: 'CNY'
+            },
           }
+        }).then((res) => {
+          console.log('res ===', res)
+          wx.hideLoading()
+          wx.showToast({
+            title: '退款成功',
+          })
+          this.updateOrder(item)
+        }).catch((err) => {
+          wx.hideLoading()
+          wx.showToast({
+            title: err || '退款失败,请重试',
+          })
         })
-        // 订单状态更新
-        // callCloudFunction('quickstartFunctions', {
-        //   type: 'order',
-        //   moduleType: 'cancel',
-        //   data: {
-        //     ...item,
-        //     payStatus: 'cancel',
-        //   }
-        // }).then((resp) => {
-        //   console.log('resp ====', resp)
-        //   this.initData()
-        // }).catch((err) => {
-        //   wx.showToast({
-        //     title: err || '取消失败,请重试',
-        //   })
-        // })
       }
+    })
+  },
+  updateOrder(item) {
+    wx.showLoading({
+      title: '取消订单中...',
+      mask: true
+    })
+    // 订单状态更新
+    callCloudFunction('quickstartFunctions', {
+      type: 'order',
+      moduleType: 'cancel',
+      data: {
+        ...item,
+        payStatus: 'cancel',
+      }
+    }).then((resp) => {
+      console.log('resp ====', resp)
+      wx.hideLoading()
+      this.initData()
+    }).catch((err) => {
+      wx.hideLoading()
+      wx.showToast({
+        title: err || '订单更新失败,请重试',
+      })
     })
   }
 })
