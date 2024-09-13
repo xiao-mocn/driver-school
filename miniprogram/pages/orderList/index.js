@@ -1,4 +1,4 @@
-import { getCurrentDate } from "../utils/index"
+import { getCurrentDate, defaultSendMessage } from "../utils/index"
 import callCloudFunction from "../utils/cloudFunctionUtils";
 import { images } from "../const/index";
 
@@ -94,34 +94,39 @@ Page({
       title: '提示',
       content: '确定取消该订单吗？',
       success: (res) => {
+        if (!res.confirm) return
         wx.showLoading({
           title: '退款中...',
           mask: true
         })
         // 退款操作
-        callCloudFunction('wxpayFunctions', {
-          type: 'wxpay_refund',
-          data: {
-            outTradeNo: item.outTradeNo,
-            amount: {
-              refund: 1, // 退款金额
-              total: 1, // 原订单金额,
-              currency: 'CNY'
-            },
-          }
-        }).then((res) => {
-          console.log('res ===', res)
-          wx.hideLoading()
-          wx.showToast({
-            title: '退款成功',
-          })
-          this.updateOrder(item)
-        }).catch((err) => {
-          wx.hideLoading()
-          wx.showToast({
-            title: err || '退款失败,请重试',
-          })
-        })
+        this.sendMessage(item)
+        // callCloudFunction('wxpayFunctions', {
+        //   type: 'wxpay_refund',
+        //   data: {
+        //     outTradeNo: item.outTradeNo,
+        //     amount: {
+        //       refund: 1, // 退款金额
+        //       total: 1, // 原订单金额,
+        //       currency: 'CNY'
+        //     },
+        //   }
+        // }).then((res) => {
+        //   console.log('res ===', res)
+        //   wx.hideLoading()
+        //   wx.showToast({
+        //     title: '退款成功',
+        //   })
+        //   this.updateOrder({
+        //     ...res,
+        //     ...item
+        //   })
+        // }).catch((err) => {
+        //   wx.hideLoading()
+        //   wx.showToast({
+        //     title: err || '退款失败,请重试',
+        //   })
+        // })
       }
     })
   },
@@ -138,9 +143,10 @@ Page({
         ...item,
         payStatus: 'cancel',
       }
-    }).then((resp) => {
+    }).then(async (resp) => {
       console.log('resp ====', resp)
       wx.hideLoading()
+      await this.sendMessage(item)
       this.initData()
     }).catch((err) => {
       wx.hideLoading()
@@ -148,5 +154,53 @@ Page({
         title: err || '订单更新失败,请重试',
       })
     })
-  }
+  },
+  async sendMessage(item) {
+    console.log('item ====', item)
+    const date = `${item.orderTime} ${item.orderTimePeriod.split('-')[0]}`
+    await defaultSendMessage({
+      template_id: '9gYLIXnaZszuCzgDVZ8etmDoLQly1OFdXhja8zhwWHg',
+      openId: item.studentInfo.openId,
+      data: {
+        character_string5: {
+          value: item.outTradeNo
+        },
+        date3: {
+          value: date
+        },
+        thing15: {
+          value: `训练科目: ${ item.trainTypeLabel }`
+        },
+        thing1: {
+          value: `${ item.coachInfo.schoolName || '未指定' }`
+        },
+        thing4: {
+          value: `该订单已被取消，请及时查看`
+        }
+      }
+    })
+    if (item.coachId) {
+      await defaultSendMessage({
+        template_id: '9gYLIXnaZszuCzgDVZ8etmDoLQly1OFdXhja8zhwWHg',
+        openId: item.coachInfo.openId,
+        data: {
+          character_string5: {
+            value: item.outTradeNo
+          },
+          date3: {
+            value: date
+          },
+          thing15: {
+            value: `训练科目: ${ item.trainTypeLabel }`
+          },
+          thing1: {
+            value: `${ item.coachInfo.schoolName || '未指定' }`
+          },
+          thing4: {
+            value: `该订单已被取消，请及时查看！`
+          }
+        }
+      })
+    }
+  },
 })

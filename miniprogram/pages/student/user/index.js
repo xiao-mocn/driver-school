@@ -1,5 +1,6 @@
 //获取应用实例
 import { images } from "../../const/index"
+import { requestSubscribeMessage } from '../../utils/index'
 Component({
   /**
    * 页面的初始数据
@@ -27,10 +28,8 @@ Component({
         url: '/pages/login/index',
       })
     },
-    onSetting() {
-      wx.navigateTo({
-        url: '/pages/personalInformation/index',
-      })
+    async onSubscribe() {
+      await requestSubscribeMessage()
     }
   },
 })

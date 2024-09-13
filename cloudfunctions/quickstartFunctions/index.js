@@ -5,6 +5,7 @@ const order = require('./order/index');
 const deleteRecord = require('./deleteRecord/index');
 const editPassWord = require('./editPassWord/index');
 const selectRecord = require('./selectRecord/index');
+const sendMessage = require('./sendMessage/index');
 const defaultQueryList = require('./defaultQueryList/index');
 const defaultAdd = require('./defaultAdd/index');
 const defaultUpdate = require('./defaultUpdate/index');
@@ -27,6 +28,8 @@ exports.main = async (event, context) => {
       return await order.main(event, context);
     case 'selectRecord':
       return await selectRecord.main(event, context);
+    case 'sendMessage':
+      return await sendMessage.main(event, context);
     case 'defaultQueryList':
       return await defaultQueryList.main(event, context);
     case 'defaultAdd':

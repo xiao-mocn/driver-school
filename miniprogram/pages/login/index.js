@@ -148,13 +148,5 @@ Page({
     this.setData({
       checked: !this.data.checked
     })
-    if (this.data.checked) {
-      wx.showToast({
-        title: '请勾选用户隐私协议',
-        icon: 'none'
-      })
-      // 订阅消息
-      await requestSubscribeMessage()
-    }
   }
 })

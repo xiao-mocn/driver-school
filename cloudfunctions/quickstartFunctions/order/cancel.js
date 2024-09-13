@@ -24,7 +24,8 @@ exports.main = async (event, context) => {
       await db.collection('coaches').doc(data.coachId).update({
         data: {
           selectedDates,
-          monthlyOrderInfo
+          monthlyOrderInfo,
+          studentCount: db.command.inc(-1)
         },
       });
     }

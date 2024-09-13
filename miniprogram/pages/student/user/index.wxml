@@ -5,7 +5,7 @@
     <tewxt class="name">{{ userInfo.name || '未登录' }}</tewxt>
     <text class="phone">{{ userInfo.phone }}</text>
   </view>
-  <image src=" {{ images.icons.setting }}" class="setting" bindtap="onSetting" />
+  <image src="{{ images.icons.subscribed }}" class="setting" bindtap="onSubscribe" />
 </view>
 <!-- 常用功能 -->
 <view class="user-content">

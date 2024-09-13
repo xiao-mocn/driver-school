@@ -1,3 +1,4 @@
+import callCloudFunction from './cloudFunctionUtils'
 //首次点击允许获取用户信息并且授权
 export const getUserProfile = function () {
   return new Promise((resolve, reject) => {
@@ -34,14 +35,31 @@ export const requestSubscribeMessage = function () {
       fail(err) {
         console.log('用户拒绝授权', err);
         wx.showToast({
-          title: '请订阅消息通知',
+          title: '已取消订阅消息通知',
           icon: 'none'
         })
         return reject()
       }
     });
   })
-  
+}
+export const defaultSendMessage = (params) => {
+  return new Promise((resolve, reject) => {
+    callCloudFunction('quickstartFunctions', {
+      type: 'sendMessage',
+      template_id: params.template_id,
+      touser: params.openId,
+      data: {
+        ...params.data
+      }
+    }).then((res) => {
+      console.log('res', res);
+      resolve(res)
+    }).catch(e => {
+      console.log('err', e);
+      reject(e)
+    })
+  })
 }
 
 

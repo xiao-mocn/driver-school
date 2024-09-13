@@ -32,6 +32,7 @@ exports.main = async (event, context) => {
         },
       },
     });
+    console.log('res ====', res)
     return {
       success: true,
       data: {
