@@ -23,17 +23,23 @@ exports.main = async (event, context) => {
           },
         });
       } else {
-        await db.collection('coaches').doc(data.coachId).update({
-          data: {
-            incomeNum: db.command.inc(data.prices * 0.8),
-            withdrawableIncome: db.command.inc(data.prices * 0.8),
-          },
-        });
         // 更新学生数据
         if (data.trainType === 'subject3') {
           await db.collection('students').doc(data.studentId).update({
             data: {
               subject3Num: db.command.inc(1)
+            },
+          });
+          await db.collection('coaches').doc(data.coachId).update({
+            data: {
+              incomeNum: db.command.inc(parseFloat(data.coachInfo.subject3Income)),
+              withdrawableIncome: db.command.inc(parseFloat(data.coachInfo.subject3Income)),
+            },
+          });
+          // boss 收入更新
+          await db.collection('boss').doc('458dc8cc66c2a75f005129d80dba6b9a').update({
+            data: {
+              incomeNum: db.command.inc(parseFloat(data.prices) - parseFloat(data.coachInfo.subject3Income)),
             },
           });
         } else {
@@ -42,15 +48,20 @@ exports.main = async (event, context) => {
               subject2Num: db.command.inc(1)
             },
           });
+          await db.collection('coaches').doc(data.coachId).update({
+            data: {
+              incomeNum: db.command.inc(parseFloat(data.coachInfo.subject2Income)),
+              withdrawableIncome: db.command.inc(parseFloat(data.coachInfo.subject2Income)),
+            },
+          });
+          // boss 收入更新
+          await db.collection('boss').doc('458dc8cc66c2a75f005129d80dba6b9a').update({
+            data: {
+              incomeNum: db.command.inc(parseFloat(data.prices) - parseFloat(data.coachInfo.subject2Income)),
+            },
+          });
         }
-        // boss 收入更新
-        await db.collection('boss').doc('458dc8cc66c2a75f005129d80dba6b9a').update({
-          data: {
-            incomeNum: db.command.inc(data.prices * 0.2),
-          },
-        });
       }
-      
       await db.collection('orders').where({
         _id: _id
       }).update({

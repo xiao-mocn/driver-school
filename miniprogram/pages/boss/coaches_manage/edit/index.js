@@ -21,8 +21,11 @@ Page({
       carTypes: ['C1', 'C2', 'C3', 'C4'],
       schoolName: '安职喜来场',
       description: '',
-      subject2Price: 30,
-      subject3Price: 30
+      subject2Price: 68,
+      subject3Price: 68,
+      subject2Income: 15,
+      subject3Income: 15,
+      
     },
     schools: ['安职喜来场', '华城工业场', '里建华城场', '南师大红岭冠武场'],
     genders: [{label: '男', value: 'man'}, {label: '女', value: 'woman'}],

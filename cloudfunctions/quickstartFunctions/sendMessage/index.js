@@ -12,7 +12,7 @@ exports.main = async (event, context) => {
         name: 'wx_message_send_message',
         data: {
           template_id: event.template_id, // 所需下发的订阅模板id
-          page: "pages/orderList/index", //点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）。该字段不填则模板无跳转
+          page: `pages/orderList/detail/index?orderId=${event.orderId}`, //点击模板卡片后的跳转页面，仅限本小程序内的页面。支持带参数,（示例index?foo=bar）。该字段不填则模板无跳转
           touser: event.touser, //接收者（用户）的 openid
           data: {
             ...data

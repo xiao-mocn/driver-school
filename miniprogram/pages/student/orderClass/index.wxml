@@ -15,7 +15,7 @@
       </view>
       <view class="prices">
         <text class="sysbol">￥</text>
-        <text class="number">{{prices}}</text>
+        <text class="number">{{ prices }}</text>
       </view>
     </view>
     <view class="coach-dec" wx:if="{{coachInfo.description}}">

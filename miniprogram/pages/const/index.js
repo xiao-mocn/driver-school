@@ -52,7 +52,8 @@ export const images = {
     time: 'cloud://dev-6g37wdljde0bfd89.6465-dev-6g37wdljde0bfd89-1328795267/images/icons/time.png',
     class: 'cloud://dev-6g37wdljde0bfd89.6465-dev-6g37wdljde0bfd89-1328795267/images/icons/class.png',
     unSubscribe: 'cloud://dev-6g37wdljde0bfd89.6465-dev-6g37wdljde0bfd89-1328795267/images/icons/unSubscribe.png',
-    subscribed: 'cloud://dev-6g37wdljde0bfd89.6465-dev-6g37wdljde0bfd89-1328795267/images/icons/subscribed.png'
+    subscribed: 'cloud://dev-6g37wdljde0bfd89.6465-dev-6g37wdljde0bfd89-1328795267/images/icons/subscribed.png',
+    defaultConfig: 'cloud://dev-6g37wdljde0bfd89.6465-dev-6g37wdljde0bfd89-1328795267/images/icons/defaultConfig.png'
   },
   login: {
     wave: 'https://6465-dev-6g37wdljde0bfd89-1328795267.tcb.qcloud.la/images/login/wave.png?sign=76711a0e49428bab8a841a837804c0f5&t=1723921582',

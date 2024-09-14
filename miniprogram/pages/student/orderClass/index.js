@@ -10,7 +10,7 @@ Page({
     images,
     coachInfo: {},
     selectedDates: [],
-    prices: 30.00,
+    prices: 0.00,
     selectedDate: '',
     selectedTimePeriod: '',
     dateOptions:[],
@@ -24,6 +24,7 @@ Page({
       {name: '下午', selected: false, isFree: true, period: '16:00-17:00'},
       {name: '下午', selected: false, isFree: true, period: '17:30-18:30'}
     ],
+    defaultConfig: {},
     trainTypeLabel: '科目二',
     trainType: 'subject2',
     trainTypes: [
@@ -35,7 +36,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onShow: function () {
+  onShow: async function () {
     const userInfo = wx.getStorageSync('userInfo')
     if (!userInfo) {
       wx.redirectTo({
@@ -47,12 +48,53 @@ Page({
     this.setData({
       dateOptions: dates
     })
+    await this.getConfig()
     this.getCoachInfo()
   },
+  async getConfig () {
+    return new Promise((resolve, reject) => {
+      callCloudFunction('quickstartFunctions', {
+        type: 'selectRecord', // 调用管理模块
+        collectionName: 'defaultConfig',
+        _id: '983e93c466e4f7b400c5bfd16e1c965f',
+      }).then((res) => {
+        console.log(res)
+        const prices = res.defaultPrice
+        this.setData({
+          defaultConfig: {
+            ...res
+          },
+          prices
+        })
+        
+        this.setData({
+          prices: prices
+        })
+        resolve()
+      }).catch((err) => {
+        wx.showToast({
+          title: err || '默认配置查询失败，请重试',
+          icon: 'none'
+        })
+        reject(err)
+      })
+    })
+  },
   getCoachInfo: function () {
+    console.log('获取教练信息')
     const eventChannel = this.getOpenerEventChannel();
+    console.log('eventChannel', eventChannel)
     if (eventChannel) {
       eventChannel.on('acceptDataFromOpenerPage', (data) => {
+        console.log('data ==', data);
+        let prices = 0
+        if (this.data.trainType === 'subject2') {
+          prices = data.data.subject2Price
+        } else if (this.data.trainType ==='subject3') {
+          prices = data.data.subject3Price
+        } else {
+          prices = this.data.defaultConfig.defaultPrice
+        }
         this.setData({
           coachInfo: data.data,
           selectedDates: data.data.selectedDates || []

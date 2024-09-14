@@ -84,12 +84,25 @@ Page({
     const item = e.currentTarget.dataset.item
     wx.setStorageSync('orderInfo', item)
     wx.navigateTo({
-      url: '/pages/orderList/detail/index'
+      url: `/pages/orderList/detail/index?orderId=${item._id}`
     })
   },
   handleCancel(e) {
     const item = e.currentTarget.dataset.item
-    console.log('item ===', item)
+    if (item.payStatus === 'cancel') {
+      return wx.showToast({
+        title: '订单已取消',
+      })
+    }
+    const currentTime = new Date(getCurrentDate('YYYY/MM/DD hh:mm:ss')).getTime()
+    const orderTimeFormat = `${item.orderTime.replace(/\-/g, '/')} ${item.orderTimePeriod.split('-')[0]}:00`
+    const orderTime = new Date(orderTimeFormat).getTime()
+    if (item.status !== 'created' && orderTime - currentTime <= (4 * 60 * 60 * 1000)) {
+      return wx.showToast({
+        title: '离训练开始已不足4小时, 订单无法取消',
+        icon: 'none'
+      })
+    }
     wx.showModal({
       title: '提示',
       content: '确定取消该订单吗？',
@@ -99,34 +112,32 @@ Page({
           title: '退款中...',
           mask: true
         })
-        // 退款操作
-        this.sendMessage(item)
-        // callCloudFunction('wxpayFunctions', {
-        //   type: 'wxpay_refund',
-        //   data: {
-        //     outTradeNo: item.outTradeNo,
-        //     amount: {
-        //       refund: 1, // 退款金额
-        //       total: 1, // 原订单金额,
-        //       currency: 'CNY'
-        //     },
-        //   }
-        // }).then((res) => {
-        //   console.log('res ===', res)
-        //   wx.hideLoading()
-        //   wx.showToast({
-        //     title: '退款成功',
-        //   })
-        //   this.updateOrder({
-        //     ...res,
-        //     ...item
-        //   })
-        // }).catch((err) => {
-        //   wx.hideLoading()
-        //   wx.showToast({
-        //     title: err || '退款失败,请重试',
-        //   })
-        // })
+        callCloudFunction('wxpayFunctions', {
+          type: 'wxpay_refund',
+          data: {
+            outTradeNo: item.outTradeNo,
+            amount: {
+              refund: 1, // 退款金额
+              total: 1, // 原订单金额,
+              currency: 'CNY'
+            },
+          }
+        }).then((res) => {
+          console.log('res ===', res)
+          wx.hideLoading()
+          wx.showToast({
+            title: '退款成功',
+          })
+          this.updateOrder({
+            ...res,
+            ...item
+          })
+        }).catch((err) => {
+          wx.hideLoading()
+          wx.showToast({
+            title: err || '退款失败,请重试',
+          })
+        })
       }
     })
   },
@@ -146,7 +157,7 @@ Page({
     }).then(async (resp) => {
       console.log('resp ====', resp)
       wx.hideLoading()
-      await this.sendMessage(item)
+      this.sendMessage(item)
       this.initData()
     }).catch((err) => {
       wx.hideLoading()
@@ -161,6 +172,7 @@ Page({
     await defaultSendMessage({
       template_id: '9gYLIXnaZszuCzgDVZ8etmDoLQly1OFdXhja8zhwWHg',
       openId: item.studentInfo.openId,
+      orderId: item._id,
       data: {
         character_string5: {
           value: item.outTradeNo
@@ -183,6 +195,7 @@ Page({
       await defaultSendMessage({
         template_id: '9gYLIXnaZszuCzgDVZ8etmDoLQly1OFdXhja8zhwWHg',
         openId: item.coachInfo.openId,
+        orderId: item._id,
         data: {
           character_string5: {
             value: item.outTradeNo

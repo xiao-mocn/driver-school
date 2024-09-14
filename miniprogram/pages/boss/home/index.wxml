@@ -1,7 +1,7 @@
 <view class="income-container">
   <view class="income-item">
     <view class="title-bg">
-      <text>账户余额</text>
+      <text>账户收入</text>
     </view>
     <view class="right-bg"></view>
     <image src="{{images.boss.income}}" class="income-icon"></image>

@@ -1,0 +1,23 @@
+<view class="base-info">
+  <view class="title">
+    <view class="icon" ></view>
+    <text>基本信息</text>
+  </view>
+  <view class="form">
+    <view class="item">
+      <text class="icon">*</text>
+      <text class="label">默认价格: </text>
+      <input
+        value="{{formData.defaultPrice}}"
+        data-name="defaultPrice"
+        type="number"
+        bindinput="fieldChange"
+        base-input="true"
+        placeholder-class="placeholder"
+        placeholder="请输入账号名(必填)" />
+    </view>
+  </view>
+</view>
+<view class="bottom-btn" bindtap="handleButtonClick">
+  <text>立即提交</text>
+</view>

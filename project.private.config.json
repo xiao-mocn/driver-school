@@ -7,6 +7,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "defaultConfig",
+          "pathName": "pages/boss/defaultConfig/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "students_manage_edit",
+          "pathName": "pages/boss/students_manage/edit/index",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/orderDetail",
           "pathName": "pages/orderList/detail/index",
           "query": "",
@@ -105,13 +119,6 @@
           "scene": null
         },
         {
-          "name": "coaches_manage/edit",
-          "pathName": "pages/boss/coaches_manage/edit/index",
-          "query": "type=add",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
           "name": "students_manage",
           "pathName": "pages/boss/students_manage/index",
           "query": "",
@@ -119,22 +126,8 @@
           "scene": null
         },
         {
-          "name": "students_manage_edit",
-          "pathName": "pages/boss/students_manage/edit/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
           "name": "coach_manage",
           "pathName": "pages/boss/coaches_manage/index",
-          "query": "",
-          "launchMode": "default",
-          "scene": null
-        },
-        {
-          "name": "student-user",
-          "pathName": "pages/student/user/index",
           "query": "",
           "launchMode": "default",
           "scene": null

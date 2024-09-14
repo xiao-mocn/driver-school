@@ -11,10 +11,38 @@ Page({
     orderInfo: {},
     userInfo: {}
   },
+  onLoad: async function(options) {
+    const orderId = options.orderId
+    console.log('orderId ===', options)
+    if (orderId) {
+      await this.initOrderInfo(orderId)
+    }
+    
+  },
+  async initOrderInfo(orderId) {
+    return new Promise((resolve, reject) => {
+      callCloudFunction('quickstartFunctions', {
+        type: 'selectRecord',
+        collectionName: 'orders',
+        _id: orderId
+      }).then((res) => {
+        console.log('res ===', res)
+        wx.setStorageSync('orderInfo', res)
+        this.setData({
+          orderInfo: res
+        })
+        resolve()
+      }).catch((err) => {
+        console.log('err ===', err)
+        reject(err)
+      })
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onShow: function () {
+    console.log('onShow')
     const userInfo = wx.getStorageSync('userInfo')
     if (!userInfo) {
       wx.redirectTo({
@@ -69,7 +97,7 @@ Page({
   callPayment(orderId) {
     callCloudFunction('wxpayFunctions', {
       type: 'wxpay_order',
-      payNum: 1,
+      payNum: this.data.orderInfo.prices * 100
     }).then((resp) => {
       console.log('resp ====', resp)
       wx.requestPayment({
@@ -99,6 +127,7 @@ Page({
     await defaultSendMessage({
       template_id: '9gYLIXnaZszuCzgDVZ8etmDoLQly1OFdXhja8zhwWHg',
       openId: this.data.userInfo.openId,
+      orderId: this.data.orderInfo._id,
       data: {
         character_string5: {
           value: outTradeNo
@@ -121,6 +150,7 @@ Page({
       await defaultSendMessage({
         template_id: '9gYLIXnaZszuCzgDVZ8etmDoLQly1OFdXhja8zhwWHg',
         openId: this.data.orderInfo.coachInfo.openId,
+        orderId: this.data.orderInfo._id,
         data: {
           character_string5: {
             value: outTradeNo
@@ -146,6 +176,7 @@ Page({
     callCloudFunction('quickstartFunctions', {
       type: 'defaultUpdate',
       _id: orderId,
+      collectionName: 'orders',
       data: {
         outTradeNo: res.outTradeNo,
       }

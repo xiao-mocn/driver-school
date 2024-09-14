@@ -37,7 +37,7 @@ Page({
     });
   },
   pickerChange(e) {
-    console.log(e)
+    console.log('e', e)
     const value = e.detail.value
     const fieldName = e.currentTarget.dataset.name;
     const range = e.currentTarget.dataset.range
@@ -143,7 +143,7 @@ Page({
     if (!this.data.formData.name) {
       wx.showToast({
         title: '请输入账号名',
-        icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
+        icon: 'none', // 提示图标，可选值：'success', 'loading', 'none'
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
         mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
       })
@@ -152,7 +152,7 @@ Page({
     if (!this.data.formData.password) {
       wx.showToast({
         title: '请输入账号密码',
-        icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
+        icon: 'none', // 提示图标，可选值：'success', 'loading', 'none'
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
         mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
       })
@@ -161,7 +161,7 @@ Page({
     if (!this.data.formData.idCard) {
       wx.showToast({
         title: '请输入身份证',
-        icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
+        icon: 'none', // 提示图标，可选值：'success', 'loading', 'none'
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
         mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
       })
@@ -170,7 +170,7 @@ Page({
     if (!idCardReg.test(this.data.formData.idCard)) {
       wx.showToast({
         title: '身份证不正确',
-        icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
+        icon: 'none', // 提示图标，可选值：'success', 'loading', 'none'
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
         mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
       })
@@ -179,7 +179,7 @@ Page({
     if (!this.data.formData.phone) {
       wx.showToast({
         title: '请输入手机号码',
-        icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
+        icon: 'none', // 提示图标，可选值：'success', 'loading', 'none'
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
         mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
       })
@@ -188,7 +188,7 @@ Page({
     if (!phoneReg.test(this.data.formData.phone)) {
       wx.showToast({
         title: '手机号不正确',
-        icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
+        icon: 'none', // 提示图标，可选值：'success', 'loading', 'none'
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
         mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
       })
@@ -197,7 +197,7 @@ Page({
     if (!this.data.formData.schoolName) {
       wx.showToast({
         title: '请输入驾校名称',
-        icon: 'error', // 提示图标，可选值：'success', 'loading', 'none'
+        icon: 'none', // 提示图标，可选值：'success', 'loading', 'none'
         duration: 1000, // 提示的持续时间，单位为毫秒，默认为 1500
         mask: true // 是否显示透明蒙层，防止触摸穿透，默认为 false
       })
@@ -214,8 +214,6 @@ Page({
         functionType: 'add',
         data: {
           ...this.data.formData,
-          finishClass: 0,
-          totalClass: 0,
           subject2Num: 0, // 训练科二次数
           subject3Num: 0
         }
@@ -233,6 +231,10 @@ Page({
           studentCount: 0,
           totalOrdNum: 0,
           incomeNum: 0,
+          subject2Price: 68,
+          subject3Price: 68,
+          subject2Income: 15,
+          subject3Income: 15,
           withdrawableIncome: 0
         }
       }

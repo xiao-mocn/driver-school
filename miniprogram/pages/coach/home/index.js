@@ -1,6 +1,6 @@
 import { images } from "../../const/index"
 import callCloudFunction from '../../utils/cloudFunctionUtils'
-import { getCurrentDate } from '../../utils/index'
+import { getCurrentDate, defaultSendMessage } from '../../utils/index'
 //获取应用实例
 Component({
   /**
@@ -75,7 +75,10 @@ Component({
       callCloudFunction('quickstartFunctions', {
         type: 'order',
         moduleType: 'queryList',
-        ...params
+        ...params,
+        data: {
+          payStatus: 'paid',
+        }
       }).then((res) => {
         console.log('res ==', res)
         this.setData({
@@ -142,6 +145,9 @@ Component({
                 title: '接单成功',
                 icon: 'success'
               })
+              this.sendMessage(orderInfo, {
+                thing4: '该订单已被接单，请及时查看'
+              })
               this.initData()
             }).catch((err) => {
               wx.hideLoading()
@@ -153,7 +159,6 @@ Component({
           }
         }
       })
-
     },
     finishOrder(orderInfo) {
       console.log('finishOrder ==', orderInfo)
@@ -185,6 +190,9 @@ Component({
                 title: '完成订单',
                 icon: 'success'
               })
+              this.sendMessage(orderInfo, {
+                thing4: '该订单已被完成，请及时评价'
+              })
               this.initData()
             }).catch((err) => {
               wx.hideLoading()
@@ -196,6 +204,32 @@ Component({
           }
         }
       })
-    }
+    },
+    async sendMessage(item, messageParams) {
+      console.log('item ====', item)
+      const date = `${item.orderTime} ${item.orderTimePeriod.split('-')[0]}`
+      await defaultSendMessage({
+        template_id: '9gYLIXnaZszuCzgDVZ8etmDoLQly1OFdXhja8zhwWHg',
+        openId: item.studentInfo.openId,
+        orderId: item._id,
+        data: {
+          character_string5: {
+            value: item.outTradeNo
+          },
+          date3: {
+            value: date
+          },
+          thing15: {
+            value: `训练科目: ${ item.trainTypeLabel }`
+          },
+          thing1: {
+            value: `${ item.coachInfo.schoolName || '未指定' }`
+          },
+          thing4: {
+            value: messageParams.thing4
+          }
+        }
+      })
+    },
   }
 })
