@@ -17,5 +17,12 @@ App({
     this.globalData = {
       isLoggedIn: false, // 初始状态为未登录
     };
+  },
+  onShareAppMessage: function () {
+    return {
+      title: '川大教培',
+      path: '/pages/home/index',
+      imageUrl: 'https://6465-dev-6g37wdljde0bfd89-1328795267.tcb.qcloud.la/images/icons/WechatIMG713.jpg?sign=cab4430f7cbc47b7164c869e8658dd55&t=1726303803'
+    };
   }
 });
